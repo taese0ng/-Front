@@ -8,7 +8,11 @@ var open = false;
 function Menu_bar({location}){
     window.onresize = function (event) {
       if (this.window.outerWidth > 725){
+        try{
         document.getElementById("section1").style.left="-60vw";
+        }catch(error){
+
+        }
         open = false;
       }
     };
@@ -22,6 +26,9 @@ function Menu_bar({location}){
         : (document.getElementById("section1").style.left = "-60vw");
     }
     
+    function LogOut(){
+      localStorage.removeItem("token")
+    }
     return (
       <div id="menubar">
         <section id="hamburger" onClick={clickMenu}>
@@ -57,7 +64,7 @@ function Menu_bar({location}){
         <section id="section2">
           <p>대충 닉네임이라는 뜻</p>
           <Link to="/login" className="Link">
-            <button className="smallBtn">Log out</button>
+            <button className="smallBtn" onClick={LogOut}>Log out</button>
           </Link>
         </section>
       </div>

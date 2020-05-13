@@ -24,7 +24,7 @@ function SignUp(){
     }
     return (
       <div id="signupPage">
-        <Title></Title>
+        <Title/>
         <input className="InputInfo" placeholder="e-mail" />
         <button className="searchBtn" id="signup_searchBtn">
           인증하기
