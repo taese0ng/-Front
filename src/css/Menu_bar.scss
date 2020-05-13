@@ -1,0 +1,72 @@
+#menubar{
+    display: inline-block;
+    background-color: lightblue;
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    *{
+        display: inline;
+    }
+    a, p{
+        text-decoration: none;
+        font-size: 25px;
+        color: black;
+        margin-right: 30px;
+    }
+    #hamburger{
+        position: relative;
+        display: none;
+        margin-left: 10px;
+        cursor: pointer;
+        z-index: 999;
+        img{
+            width: 30px
+        }
+    }
+    #section1{
+        margin-left: 10px;
+        p{
+            cursor: pointer;
+        }
+    }
+    #section2{
+        float: right;
+        margin-right: 10px;
+    }
+    .Link{
+        margin-right: 0;
+    }
+}
+
+@media(max-width: 725px){
+    #menubar{
+        #hamburger{
+            display: inline;
+        }
+        #section1{
+            z-index: 100;
+            padding-top: 50px;
+            position: absolute;
+            margin: 0;
+            top: 0;
+            left: -60vw;
+            height: calc( 100vh - 50px );
+            width: 60vw;
+            background-color: rgba(233, 233, 233, 0.938);
+            transition: all 350ms;
+            .Link{
+                display: block;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                padding-left: 20px;
+            }
+            .Link:hover{
+                background-color: rgb(168, 168, 168);
+            }
+        }
+    }
+}
+
+#Home, #MyPage, #SharePage{
+    font-weight: bold;
+}
