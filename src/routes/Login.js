@@ -2,8 +2,10 @@ import React, {useState} from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Title } from "../components";
 import axios from 'axios';
+import { connect } from "react-redux";
+import { setUserName } from "../store/store";
 
-function Login() {
+function Login({setUserName}) {
   const history = useHistory();
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -51,6 +53,7 @@ function Login() {
               localStorage.setItem(
                 "name" , res.data.data.name
               )
+              setUserName();
             }
           }
         )
@@ -95,4 +98,12 @@ function Login() {
   );
 }
 
-export default Login;
+
+function mapStateToProps(state) {
+  return { userName: state.userName };
+}
+
+function mapDispatchToProps(dispatch) {
+  return { setUserName: () => dispatch(setUserName()),};
+}
+export default connect(mapStateToProps, mapDispatchToProps) (Login);

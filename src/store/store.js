@@ -5,11 +5,15 @@ const toDos = createSlice({
   initialState: {
     location:[],
     // list: [],
+    userName:localStorage.getItem('name')
   },
   reducers: {
     addLocation:(state, action) => {
       state.location.push({ text: action.payload, id: Date.now()});
     },
+    setUserName:(state)=>{
+      state.userName = localStorage.getItem('name');
+    }
     // add: (state, action) => {
     //   state.list.push({ text: action.payload, id: Date.now() });
     // },
@@ -27,6 +31,7 @@ const toDos = createSlice({
 
 export const {
     addLocation,
+    setUserName,
     // add,
     // remove
 } = toDos.actions;
