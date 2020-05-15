@@ -6,6 +6,8 @@ import hamgurger from "../assets/hamburgerMenu.png";
 var open = false;
 
 function Menu_bar({location}){
+    var name = localStorage.getItem('name');
+
     window.onresize = function (event) {
       if (this.window.outerWidth > 725){
         try{
@@ -28,6 +30,7 @@ function Menu_bar({location}){
     
     function LogOut(){
       localStorage.removeItem("token")
+      localStorage.removeItem("name");
     }
     return (
       <div id="menubar">
@@ -62,7 +65,7 @@ function Menu_bar({location}){
           </Link>
         </section>
         <section id="section2">
-          <p>대충 닉네임이라는 뜻</p>
+            <p>{name}</p>
           <Link to="/login" className="Link">
             <button className="smallBtn" onClick={LogOut}>Log out</button>
           </Link>

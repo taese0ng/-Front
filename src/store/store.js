@@ -5,15 +5,11 @@ const toDos = createSlice({
   initialState: {
     location:[],
     // list: [],
-    menuOpen: false,
   },
   reducers: {
     addLocation:(state, action) => {
       state.location.push({ text: action.payload, id: Date.now()});
     },
-    setMenuOpen:(state) =>{
-      state.menuOpen = !state.menuOpen
-    }
     // add: (state, action) => {
     //   state.list.push({ text: action.payload, id: Date.now() });
     // },
@@ -31,7 +27,6 @@ const toDos = createSlice({
 
 export const {
     addLocation,
-    setMenuOpen
     // add,
     // remove
 } = toDos.actions;

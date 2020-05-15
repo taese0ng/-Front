@@ -28,16 +28,33 @@ function Login() {
   function Clicks(e){
     e.preventDefault();
   
-    axios.post("http://192.168.0.26:4000/api/auth/login", {
+    axios.post("http://49.50.175.145:3389/api/auth/login", {
       // username: "dlfdyd96",
       // password: "password123"
       username: name,
       password: password
     }).then((res) => {
+      // console.log(res)
       if(res.data.success){
+        let token = res.data.data
         localStorage.setItem(
-          "token" , res.data.data
+          "token" , token
         );
+
+        axios.get("http://49.50.175.145:3389/api/auth/me",{
+          headers: { 
+            'x-access-token':token
+          }
+        }).then((res) =>{
+            console.log(res.data)
+            if (res.data.success){
+              localStorage.setItem(
+                "name" , res.data.data.name
+              )
+            }
+          }
+        )
+
         history.push("/yourSchedule");
       }
       else if(!res.data.message){
@@ -50,7 +67,6 @@ function Login() {
       else{
         alert(res.data.message);
       }
-      console.log(res)//token -> res.data.data
     });
   }
 
@@ -78,6 +94,5 @@ function Login() {
     </div>
   );
 }
-
 
 export default Login;
