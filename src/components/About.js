@@ -1,5 +1,5 @@
 import React from "react";
-import "./About.scss";
+import "../css/About.scss";
 
 // 주소, 이용시간, 쉬는 날 , 연락처, 입장료, 주차시설
 function About() {

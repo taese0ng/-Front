@@ -1,5 +1,5 @@
 import React from 'react';
-import "./HowTo.scss";
+import "../css/HowTo.scss";
 
 //아이콘 (버스 택시 도보)
 function HowTo() {

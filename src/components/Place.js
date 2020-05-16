@@ -1,5 +1,5 @@
 import React from "react";
-import "./Place.scss";
+import "../css/Place.scss";
 import Content from "./Content"
 
 // 타임라인 위 동그라미 + 말풍선(안에 내용 -> Content)
