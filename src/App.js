@@ -1,7 +1,7 @@
 import React from 'react';
 import "./css/Custom.css";
 import { HashRouter as Router, Route, Redirect } from "react-router-dom";
-import { Login, SignUp, Tendency, Home, MyPages, SharePage } from "./routes";
+import { Login, SignUp, Tendency, Home, MyPages, SharePage ,Timeline} from "./routes";
 import { MenuBar } from './components'
 
 function App() {
@@ -17,6 +17,8 @@ function App() {
       <Route exact path="/yourSchedule" component={Home}></Route>
       <Route exact path="/yourSchedule/mypages" component={MyPages}></Route>
       <Route exact path="/yourSchedule/sharepage" component={SharePage}></Route>
+      <Route exact path="/timeline" component={Timeline}></Route>
+
       {/* <Route path="/:id" component={Detail}></Route> */}
     </Router>
   );

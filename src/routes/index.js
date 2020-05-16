@@ -4,5 +4,6 @@ import MyPages from './MyPages';
 import SharePage from './SharePage';
 import SignUp from './SignUp';
 import Tendency from './Tendency';
+import Timeline from '../timeline/Timeline';
 
-export {Home, Login, MyPages, SharePage, SignUp, Tendency};
+export {Home, Login, MyPages, SharePage, SignUp, Tendency,Timeline};
