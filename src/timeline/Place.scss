@@ -1,0 +1,19 @@
+div{
+    li {
+		position: relative;
+	
+		.place__circle {
+			width: 25px;
+			height: 25px;
+			position: absolute;
+			color: #fff;
+			background: #afdcf8;
+			border-radius: 100%;
+			box-shadow: 0 0 0 2px #ffffff;
+			left: 10%;
+			top: 50%;
+			margin: 0 0 0 -17.5px;
+		}
+	}
+    
+}
