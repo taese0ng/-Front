@@ -1,109 +1,77 @@
-import React from 'react'
-import '../css/Banner.scss'
-import Slider from "infinite-react-carousel";
+import React, { Component } from 'react';
 import arrowRight from '../assets/arrow-right.png'
 import arrowLeft from '../assets/arrow-left.png'
+import '../css/Banner.scss'
 
-function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        marginTop: "125px",
-        marginRight: "20px",
-        height: "50px",
-        width: "50px",
-      }}
-      onClick={onClick}
-    >
-      <img
-        width="50px"
-        src={arrowRight}
-        alt="arrow-right"
-      />
-    </div>
-  );
+var imgs;
+var img_count;
+var img_position = 1;
+var dots;
+
+function back(){
+    if(1<img_position){
+        console.log("back");
+        imgs.style.left= (img_count-img_position-1)*100+'%';
+        img_position--;
+        dots[img_position].style.backgroundColor = 'rgb(116, 116, 116)';
+        dots[img_position-1].style.backgroundColor = "red";
+    }
 }
 
-
-function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        marginTop: "125px",
-        marginLeft: "20px",
-        height: "50px",
-        width: "50px",
-      }}
-      onClick={onClick}
-    >
-      <img
-        width="50px"
-        src={arrowLeft}
-        alt="arrow-left"
-      />
-    </div>
-  );
+function next(){
+    if(img_count>img_position){
+        console.log("next")
+        imgs.style.left= -img_position*100+'%';
+        img_position++;
+        dots[img_position-2].style.backgroundColor = 'rgb(116, 116, 116)';
+        dots[img_position-1].style.backgroundColor = "red";
+    }
 }
 
-function Banner(){
-    const settings = {
-      className: "Banner",
-      dots:true,
-      autoplay: true,
-      pauseOnHover: true,
-      nextArrow: <SampleNextArrow />,
-      prevArrow: <SamplePrevArrow />,
-    };
+class Banner extends Component{
 
-    return (
-      <Slider {...settings} className="slider">
-        <div>
-          <img
-            width="100%"
-            height="100%"
-            alt="피사의사탑"
-            src="https://img.huffingtonpost.com/asset/5d81573a230000580556dcd2.jpeg?ops=scalefit_630_noupscale"
-          />
-        </div>
-        <div>
-          <img
-            height="100%"
-            alt="콜로세움"
-            src="https://t1.daumcdn.net/cfile/tistory/997861485CE3D49F25"
-          />
-        </div>
-        <div>
-          <img
-            width="100%"
-            height="100%"
-            alt="어디 예쁜도시"
-            src="https://travelpost.kr/wp-content/uploads/2015/12/venice.jpg"
-          />
-        </div>
-        <div>
-          <img
-            width="100%"
-            height="100%"
-            alt="아유타야"
-            src="https://img-wishbeen.akamaized.net/spot/1414596460961_t.JPG"
-          />
-        </div>
-        <div>
-          <img
-            width="100%"
-            height="100%"
-            alt="유럽이쁜다리"
-            src="https://i0.wp.com/www.valisemag.com/wp-content/uploads/2017/01/London-Sights-Featured.jpeg?fit=1910%2C999&ssl=1"
-          />
-        </div>
-      </Slider>
-    );
+    componentDidMount(){
+        imgs = document.getElementById('imgList');
+        img_count = imgs.childElementCount;
+        dots = document.getElementsByClassName('dot');
+        dots[0].style.backgroundColor = "red";
+    }
+    
+    
+    render(){
+        return (
+            <>
+                <div id="Banner">
+                    <img onClick={back} id="leftArrow" width="50px" src={arrowLeft} alt="arrow-left"/>
+                    <ul id="imgList">
+                        <li>
+                            <img src="https://travelpost.kr/wp-content/uploads/2015/12/venice.jpg" alt="xx"/>
+                        </li>
+                        <li>
+                            <img src="https://t1.daumcdn.net/cfile/tistory/997861485CE3D49F25" alt="xx"/>
+                        </li>
+                        <li>
+                            <img src="https://img.huffingtonpost.com/asset/5d81573a230000580556dcd2.jpeg?ops=scalefit_630_noupscale" alt="xx"/>
+                        </li>
+                    </ul>
+                    <img onClick={next} id="rightArrow" width="50px" src={arrowRight} alt="arrow-right"/>
+                </div>
+                <ul id="dotList">
+                    <li className="dots">
+                        <div className="dot"></div>
+                    </li>
+                    <li className="dots">
+                        <div className="dot"></div>
+                    </li>
+                    <li className="dots">
+                        <div className="dot"></div>
+                    </li>
+                </ul>
+            </>
+        )
+    }
+    
 }
+
 
 export default Banner;

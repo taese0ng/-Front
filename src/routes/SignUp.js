@@ -61,7 +61,7 @@ function SignUp(){
         passwordConfirmation: passwordConfirm,
         name: name
       }).then((res) => {
-        console.log(res)
+        //console.log(res)
         if(res.data.success){
           alert("회원가입이 완료 되었습니다.");
           history.push("/login");

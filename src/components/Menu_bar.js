@@ -30,6 +30,7 @@ function Menu_bar({userName, location}){
     function LogOut(){
       localStorage.removeItem("token")
       localStorage.removeItem("name");
+      window.location.reload();
     }
     return (
       <div id="menubar">

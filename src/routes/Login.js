@@ -48,17 +48,17 @@ function Login({setUserName}) {
             'x-access-token':token
           }
         }).then((res) =>{
-            console.log(res.data)
+            //console.log(res.data)
             if (res.data.success){
               localStorage.setItem(
                 "name" , res.data.data.name
               )
               setUserName();
             }
+            window.location.reload();
+            history.push("/yourSchedule");
           }
         )
-
-        history.push("/yourSchedule");
       }
       else if(!res.data.message){
         let str="";

@@ -5,7 +5,7 @@ const toDos = createSlice({
   initialState: {
     location:[],
     // list: [],
-    userName:localStorage.getItem('name')
+    userName:localStorage.getItem('name'),
   },
   reducers: {
     addLocation:(state, action) => {
