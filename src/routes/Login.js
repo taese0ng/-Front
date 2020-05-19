@@ -31,12 +31,10 @@ function Login({setUserName}) {
     e.preventDefault();
   
     axios.post("http://49.50.175.145:3389/api/auth/login", {
-      // username: "dlfdyd96",
-      // password: "password123"
       username: name,
       password: password
     }).then((res) => {
-      // console.log(res)
+      // console.log(res.data)
       if(res.data.success){
         let token = res.data.data
         localStorage.setItem(
@@ -48,7 +46,7 @@ function Login({setUserName}) {
             'x-access-token':token
           }
         }).then((res) =>{
-            //console.log(res.data)
+            // console.log(res.data)
             if (res.data.success){
               localStorage.setItem(
                 "name" , res.data.data.name
