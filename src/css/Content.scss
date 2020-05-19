@@ -1,0 +1,73 @@
+div{
+    
+    .content__title{
+        display: block;
+        width: 12%;
+        padding-left: 11%;
+        position: absolute;
+        bottom : 49%;		
+        p {
+            background: #ffffff;
+            text-align:center;
+            margin: 0;
+            padding:5%;
+            font-size: 2em;
+            box-shadow: 0 0 0 2px #afdcf8;
+        }
+    }
+    .content__how{
+        display: block;
+        width: 13%;
+        padding-left: 11%;
+        position: absolute;
+        top : 53%;
+        
+        img {
+            width:18%;
+            margin: 7%;
+        }
+    }
+    .content__place {
+        display: inline-block;
+        margin: 0 0 20px 25%;
+        margin-right: 2% ;
+        background: #afdcf8;
+        color: #fff;
+        padding: 1.5em;
+        font-size: 1.2em;
+        font-weight: 300;
+        position: relative;
+        border-radius: 10px;
+    
+        img {
+                
+            position: absolute;
+            max-height: 90%;
+            min-width: 40%;
+            max-width: 40%;
+            margin-right: 20px;
+        }
+        
+        //말풍선 꼬리
+        &:after {
+            right: 100%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-right-color: #afdcf8;
+            border-width: 10px;
+            top: 50%;
+            
+                img {
+                        position: absolute;
+                    max-height: 80%;
+                    min-width: 38%;
+                    max-width: 40%;
+                    margin-right: 20px;
+                }
+        }
+    }
+}

@@ -1,0 +1,37 @@
+.about__data{
+        margin: 0 0 0 43%;
+                
+    .about__name{
+        position: relative;
+        margin:0;
+    }
+    .about__description{
+        font-weight: lighter;
+        position: relative;
+    }
+    div{
+        h4{
+            display: inline;
+            margin: 5px;
+        }
+        .about__content{
+            font-weight: normal;
+        }
+        
+    }
+
+    .about__notice{
+        position: relative;
+        .about__hours, .about__dayoff {
+            .about__content{
+                color:green;
+                font-weight:bold;
+            }
+        }
+        .about__phone {
+            .about__content{
+                color:blue;
+            }
+        }
+    }
+}
