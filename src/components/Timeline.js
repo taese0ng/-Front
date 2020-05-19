@@ -1,8 +1,6 @@
 import React from "react";
 import Place from "./Place"
-import HowTo from "./HowTo"
 import '../css/Timeline.scss'
-
 
 
 // 타임 라인
@@ -11,7 +9,9 @@ function TimeLine() {
       <div className="container">
          <ul className="timeline">
             <Place />
-
+            <Place />
+            <Place />
+            <Place />
          </ul>
       </div>
 

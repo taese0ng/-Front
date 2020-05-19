@@ -1,19 +1,27 @@
-div{
-    li {
-		position: relative;
-	
+
+li {
+	position: relative;
+
+	.place__circle {
+		width: 25px;
+		height: 25px;
+		position: absolute;
+		color: #fff;
+		background: #afdcf8;
+		border-radius: 100%;
+		box-shadow: 0 0 0 2px #ffffff;
+		left: 130px;
+		top: 50%;
+		margin: 0 0 0 -17.5px;
+	}
+	@media(max-width:850px){
 		.place__circle {
-			width: 25px;
-			height: 25px;
-			position: absolute;
-			color: #fff;
-			background: #afdcf8;
-			border-radius: 100%;
-			box-shadow: 0 0 0 2px #ffffff;
-			left: 10%;
-			top: 50%;
-			margin: 0 0 0 -17.5px;
+			left: 60px;
 		}
 	}
-    
+	@media(max-width:600px){
+		.place__circle {
+			left: 40px;
+		}
+	}
 }

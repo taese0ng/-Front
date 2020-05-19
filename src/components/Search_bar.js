@@ -19,12 +19,13 @@ function Search_bar({locations, addLocations}){
               {location.id}
             </button>
           ))}
-          {locations.length <= 2 && (
+          {locations.length <= 1 && (
             <button onClick={clickPlus} className="middleBtn">
               +
             </button>
           )}
         </section>
+
         <section id="section2">
           {locations.length > 0 ? (
             <button className="searchBtn" id="Activation">

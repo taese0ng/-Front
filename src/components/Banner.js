@@ -13,8 +13,8 @@ function back(){
         console.log("back");
         imgs.style.left= (img_count-img_position-1)*100+'%';
         img_position--;
-        dots[img_position].style.backgroundColor = 'rgb(116, 116, 116)';
-        dots[img_position-1].style.backgroundColor = "red";
+        dots[img_position].style.backgroundColor = 'white';
+        dots[img_position-1].style.backgroundColor = "rgb(43, 43, 43)";
     }
 }
 
@@ -23,8 +23,8 @@ function next(){
         console.log("next")
         imgs.style.left= -img_position*100+'%';
         img_position++;
-        dots[img_position-2].style.backgroundColor = 'rgb(116, 116, 116)';
-        dots[img_position-1].style.backgroundColor = "red";
+        dots[img_position-2].style.backgroundColor = 'white';
+        dots[img_position-1].style.backgroundColor = "rgb(43, 43, 43)";
     }
 }
 
@@ -34,9 +34,8 @@ class Banner extends Component{
         imgs = document.getElementById('imgList');
         img_count = imgs.childElementCount;
         dots = document.getElementsByClassName('dot');
-        dots[0].style.backgroundColor = "red";
+        dots[0].style.backgroundColor = "rgb(43, 43, 43)";
     }
-    
     
     render(){
         return (
@@ -55,18 +54,19 @@ class Banner extends Component{
                         </li>
                     </ul>
                     <img onClick={next} id="rightArrow" width="50px" src={arrowRight} alt="arrow-right"/>
+                    <ul id="dotList">
+                        <li className="dots">
+                            <div className="dot"></div>
+                        </li>
+                        <li className="dots">
+                            <div className="dot"></div>
+                        </li>
+                        <li className="dots">
+                            <div className="dot"></div>
+                        </li>
+                    </ul>
                 </div>
-                <ul id="dotList">
-                    <li className="dots">
-                        <div className="dot"></div>
-                    </li>
-                    <li className="dots">
-                        <div className="dot"></div>
-                    </li>
-                    <li className="dots">
-                        <div className="dot"></div>
-                    </li>
-                </ul>
+                
             </>
         )
     }

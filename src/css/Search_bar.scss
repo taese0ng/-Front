@@ -4,20 +4,24 @@
     width: 100%;
     #section1{
         float: left;
+        .middleBtn{
+            vertical-align: middle;
+        }
     }
     #section2{
         float: right;
         margin-right: 10px;
+        .searchBtn{
+            height: 40px;
+            margin: 10px;
+            margin-right: 0;
+            color: rgb(133, 133, 133);
+        }
+        #Activation{
+            background-color: rgb(58, 158, 252);
+            color: white;
+        }
     }
-    .searchBtn{
-        height: 40px;
-        margin: 10px;
-        margin-right: 0;
-        color: rgb(133, 133, 133);
-    }
-
-    #Activation{
-        background-color: rgb(58, 158, 252);
-        color: white;
-    }
+    
+    
 }

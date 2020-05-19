@@ -1,8 +1,11 @@
-
-.timeline__howto{
-	
-	img {
-		width:18%;
-		margin: 7%;
+.transport_icon{
+	padding: 0;
+	text-align: center;
+	li{
+		display: inline-block;
+		img{
+			width: 45px;
+			padding: 10px;
+		}
 	}
 }
