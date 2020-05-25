@@ -30,7 +30,7 @@ function Login({setUserName}) {
   function Clicks(e){
     e.preventDefault();
   
-    axios.post("http://49.50.175.145:3389/api/auth/login", {
+    axios.post("http://49.50.175.145:3389/login", {
       username: name,
       password: password
     }).then((res) => {
@@ -41,7 +41,7 @@ function Login({setUserName}) {
           "token" , token
         );
 
-        axios.get("http://49.50.175.145:3389/api/auth/me",{
+        axios.get("http://49.50.175.145:3389/me",{
           headers: { 
             'x-access-token':token
           }
