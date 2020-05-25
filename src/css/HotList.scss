@@ -1,0 +1,26 @@
+.location{
+    display: table;
+    list-style: none;
+    background: red;
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+    p{
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+    }
+}
+
+#rcmdedLocations{
+    margin: 0 10px 0 10px;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+#hotListTitle{
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 20px;
+}

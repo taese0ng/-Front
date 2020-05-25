@@ -12,7 +12,7 @@ class App extends Component{
     logtinState : localStorage.getItem('token'),
   };
   render(){
-    if(this.state.logtinState){
+    if(!this.state.logtinState){
       return (
         <Router>
           <Redirect path="*" to="/yourSchedule" />
