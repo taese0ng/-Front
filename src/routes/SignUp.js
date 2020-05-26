@@ -38,21 +38,22 @@ function SignUp(){
     }
   
     function IsSignUp(){
-      axios.post("http://49.50.175.145:3389/join", {
+      const data = {
+        name: name,
         email: email,
-        password: password,
-        passwordConfirmation: passwordConfirm,
-        name: name
-      }).then((res) => {
+        verifyPassword: passwordConfirm,
+        password: password
+      };
+      axios.post("http://49.50.175.145:3389/join", data)
+      .then((res) => {
         console.log(res)
-        if(res.data.success){
-          alert("회원가입이 완료 되었습니다.");
-          history.push("/login");
-        }
-        else{
-          alert("입력된 데이터를 다시 한 번 확인해보세요.");
-        }
-      });
+        alert("회원가입이 완료 되었습니다.");
+        history.push("/login");
+      })
+      .catch(err => {
+        alert("입력된 데이터를 다시 한 번 확인해보세요.");
+        console.log(err);
+      })
     }
 
     return (

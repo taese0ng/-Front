@@ -1,37 +1,75 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { Component } from "react";
 import '../css/MyPage.scss'
+import axios from 'axios';
+import { connect } from "react-redux";
+import { setItineraryId } from "../store/store";
 
-function MyPages() {
-  return (
-    <>
+let itineraryList = [];
+
+class MyPages extends Component {
+  UNSAFE_componentWillMount(){
+    const id = JSON.parse(localStorage.getItem('user'))._id;
+    axios.get(`http://49.50.175.145:3389/user/${id}`)
+    .then(res=>{
+      // console.log(res);
+      itineraryList = [];
+      res.data.itinerary.forEach(element => {
+        itineraryList.push(element);
+      });
+      console.log(itineraryList)
+      // setItinerayList('')
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  }
+
+  render(){
+    const {setItineraryId} = this.props;
+
+    return (
       <div className="mypages">
-        <MyPage Location="전주" Period="1월1일" Schedule="/yourSchedule/schedule"/>
-        <MyPage Location="여수" Period="2월2일" Schedule="/yourSchedule/schedule"/>
-        <MyPage Location="서울" Period="3월3일" Schedule="/yourSchedule/schedule"/>
-        <MyPage Location="대구" Period="4월4일" Schedule="/yourSchedule/schedule"/>
-        <MyPage Location="부산" Period="5월5일" Schedule="/yourSchedule/schedule"/>
+        {itineraryList.map((element) => (
+          <MyPage 
+          Location={element.title} Period="1월1일" 
+          Id={element._id} key={element._id} 
+          method={
+            () => {
+              setItineraryId(element._id)
+              this.props.history.push(`/yourSchedule/schedule/${element._id}`);
+            }
+          }/>
+        ))}
       </div>
-    </>
-  );
+    );
+  }
 }
 
-function MyPage(props) {
-  const { Location, Period, Schedule } = props;
-  const history = useHistory();
+class MyPage extends Component {
 
-  return (
-    <div className="page" onClick={
-      () => {
-        history.push(Schedule);
-      }
-    }>
-      <ul>
-        <li>{Period}</li>
-        <li>{Location}</li>
-      </ul>
-    </div>
-  );
+  render(){
+    const {Location, Period, method} = this.props;
+    return (
+      <div className="page" onClick={method}>
+        <ul>
+          <li>{Period}</li>
+          <li>{Location}</li>
+        </ul>
+      </div>
+    );
+  }
 }
 
-export default MyPages;
+function mapStateToProps(state) {
+  return { 
+    
+   };
+}
+
+function mapDispatchToProps(dispatch) {
+  return { 
+    setItineraryId: (text) => dispatch(setItineraryId(text)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (MyPages);

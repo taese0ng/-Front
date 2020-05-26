@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 import '../css/Search_bar.scss'
 import { connect } from "react-redux";
-import { addLocation } from "../store/store";
+import { addLocation, setOpenCalendar } from "../store/store";
 
 
-function Search_bar({locations, addLocations}){
+function Search_bar({locations, addLocations, setOpenCalendar}){
     const [text, setText] = useState(0);
     function clickPlus(){
         setText(text => text+1);
         addLocations(text);
     }
+
+    function clickCalendar(){
+      setOpenCalendar();
+    }
+
     return (
       <div id="searchbar">
         <section id="section1">
-          <button className="middleBtn">여행 날짜</button>
+          <button className="middleBtn" onClick={clickCalendar}>여행 날짜</button>
           {locations.map((location) => (
             <button {...location} key={location.id} className="middleBtn">
               {location.id}
@@ -40,11 +45,16 @@ function Search_bar({locations, addLocations}){
 }
 
 function mapStateToProps(state) {
-  return { locations: state.location };
+  return { 
+    locations: state.location,
+   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return { addLocations: (text) => dispatch(addLocation(text)),};
+  return { 
+    addLocations: (text) => dispatch(addLocation(text)),
+    setOpenCalendar: () => dispatch(setOpenCalendar()),
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps) (Search_bar);

@@ -5,14 +5,24 @@ const toDos = createSlice({
   initialState: {
     location:[],
     // list: [],
-    userName:localStorage.getItem('name'),
+    openCalendar: true,//false,
+    tripDate: null,
+    itineraryId : '',
   },
   reducers: {
     addLocation:(state, action) => {
       state.location.push({ text: action.payload, id: Date.now()});
     },
-    setUserName:(state)=>{
-      state.userName = localStorage.getItem('name');
+    setOpenCalendar:(state) =>{
+      state.openCalendar = !state.openCalendar;
+      console.log(state.openCalendar)
+    },
+    setTripDate:(state, action)=>{
+      state.tripDate = action.payload;
+    },
+    setItineraryId:(state, action)=>{
+      console.log(action.payload)
+      state.itineraryId = action.payload;
     }
     // add: (state, action) => {
     //   state.list.push({ text: action.payload, id: Date.now() });
@@ -31,7 +41,9 @@ const toDos = createSlice({
 
 export const {
     addLocation,
-    setUserName,
+    setOpenCalendar,
+    setTripDate,
+    setItineraryId
     // add,
     // remove
 } = toDos.actions;

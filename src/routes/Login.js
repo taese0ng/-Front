@@ -2,13 +2,11 @@ import React, {useState} from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Title } from "../components";
 import axios from 'axios';
-import { connect } from "react-redux";
-import { setUserName } from "../store/store";
 
-function Login({setUserName}) {
+function Login() {
   const history = useHistory();
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   function only_eng(e) {
     // var check_num = /[0-9]/; // 숫자 
@@ -23,59 +21,37 @@ function Login({setUserName}) {
     }
   }
 
-  function InputName(e){
-    setName(e.target.value);
+  function InputEmail(e){
+    setEmail(e.target.value);
   }
 
   function Clicks(e){
     e.preventDefault();
-  
-    axios.post("http://49.50.175.145:3389/login", {
-      username: name,
-      password: password
-    }).then((res) => {
-      // console.log(res.data)
-      if(res.data.success){
-        let token = res.data.data
-        localStorage.setItem(
-          "token" , token
-        );
-
-        axios.get("http://49.50.175.145:3389/me",{
-          headers: { 
-            'x-access-token':token
-          }
-        }).then((res) =>{
-            // console.log(res.data)
-            if (res.data.success){
-              localStorage.setItem(
-                "name" , res.data.data.name
-              )
-              setUserName();
-            }
-            window.location.reload();
-            history.push("/yourSchedule");
-          }
-        )
-      }
-      else if(!res.data.message){
-        let str="";
-        for (let err in res.data.errors){
-          str += res.data.errors[err].message + '\n';
-        }
-        alert(str);
-      }
-      else{
-        alert(res.data.message);
-      }
-    });
+    const data ={
+      email:email,
+      password: password,
+    }
+    axios.post("http://49.50.175.145:3389/login", data)
+    .then((res) =>{
+      console.log(res)
+      let token = res.data.token;
+      let user = res.data.user;
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+      window.location.reload();
+      history.push("/yourSchedule");
+    })
+    .catch(err => {
+      console.log(err);
+      alert("아이디 / 비밀번호를 확인해주세요.");
+    })
   }
 
   return (
     <div id="loginPage">
       <Title />
       <form onSubmit={Clicks}>
-        <input className="InputInfo" placeholder="e-mail" onChange={InputName} value={name}/>
+        <input className="InputInfo" placeholder="e-mail" onChange={InputEmail} value={email}/>
         <br />
         <input
           onChange={only_eng}
@@ -97,11 +73,4 @@ function Login({setUserName}) {
 }
 
 
-function mapStateToProps(state) {
-  return { userName: state.userName };
-}
-
-function mapDispatchToProps(dispatch) {
-  return { setUserName: () => dispatch(setUserName()),};
-}
-export default connect(mapStateToProps, mapDispatchToProps) (Login);
+export default Login;

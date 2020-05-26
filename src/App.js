@@ -12,7 +12,7 @@ class App extends Component{
     logtinState : localStorage.getItem('token'),
   };
   render(){
-    if(!this.state.logtinState){
+    if(this.state.logtinState){
       return (
         <Router>
           <Redirect path="*" to="/yourSchedule" />
@@ -22,7 +22,7 @@ class App extends Component{
           <Route exact path="/yourSchedule" component={Home}></Route>
           <Route exact path="/yourSchedule/mypages" component={MyPages}></Route>
           <Route exact path="/yourSchedule/sharepage" component={SharePage}></Route>
-          <Route exact path="/yourSchedule/schedule" component={Schedule}></Route>
+          <Route path="/yourSchedule/schedule" component={Schedule}></Route>
         </Router>
       )
     }

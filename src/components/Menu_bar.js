@@ -2,11 +2,10 @@ import React from 'react'
 import '../css/Menu_bar.scss'
 import { Link } from "react-router-dom";
 import hamgurger from "../assets/hamburgerMenu.png";
-import { connect } from "react-redux";
 
 var open = false;
 
-function Menu_bar({userName, location}){
+function Menu_bar({location}){
     window.onresize = function (event) {
       if (this.window.outerWidth > 725){
         try{
@@ -29,9 +28,10 @@ function Menu_bar({userName, location}){
     
     function LogOut(){
       localStorage.removeItem("token")
-      localStorage.removeItem("name");
+      localStorage.removeItem("user");
       window.location.reload();
     }
+    
     return (
       <div id="menubar">
         <section id="hamburger" onClick={clickMenu}>
@@ -65,7 +65,7 @@ function Menu_bar({userName, location}){
           </Link>
         </section>
         <section id="section2">
-            <p>{userName}</p>
+            <p>{JSON.parse(localStorage.getItem('user')).name}</p>
           <Link to="/login" className="Link">
             <button className="smallBtn" onClick={LogOut}>Log out</button>
           </Link>
@@ -73,7 +73,5 @@ function Menu_bar({userName, location}){
       </div>
     );
 }
-function mapStateToProps(state) {
-  return { userName: state.userName };
-}
-export default connect(mapStateToProps) (Menu_bar);
+
+export default Menu_bar;
