@@ -3,6 +3,8 @@ import Place from "./Place"
 import '../css/Timeline.scss'
 import { connect } from "react-redux";
 import axios from 'axios';
+import ShowRoute from "./ShowRoute";
+
 // 타임 라인
 
 let routes = []
@@ -26,6 +28,7 @@ class TimeLine extends Component {
    render(){
       return (
          <div className="container">
+            <ShowRoute/>
             <ul className="timeline">
                {routes.map(element =>(
                   <Place />
