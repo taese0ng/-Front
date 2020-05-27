@@ -5,17 +5,12 @@ const toDos = createSlice({
   initialState: {
     location:[],
     // list: [],
-    openCalendar: true,//false,
     tripDate: null,
     itineraryId : '',
   },
   reducers: {
     addLocation:(state, action) => {
       state.location.push({ text: action.payload, id: Date.now()});
-    },
-    setOpenCalendar:(state) =>{
-      state.openCalendar = !state.openCalendar;
-      console.log(state.openCalendar)
     },
     setTripDate:(state, action)=>{
       state.tripDate = action.payload;
@@ -41,7 +36,6 @@ const toDos = createSlice({
 
 export const {
     addLocation,
-    setOpenCalendar,
     setTripDate,
     setItineraryId
     // add,

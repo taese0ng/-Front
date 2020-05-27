@@ -1,22 +1,22 @@
+// import Calendar Component 
 import React, { Component } from 'react';
-import Calendar from 'react-calendar';
- 
+import { DatePicker } from '@y0c/react-datepicker';
+// import calendar style 
+// You can customize style by copying asset folder.
+import '@y0c/react-datepicker/assets/styles/calendar.scss';
+import '../css/MyCalendar.scss';
+// Please include the locale you want to use.
+// and delivery props to calendar component 
+// See locale list https://github.com/moment/moment/tree/develop/locale
+import 'moment/locale/ko';
+
 class MyCalendar extends Component {
-  state = {
-    date: new Date(),
-  }
- 
-  onChange = date => this.setState({ date })
- 
+
+  
   render() {
     return (
-      <div>
-        <Calendar
-          onChange={this.onChange}
-          value={this.state.date}
-        />
-      </div>
-    );
+      <DatePicker locale="ko" placeholder="날짜 선택"/>
+    )
   }
 }
 

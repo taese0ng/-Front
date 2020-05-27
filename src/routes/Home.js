@@ -1,29 +1,15 @@
 import React from 'react'
-import { SearchBar, Banner, HotList, MyCalendar} from '../components';
-import { connect } from "react-redux";
+import { SearchBar, Banner, HotList} from '../components';
 import '../css/Home.scss';
 
-function Home({openCalendar}){
+function Home(){
     return (
         <>
             <Banner></Banner>
             <SearchBar></SearchBar>
-            {
-                openCalendar ? 
-                <div id="calendar">
-                <MyCalendar/>
-                </div>
-                : <></>
-            }
             <HotList></HotList>
         </>
     )
 }
 
-function mapStateToProps(state) {
-    return { 
-        openCalendar: state.openCalendar,
-     };
-  }
-
-export default connect(mapStateToProps) (Home);
+export default Home;
