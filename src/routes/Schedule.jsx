@@ -4,7 +4,7 @@ import {Timeline} from '../components'
 class Schedule extends Component{
     render(){
         return(
-            <div className="test" style={{textAlign:`center`}}>
+            <div style={{textAlign:`center`}}>
                 <Timeline/>
             </div>
         )

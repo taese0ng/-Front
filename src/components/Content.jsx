@@ -1,6 +1,6 @@
 import React from "react";
-import HowTo from './HowTo'
-import About from './About'
+import HowTo from './HowTo.jsx'
+import About from './About.jsx'
 import "../css/Content.scss"
 
 // 말풍선 안 내용 (장소이름, 장소설명 + About(글로 설명된 부분))

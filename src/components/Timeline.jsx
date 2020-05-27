@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import Place from "./Place"
+import Place from "./Place.jsx"
 import '../css/Timeline.scss'
 import { connect } from "react-redux";
 import axios from 'axios';
-import ShowRoute from "./ShowRoute";
+import ShowRoute from "./ShowRoute.jsx";
 import update from 'react-addons-update';
 // 타임 라인
 
@@ -11,7 +11,8 @@ class TimeLine extends Component {
    constructor(props){
       super(props);
       this.state = {
-         routes : []
+         routes : [],
+         reviseBtn : false,
       }
     }
 
@@ -35,15 +36,43 @@ class TimeLine extends Component {
       })
    }
 
+   clickRevise = () => {
+      this.setState({
+         reviseBtn : !this.state.reviseBtn
+      });
+   }
+
+   clickUpBtn = (idx) =>{
+      console.log("Up", idx)
+   }
+
+   clickDownBtn = (idx) =>{
+      console.log("Down", idx)
+   }
+
    render(){
-      const {routes} = this.state;
       return (
          <div className="container">
             <ShowRoute/>
+            <div id="ReviseSchedule">
+               <button onClick={this.clickRevise}>일정 수정</button>
+            </div>
             <ul className="timeline">
-               {routes.map(route =>(
-                  <Place info={route}/>
-               ))}
+               {
+                  this.state.routes.map((route,index) => (
+                     <li key={index}>
+                        {
+                           this.state.reviseBtn ? 
+                           <div>
+                              <button onClick={() => this.clickUpBtn(index)}>Up</button>
+                              <button onClick={() => this.clickDownBtn(index)}>Down</button>
+                           </div> : 
+                           <></>
+                        }
+                        <Place info={route}/>
+                     </li>
+                  ))
+               }
             </ul>
          </div>
 

@@ -3,8 +3,8 @@ import { compose, withProps } from "recompose";
 //Recompse API가 하는 일은 말 그대로 소품들을 다른 방식으로 재구성할 수 있게 해준다.
 //보통 우리는 그것들을 부품 안에 넣지만, 이제 우리는 그것들을 앞쪽에 있는 물체에 넣을 수 있어서 우리의 부품들이 덜 어수선해짐
 import RouteRenderComponent from "./RouteRenderComponent";
-import { G_API_URL } from "./Constants";
-import DummyLocations from "./DummyLocations";
+import { G_API_URL } from "./Constants.jsx";
+import DummyLocations from "./DummyLocations.jsx";
 const { withScriptjs, withGoogleMap, GoogleMap } = require("react-google-maps");
 
 class ShowRoute extends Component {

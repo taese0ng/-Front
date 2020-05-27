@@ -1,5 +1,5 @@
 import { locationsList } from "./Constants";
-import { createLocationObject } from "./Helper";
+import { createLocationObject } from "./Helper.js";
 
 const directions = [
   {

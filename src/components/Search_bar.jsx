@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import '../css/Search_bar.scss'
 import { connect } from "react-redux";
 import { addLocation } from "../store/store";
-import MyCalendar from './MyCalendar'
+import MyCalendar from './MyCalendar.jsx'
 
 
 function Search_bar({locations, addLocations, setOpenCalendar}){
