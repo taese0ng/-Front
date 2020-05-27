@@ -44,19 +44,54 @@ class TimeLine extends Component {
 
    clickUpBtn = (idx) =>{
       console.log("Up", idx)
+      if(idx > 0){
+         let down = this.state.routes[idx];
+         let up = this.state.routes[idx-1];
+         this.setState({
+            routes : update(
+               this.state.routes,
+               {
+                  [idx] : {$set : up},
+                  [idx-1]: {$set: down}
+               }
+            )
+         })
+      }
    }
 
    clickDownBtn = (idx) =>{
       console.log("Down", idx)
+      if(idx < this.state.routes.length-1){
+         let up = this.state.routes[idx];
+         let down = this.state.routes[idx+1];
+         this.setState({
+            routes : update(
+               this.state.routes,
+               {
+                  [idx] : {$set : down},
+                  [idx+1]: {$set: up}
+               }
+            )
+         })
+      }
+   }
+
+   clickDelBtn = (idx) => {
+      console.log("Del", idx);
+      this.setState({
+         routes : update(
+            this.state.routes,
+            {
+               $splice: [[idx,1]]
+            }
+         )
+      })
    }
 
    render(){
       return (
          <div className="container">
             <ShowRoute/>
-            <div id="ReviseSchedule">
-               <button onClick={this.clickRevise}>일정 수정</button>
-            </div>
             <ul className="timeline">
                {
                   this.state.routes.map((route,index) => (
@@ -64,8 +99,9 @@ class TimeLine extends Component {
                         {
                            this.state.reviseBtn ? 
                            <div>
-                              <button onClick={() => this.clickUpBtn(index)}>Up</button>
-                              <button onClick={() => this.clickDownBtn(index)}>Down</button>
+                              <button className="smallBtn" onClick={() => this.clickUpBtn(index)}>Up</button>
+                              <button className="smallBtn" onClick={() => this.clickDownBtn(index)}>Down</button>
+                              <button className="smallBtn" onClick={() => this.clickDelBtn(index)}>Delete</button>
                            </div> : 
                            <></>
                         }
@@ -74,6 +110,12 @@ class TimeLine extends Component {
                   ))
                }
             </ul>
+            <div id="ReviseSchedule">
+               {!this.state.reviseBtn ?
+               <button className="middleBtn" onClick={this.clickRevise}>일정 수정</button> :
+               <button className="middleBtn" onClick={this.clickRevise}>수정 완료</button>
+               }
+            </div>
          </div>
 
       );

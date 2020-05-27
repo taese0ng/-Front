@@ -5,7 +5,7 @@ import { addLocation } from "../store/store";
 import MyCalendar from './MyCalendar.jsx'
 
 
-function Search_bar({locations, addLocations, setOpenCalendar}){
+function Search_bar({locations, addLocations}){
     const [text, setText] = useState(0);
     function clickPlus(){
         setText(text => text+1);
@@ -16,7 +16,6 @@ function Search_bar({locations, addLocations, setOpenCalendar}){
       <div id="searchbar">
         <section id="section1">
           <MyCalendar/>
-          {/* <button className="middleBtn" onClick={clickCalendar}>여행 날짜</button> */}
           {locations.map((location) => (
             <button {...location} key={location.id} className="middleBtn">
               {location.id}

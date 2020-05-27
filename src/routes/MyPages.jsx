@@ -13,9 +13,9 @@ class MyPages extends Component {
     }
   }
 
-  async UNSAFE_componentWillMount(){
+  UNSAFE_componentWillMount(){
     const id = JSON.parse(localStorage.getItem('user'))._id;
-    await axios.get(`http://49.50.175.145:3389/user/${id}`)
+    axios.get(`http://49.50.175.145:3389/user/${id}`)
     .then(res=>{
       res.data.itinerary.forEach(element => {
         this.setState({
@@ -36,7 +36,7 @@ class MyPages extends Component {
   render(){
     const {setItineraryId} = this.props;
     const {itineraryList} = this.state;
-    console.log(itineraryList)
+    // console.log(itineraryList)
     return (
       <div className="mypages">
         {itineraryList.map((element) => (
