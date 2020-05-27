@@ -1,4 +1,6 @@
+
 .about__data{
+    text-align: left;
     display: flex;
     padding: 10px;
     max-width: 1200px;
@@ -30,6 +32,8 @@
 }
 
 .about__notice{
+    float: left;
+    text-align: left;
     padding: 0 20px 20px 20px;
     li{
         list-style: none;

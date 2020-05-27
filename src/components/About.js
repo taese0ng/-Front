@@ -2,7 +2,7 @@ import React from "react";
 import "../css/About.scss";
 
 // 주소, 이용시간, 쉬는 날 , 연락처, 입장료, 주차시설
-function About() {
+function About(props) {
     return (
         <>
             <ul className="about__data">
@@ -11,7 +11,7 @@ function About() {
                 </li>
 
                 <li className="about__description__box">
-                    <p className="about__name">돌산공원</p>
+                    <p className="about__name">{props.info.name}</p>
                     <p className="about__description">
                         돌산공원은 돌산대교와 마주보는 자리에 위치하고 하고 있으며 87,000여평의 부지에 1987년 조성되었다. 
                         공원에는 2004년 sbs아침드라마 “선택” 세트 촬영장이 설치되어 많은 관광객들이 관람하고 있으며,

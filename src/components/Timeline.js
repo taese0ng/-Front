@@ -4,21 +4,31 @@ import '../css/Timeline.scss'
 import { connect } from "react-redux";
 import axios from 'axios';
 import ShowRoute from "./ShowRoute";
-
+import update from 'react-addons-update';
 // 타임 라인
 
-let routes = []
-
 class TimeLine extends Component {
+   constructor(props){
+      super(props);
+      this.state = {
+         routes : []
+      }
+    }
+
    UNSAFE_componentWillMount(){
       const {itineraryId} = this.props
       axios.get(`http://49.50.175.145:3389/itinerary/${itineraryId}`)
       .then(res => {
-         routes = [];
          res.data.itinerary.routes.forEach(element => {
-            routes.push(element)
+            this.setState({
+               routes: update(
+                 this.state.routes,
+                 {
+                   $push: [element]
+                 }
+               )
+             })
          });
-         console.log(routes);
       })
       .catch(err => {
          console.log(err);
@@ -26,12 +36,13 @@ class TimeLine extends Component {
    }
 
    render(){
+      const {routes} = this.state;
       return (
          <div className="container">
             <ShowRoute/>
             <ul className="timeline">
-               {routes.map(element =>(
-                  <Place />
+               {routes.map(route =>(
+                  <Place info={route}/>
                ))}
             </ul>
          </div>

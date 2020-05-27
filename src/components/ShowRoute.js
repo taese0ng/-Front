@@ -46,7 +46,7 @@ export default compose(
     googleMapURL: G_API_URL,
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `300px` }} />,
-    mapElement: <div style={{ height: `100%` }} />
+    mapElement: <div style={{ height: `100%`, width: `100vw` }} />
   }), // props ( 변하지 않는 데이터 )
   withScriptjs,
   withGoogleMap 

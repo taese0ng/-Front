@@ -3,21 +3,30 @@ import '../css/MyPage.scss'
 import axios from 'axios';
 import { connect } from "react-redux";
 import { setItineraryId } from "../store/store";
-
-let itineraryList = [];
+import update from 'react-addons-update';
 
 class MyPages extends Component {
-  UNSAFE_componentWillMount(){
+  constructor(props){
+    super(props);
+    this.state = {
+      itineraryList: []
+    }
+  }
+
+  async UNSAFE_componentWillMount(){
     const id = JSON.parse(localStorage.getItem('user'))._id;
-    axios.get(`http://49.50.175.145:3389/user/${id}`)
+    await axios.get(`http://49.50.175.145:3389/user/${id}`)
     .then(res=>{
-      // console.log(res);
-      itineraryList = [];
       res.data.itinerary.forEach(element => {
-        itineraryList.push(element);
+        this.setState({
+          itineraryList: update(
+            this.state.itineraryList,
+            {
+              $push: [element]
+            }
+          )
+        })
       });
-      console.log(itineraryList)
-      // setItinerayList('')
     })
     .catch(err=>{
       console.log(err);
@@ -26,12 +35,13 @@ class MyPages extends Component {
 
   render(){
     const {setItineraryId} = this.props;
-
+    const {itineraryList} = this.state;
+    console.log(itineraryList)
     return (
       <div className="mypages">
         {itineraryList.map((element) => (
           <MyPage 
-          Location={element.title} Period="1월1일" 
+          Location={element.title} Period={element.routes[0].Date} 
           Id={element._id} key={element._id} 
           method={
             () => {
@@ -50,7 +60,7 @@ class MyPage extends Component {
   render(){
     const {Location, Period, method} = this.props;
     return (
-      <div className="page" onClick={method}>
+      <div className="page" onClick={method} >
         <ul>
           <li>{Period}</li>
           <li>{Location}</li>

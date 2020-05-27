@@ -46,7 +46,7 @@ function SignUp(){
       };
       axios.post("http://49.50.175.145:3389/join", data)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         alert("회원가입이 완료 되었습니다.");
         history.push("/login");
       })
