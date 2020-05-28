@@ -6,14 +6,8 @@ import axios from 'axios';
 import ShowRoute from "./ShowRoute.jsx";
 import update from 'react-addons-update';
 import { Link } from "react-router-dom";
-// 타임 라인
 
 class TimeLine extends Component {
-   goHome = () => {
-      console.log("dd")
-      this.props.history.push('/yourSchedule')
-      // history.push('/yourSchedule')
-   }
    constructor(props){
       super(props);
       this.state = {
@@ -60,10 +54,12 @@ class TimeLine extends Component {
       if(idx > 0){
          let down = this.state.routes[idx];
          let up = this.state.routes[idx-1];
+         
          this.setState({
             routes : update(
                this.state.routes,
                {
+                  
                   [idx] : {$set : up},
                   [idx-1]: {$set: down}
                }
@@ -143,7 +139,7 @@ class TimeLine extends Component {
             <ul className="timeline">
                {
                   this.state.routes.map((route,index) => (
-                     <li key={index}>
+                     <li key={index} className="route">
                         {
                            this.state.reviseBtn ? 
                            <div>
@@ -169,11 +165,9 @@ class TimeLine extends Component {
                   <Link to="/yourSchedule">
                      <button className="middleBtn" onClick = {this.clickDelSchedule}>일정 삭제</button>
                   </Link>
-                     
                </span>
             </div>
          </div>
-
       );
    }
 }

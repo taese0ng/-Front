@@ -1,0 +1,62 @@
+.card{
+    cursor: pointer;
+    list-style: none;
+    background-color: #022435;
+    color: white;
+    text-align: center;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0;
+    border-radius: 12px;
+    #cardImg{
+        border-radius: 12px 12px 0 0;
+        img{
+            height: 100%;
+            border-radius: 12px 12px 0 0;
+        }
+    }
+    #CardContent{
+        padding-left: 10px;
+        text-align: left;
+        font-weight: 500;
+        font-size: 25px;
+    }
+    ul{
+        padding: 0;
+        margin: 0;
+        li{
+            list-style: none;
+            margin: 10px 0 10px 0;
+        }
+        #scheduleName{
+            font-weight: bold;
+            font-size: 30px;
+        }
+    }
+}
+
+
+#CardView{
+    text-align: center;
+    padding: 0;
+    ul{
+        padding: 0;
+        margin: 0;
+    }
+}
+
+@media(max-width: 725px){
+    #CardView{
+        ul{
+            width: 93%;
+            .card{
+                #cardImg{
+                    img{
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
