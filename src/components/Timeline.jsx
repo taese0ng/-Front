@@ -5,12 +5,20 @@ import { connect } from "react-redux";
 import axios from 'axios';
 import ShowRoute from "./ShowRoute.jsx";
 import update from 'react-addons-update';
+import { Link } from "react-router-dom";
 // 타임 라인
 
 class TimeLine extends Component {
+   goHome = () => {
+      console.log("dd")
+      this.props.history.push('/yourSchedule')
+      // history.push('/yourSchedule')
+   }
    constructor(props){
       super(props);
       this.state = {
+         title: '',
+         description : '',
          routes : [],
          reviseBtn : false,
       }
@@ -20,6 +28,7 @@ class TimeLine extends Component {
       const {itineraryId} = this.props
       axios.get(`http://49.50.175.145:3389/itinerary/${itineraryId}`)
       .then(res => {
+         console.log(res)
          res.data.itinerary.routes.forEach(element => {
             this.setState({
                routes: update(
@@ -30,6 +39,10 @@ class TimeLine extends Component {
                )
              })
          });
+         this.setState({
+            title: res.data.itinerary.title,
+            description : res.data.itinerary.description,
+         })
       })
       .catch(err => {
          console.log(err);
@@ -88,6 +101,41 @@ class TimeLine extends Component {
       })
    }
 
+   clickDelSchedule = () =>{
+      const {itineraryId} = this.props
+      console.log("Delete Schedule");
+      axios.get(`http://49.50.175.145:3389/itinerary/${itineraryId}/delete`,
+         {
+            headers:{
+               'Authorization' : `Bearer ${localStorage.getItem('token')}` // 꼭 'Bearer ' 붙여줘야함
+            }
+      }).then(res => {
+         console.log(res,"삭제")
+      }).catch(err => console.log(err))
+   }
+
+   clickUpdateBtn = () => {
+      const {itineraryId} = this.props
+      console.log("Update");
+      axios.post(`http://49.50.175.145:3389/itinerary/${itineraryId}/edit`,
+      {
+         title : this.state.title,
+         description : this.state.description,
+         routes:this.state.routes
+      },
+      {
+         headers:{
+            'Authorization' : `Bearer ${localStorage.getItem('token')}` // 꼭 'Bearer ' 붙여줘야함
+         }
+     }).then(res => {
+         console.log(res,"이거야")
+      }).catch(err => console.log(err))
+
+      this.setState({
+         reviseBtn : !this.state.reviseBtn
+      });
+   }
+
    render(){
       return (
          <div className="container">
@@ -110,11 +158,19 @@ class TimeLine extends Component {
                   ))
                }
             </ul>
-            <div id="ReviseSchedule">
-               {!this.state.reviseBtn ?
-               <button className="middleBtn" onClick={this.clickRevise}>일정 수정</button> :
-               <button className="middleBtn" onClick={this.clickRevise}>수정 완료</button>
-               }
+            <div>
+               <span id="ReviseSchedule">
+                  {!this.state.reviseBtn ?
+                  <button className="middleBtn" onClick={this.clickRevise}>일정 수정</button> :
+                  <button className="middleBtn" onClick={this.clickUpdateBtn}>수정 완료</button>
+                  }
+               </span>
+               <span>
+                  <Link to="/yourSchedule">
+                     <button className="middleBtn" onClick = {this.clickDelSchedule}>일정 삭제</button>
+                  </Link>
+                     
+               </span>
             </div>
          </div>
 

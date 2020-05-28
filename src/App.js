@@ -15,8 +15,8 @@ class App extends Component{
     if(this.state.logtinState){
       return (
         <Router>
-          {/* <Redirect path="*" to="/yourSchedule" /> */}
-          <Redirect path="*" to="/yourSchedule/schedule/5ecd35e6ff3ae2034cec9cf5" />
+          <Redirect path="*" to="/yourSchedule" />
+          {/* <Redirect path="*" to="/yourSchedule/schedule/5ecd35e6ff3ae2034cec9cf5" /> */}
           <Route exact path="/tendency" component={Tendency}></Route>
           <Route path="/yourSchedule" component={MenuBar}></Route>
           <Route exact path="/yourSchedule" component={Home}></Route>
