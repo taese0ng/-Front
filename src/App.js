@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import "./css/Custom.css";
 import { HashRouter as Router, Route, Redirect} from "react-router-dom";
-import { Login, SignUp, Tendency, Home, MyPages, SharePage, Schedule} from "./routes";
+import { Login, SignUp, Tendency, Home, MySchedule, SharePage, Schedule, Profile} from "./routes";
 import { MenuBar } from './components'
 
 class App extends Component{
@@ -9,20 +9,22 @@ class App extends Component{
   // let isAuth = re.test(this.props.location.pathname);
 
   state = {
-    logtinState : localStorage.getItem('token'),
+    logtinState : sessionStorage.getItem('token'),
   };
+
   render(){
     if(this.state.logtinState){
       return (
         <Router>
-          {/* <Redirect path="*" to="/yourSchedule" /> */}
-          <Redirect path="*" to="/yourSchedule/sharepage" />
+          <Redirect path="*" to="/yourSchedule" />
+          {/* <Redirect path="*" to="/yourSchedule/profile" /> */}
           <Route exact path="/tendency" component={Tendency}></Route>
           <Route path="/yourSchedule" component={MenuBar}></Route>
           <Route exact path="/yourSchedule" component={Home}></Route>
-          <Route exact path="/yourSchedule/mypages" component={MyPages}></Route>
+          <Route exact path="/yourSchedule/myschedule" component={MySchedule}></Route>
           <Route exact path="/yourSchedule/sharepage" component={SharePage}></Route>
           <Route path="/yourSchedule/schedule" component={Schedule}></Route>
+          <Route exact path="/yourSchedule/profile" component={Profile}></Route>
         </Router>
       )
     }

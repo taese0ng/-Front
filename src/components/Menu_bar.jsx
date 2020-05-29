@@ -27,8 +27,8 @@ function Menu_bar({location}){
     }
     
     function LogOut(){
-      localStorage.removeItem("token")
-      localStorage.removeItem("user");
+      sessionStorage.removeItem("token")
+      sessionStorage.removeItem("user");
       window.location.reload();
     }
     
@@ -45,11 +45,11 @@ function Menu_bar({location}){
               <p>Home</p>
             )}
           </Link>
-          <Link to="/yourSchedule/mypages" className="Link" onClick={clickMenu}>
-            {location.pathname === "/yourSchedule/mypages" ? (
-              <p id="MyPage">My Page</p>
+          <Link to="/yourSchedule/myschedule" className="Link" onClick={clickMenu}>
+            {location.pathname === "/yourSchedule/myschedule" ? (
+              <p id="MySchedule">My Schedule</p>
             ) : (
-              <p>My Page</p>
+              <p>My Schedule</p>
             )}
           </Link>
           <Link
@@ -65,7 +65,9 @@ function Menu_bar({location}){
           </Link>
         </section>
         <section id="section2">
-            <p>{JSON.parse(localStorage.getItem('user')).name}</p>
+          <Link to='/yourSchedule/profile' className="Link">
+            <p>{JSON.parse(sessionStorage.getItem('user')).name}</p>
+            </Link>
           <Link to="/login" className="Link">
             <button className="smallBtn" onClick={LogOut}>Log out</button>
           </Link>

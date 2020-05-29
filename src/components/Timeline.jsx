@@ -103,7 +103,7 @@ class TimeLine extends Component {
       axios.get(`http://49.50.175.145:3389/itinerary/${itineraryId}/delete`,
          {
             headers:{
-               'Authorization' : `Bearer ${localStorage.getItem('token')}` // 꼭 'Bearer ' 붙여줘야함
+               'Authorization' : `Bearer ${sessionStorage.getItem('token')}` // 꼭 'Bearer ' 붙여줘야함
             }
       }).then(res => {
          console.log(res,"삭제")
@@ -121,7 +121,7 @@ class TimeLine extends Component {
       },
       {
          headers:{
-            'Authorization' : `Bearer ${localStorage.getItem('token')}` // 꼭 'Bearer ' 붙여줘야함
+            'Authorization' : `Bearer ${sessionStorage.getItem('token')}` // 꼭 'Bearer ' 붙여줘야함
          }
      }).then(res => {
          console.log(res,"이거야")

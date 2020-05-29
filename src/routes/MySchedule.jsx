@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import '../css/MyPage.scss'
+import '../css/MySchedule.scss'
 import axios from 'axios';
 import { connect } from "react-redux";
 import { setItineraryId } from "../store/store";
@@ -14,7 +14,7 @@ class MyPages extends Component {
   }
 
   UNSAFE_componentWillMount(){
-    const id = JSON.parse(localStorage.getItem('user'))._id;
+    const id = JSON.parse(sessionStorage.getItem('user'))._id;
     axios.get(`http://49.50.175.145:3389/user/${id}`)
     .then(res=>{
       res.data.itinerary.forEach(element => {

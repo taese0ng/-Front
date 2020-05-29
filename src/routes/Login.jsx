@@ -36,8 +36,8 @@ function Login() {
       console.log(res)
       let token = res.data.token;
       let user = res.data.user;
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
+      sessionStorage.setItem('token', token);
+      sessionStorage.setItem("user", JSON.stringify(user));
       window.location.reload();
       history.push("/yourSchedule");
     })
