@@ -1,55 +1,78 @@
-import React, { Component } from "react";
-import { compose, withProps } from "recompose";
-//Recompse API가 하는 일은 말 그대로 소품들을 다른 방식으로 재구성할 수 있게 해준다.
-//보통 우리는 그것들을 부품 안에 넣지만, 이제 우리는 그것들을 앞쪽에 있는 물체에 넣을 수 있어서 우리의 부품들이 덜 어수선해짐
-import RouteRenderComponent from "./RouteRenderComponent";
-import { G_API_URL } from "./Constants.jsx";
-import DummyLocations from "./DummyLocations.jsx";
-const { withScriptjs, withGoogleMap, GoogleMap } = require("react-google-maps");
+/*global kakao*/
+
+import React, { Component } from 'react';
+import DummyLocations from "./DummyLocations";
+import '../css/ShowRoute.scss';
+
+
 
 class ShowRoute extends Component {
-  state = {
-    defaultZoom: 12,
-    map: null,
-    center: {
-      lat: 34.7516329613,
-      lng:  127.7140048886
-      // TODO 평균 내서 가운데 값 찾기
-    }
-  };
-  render() {
-    return (
-      <GoogleMap
-        defaultZoom={this.state.defaultZoom}
-        center={this.state.center}
-        defaultCenter={new window.google.maps.LatLng(34.6016329613, 127.7040048886)}
-      >
-        {DummyLocations.map((elem, index) => {
-          return (
-            <RouteRenderComponent
-              key={index}
-              index={index + 1}
-              strokeColor={elem.strokeColor}
-              from={elem.from}
-              to={elem.to}
-              lastData={DummyLocations.length}
-            />
-          );
-        })}
-      </GoogleMap>
-    );
-  }
-}
 
-export default compose(
-  withProps({
-    googleMapURL: G_API_URL,
-    loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `300px` }} />,
-    mapElement: <div style={{ height: `100%`, width: `100vw` }} />
-  }), // props ( 변하지 않는 데이터 )
-  withScriptjs,
-  withGoogleMap 
-  // 상위 컴포넌트 (수정될 가능성이 있는 구성요소를 반환하는 구성요소)
-  //withScriptJS 및 withGoogleMap의 형식화는 일반적으로 HOCS를 보는 더 좋은 방법
-)(ShowRoute);
+    componentDidMount() {
+        let el = document.getElementById('map');
+
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = "https://dapi.kakao.com/v2/maps/sdk.js?appkey=60c6aa1625d0fa0ff4875eb7917e607a&autoload=false";
+        document.head.appendChild(script);
+
+        script.onload = () => {
+            let map;
+            kakao.maps.load(() => {
+
+
+                map = new kakao.maps.Map(el, {
+                    center: new kakao.maps.LatLng(34.7516329613, 127.7140048886),
+                });
+                var bounds = new kakao.maps.LatLngBounds();
+
+                DummyLocations.map((elem, index) => {
+                    //     console.log(elem)
+
+                    var to = new kakao.maps.LatLng(elem.to.lat, elem.to.lng);
+                    var from = new kakao.maps.LatLng(elem.from.lat, elem.from.lng);
+                    var marker = new kakao.maps.Marker({
+                        map: map, // 마커를 표시할 지도
+                        position: from, // 마커를 표시할 위치
+                        title: index + 1 // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                    });
+
+                    var polyline = new kakao.maps.Polyline({
+                        path: [from, to], // 선을 구성하는 좌표배열 입니다
+                        strokeWeight: 5, // 선의 두께 입니다
+                        strokeColor: 'red', // 선의 색깔입니다
+                        strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+                        strokeStyle: 'dashed' // 선의 스타일입니다
+
+                    });
+
+                    if (index + 1 === DummyLocations.length) {
+                        marker = new kakao.maps.Marker({
+                            map: map, // 마커를 표시할 지도
+                            position: to, // 마커를 표시할 위치
+                            title: index + 2 // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                        });
+                    }
+
+
+                    bounds.extend(to);
+                    bounds.extend(from);
+                    //polyline.setMap(map);
+                    return null;
+                });
+                
+
+
+                map.setBounds(bounds);
+            });
+
+        };
+    }
+
+    render() {
+        return (
+            <div className="ShowRoute" id="map"></div>
+        );
+    }
+}
+export default ShowRoute;
