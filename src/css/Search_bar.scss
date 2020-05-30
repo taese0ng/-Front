@@ -2,11 +2,49 @@
     display: inline-block;
     background-color: #022435;
     width: 100%;
+    ul{
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
     #section1{
         float: left;
         .middleBtn{
             vertical-align: middle;
         }
+        #largeCategory{
+            position: absolute;
+            background-color: red;
+            height: 300px;
+            z-index: 1;
+            #LAreas{
+                display: inline-block;
+                height: 100%;
+                overflow: auto;
+            }
+            #SAreas{
+                display: inline-block;
+                height: 100%;
+                overflow: auto;
+            }
+            .LAreaList{
+                text-align: center;
+                font-weight: 500;
+                font-size: 28px;
+                width: 180px;
+                padding: 10px 0 10px 0;
+                border: 1px solid black;
+            }
+            .SAreaList{
+                text-align: center;
+                font-weight: 500;
+                font-size: 28px;
+                width: 180px;
+                padding: 10px 0 10px 0;
+                border: 1px solid black;
+            }
+        }
+        
     }
     #section2{
         float: right;
@@ -22,5 +60,7 @@
             color: white;
         }
     }
-    
 }
+
+
+

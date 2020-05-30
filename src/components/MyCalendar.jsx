@@ -11,11 +11,12 @@ import '../css/MyCalendar.scss';
 import 'moment/locale/ko';
 
 class MyCalendar extends Component {
-
-  
   render() {
     return (
-      <DatePicker locale="ko" placeholder="날짜 선택"/>
+      <DatePicker 
+      locale="ko"
+      placeholder="날짜 선택"
+      />
     )
   }
 }

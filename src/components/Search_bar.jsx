@@ -3,13 +3,34 @@ import '../css/Search_bar.scss'
 import { connect } from "react-redux";
 import { addLocation } from "../store/store";
 import MyCalendar from './MyCalendar.jsx'
-
+import { Areas } from '../components/Areas.js'
 
 function Search_bar({locations, addLocations}){
-    const [text, setText] = useState(0);
+    const [LCategory, setLCategory] = useState(false);
+    const [SCategory, setSCategory] = useState(false);
+    const [LArea, setLArea] = useState(null);
+    
     function clickPlus(){
-        setText(text => text+1);
-        addLocations(text);
+        setLCategory(LCategory => !LCategory);
+        setSCategory(SCategory => false)
+    }
+
+
+    function clickLCategory(area, Area){
+      if(LArea === Area && SCategory){
+        setSCategory(SCategory => false)
+      }
+      else{
+        setSCategory(SCategory => true);
+      }
+      setLArea(LArea => Area)
+    }
+
+    function choiceArea(SAreaCode, AreaName){
+      console.log(LArea.code, SAreaCode);
+      setLCategory(LCategory => !LCategory);
+      setSCategory(SCategory => !SCategory);
+      addLocations(AreaName);
     }
 
     return (
@@ -18,13 +39,47 @@ function Search_bar({locations, addLocations}){
           <MyCalendar/>
           {locations.map((location) => (
             <button {...location} key={location.id} className="middleBtn">
-              {location.id}
+              {location.text}
             </button>
           ))}
           {locations.length <= 1 && (
-            <button onClick={clickPlus} className="middleBtn">
-              +
-            </button>
+            <ul>
+                <li>
+                    <button onClick={clickPlus} className="middleBtn">
+                        +
+                    </button>
+                </li>
+                { LCategory && (
+                    <li id="largeCategory">
+                        <div id="LAreas">
+                            <ul>
+                            {Areas.map((LArea) =>(
+                                <li
+                                key={LArea.code}
+                                className="LAreaList"
+                                id="LArea"
+                                onClick={() => clickLCategory(LArea.code, LArea)}
+                                >{LArea.bigArea}</li>
+                            ))}
+                            </ul>
+                        </div>
+                        <div id="SAreas">
+                            { SCategory && (
+                                <ul>
+                                    {  LArea.areas.map((SArea) =>(
+                                        <li
+                                        key={SArea.code}
+                                        className="SAreaList"
+                                        id="SArea"
+                                        onClick={()=>choiceArea(SArea.code, SArea.name)}
+                                        >{SArea.name}</li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
+                    </li>
+                )}
+            </ul>
           )}
         </section>
 
