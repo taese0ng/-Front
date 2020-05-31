@@ -8,10 +8,15 @@ import '../css/ShowRoute.scss';
 
 class ShowRoute extends Component {
 
-    componentDidMount() {
-        let el = document.getElementById('map');
+    onUnload(event) {
+        alert('page Refreshed')
+    }
 
+    componentDidMount() {
+
+        let el = document.getElementById('map');
         const script = document.createElement('script');
+        script.id = "script"
         script.async = true;
         script.src = "https://dapi.kakao.com/v2/maps/sdk.js?appkey=60c6aa1625d0fa0ff4875eb7917e607a&autoload=false";
         document.head.appendChild(script);
@@ -25,6 +30,8 @@ class ShowRoute extends Component {
                     center: new kakao.maps.LatLng(34.7516329613, 127.7140048886),
                 });
                 var bounds = new kakao.maps.LatLngBounds();
+
+                
 
                 DummyLocations.map((elem, index) => {
                     //     console.log(elem)
@@ -54,13 +61,20 @@ class ShowRoute extends Component {
                         });
                     }
 
-
                     bounds.extend(to);
                     bounds.extend(from);
-                    //polyline.setMap(map);
+
+                    //오류 해결
+                    try {
+                        polyline.setMap(map);
+                    }catch(err) {
+                        console.log(`error 발생 ~! \n${err}`);
+                        window.location.reload();
+                        //react가 먼저 사라져서 kakako script에서  오류나는 거니까 reload해줌
+                    }
                     return null;
                 });
-                
+
 
 
                 map.setBounds(bounds);
@@ -68,13 +82,10 @@ class ShowRoute extends Component {
 
         };
     }
-
     render() {
         return (
-            <div className="ShowRoute" id="map"></div>
+            <section className="ShowRoute" id="map"></section>
         );
     }
 }
-
-
 export default ShowRoute;
