@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import "./css/Custom.css";
 import { HashRouter as Router, Route, Redirect} from "react-router-dom";
-import { Login, SignUp, Tendency, Home, MySchedule, SharePage, Schedule, Profile} from "./routes";
+import { Login, SignUp, Tendency, Home, MySchedule, SharePage, Schedule, Profile, DetailView} from "./routes";
 import { MenuBar } from './components'
 
 class App extends Component{
@@ -17,7 +17,7 @@ class App extends Component{
       return (
         <Router>
           <Redirect path="*" to="/yourSchedule" />
-          {/* <Redirect path="*" to="/yourSchedule/profile" /> */}
+          {/* <Redirect path="*" to="/yourSchedule/detailView" /> */}
           <Route exact path="/tendency" component={Tendency}></Route>
           <Route path="/yourSchedule" component={MenuBar}></Route>
           <Route exact path="/yourSchedule" component={Home}></Route>
@@ -25,6 +25,7 @@ class App extends Component{
           <Route exact path="/yourSchedule/sharepage" component={SharePage}></Route>
           <Route path="/yourSchedule/schedule" component={Schedule}></Route>
           <Route exact path="/yourSchedule/profile" component={Profile}></Route>
+          <Route exact path="/yourSchedule/detailView" component={DetailView}></Route>
         </Router>
       )
     }

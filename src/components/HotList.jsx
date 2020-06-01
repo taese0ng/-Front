@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import '../css/HotList.scss'
+import { Link } from "react-router-dom";
 
 function RecommendationLocation(){
     return (
         <>
-            <li className='location'>
-                <p>불국사</p>
-            </li>
+            <Link className="Link" to='/yourSchedule/detailView'>
+                <li className='location'>
+                    <p>불국사</p>
+                </li>
+            </Link>
             <li className='location'>
                 <p>한옥마을</p>
             </li>
