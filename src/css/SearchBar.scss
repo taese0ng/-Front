@@ -2,7 +2,7 @@
     display: inline-block;
     // background-color: #022435;
     // background-color: rgb(252,101,69);
-    background-color: rgb(249,113,113);
+    background-color: #ff6633;
     width: 100%;
     ul{
         padding: 0;
@@ -20,32 +20,54 @@
             #LAreas{
                 vertical-align: top;
                 display: inline-block;
-                height: 300px;
                 overflow: auto;
+                height: 0;
+                max-height: 300px;
+                border-radius: 0 0 10px 10px;
             }
             #SAreas{
                 vertical-align: top;
                 display: inline-block;
                 overflow: auto;
+                height: 0;
                 max-height: 400px;
+                border-radius: 0 0 10px 10px;
             }
             .LAreaList{
                 text-align: center;
+                cursor: pointer;
                 font-weight: 500;
-                font-size: 28px;
+                font-size: 26px;
                 width: 180px;
+                color: white;
                 padding: 10px 0 10px 0;
-                background-color: red;
-                border: 1px solid black;
+                background-color: #fd7547;
+                border-bottom: 1px solid white;
+                -ms-overflow-style: none; /* IE and Edge */
+                scrollbar-width: none; /* Firefox */
+            }
+            .LAreaList::-webkit-scrollbar{
+                display: none;
+                -ms-overflow-style: none; /* IE and Edge */
+                scrollbar-width: none; /* Firefox */
             }
             .SAreaList{
                 text-align: center;
+                cursor: pointer;
                 font-weight: 500;
                 font-size: 28px;
                 width: 180px;
+                color: white;
                 padding: 10px 0 10px 0;
-                background-color: blue;
-                border: 1px solid black;
+                background-color: #ffa689;
+                border-bottom: 1px dotted white;
+                -ms-overflow-style: none; /* IE and Edge */
+                scrollbar-width: none; /* Firefox */
+            }
+            .SAreaList::-webkit-scrollbar{
+                display: none;
+                -ms-overflow-style: none; /* IE and Edge */
+                scrollbar-width: none; /* Firefox */
             }
         }
         
@@ -63,7 +85,7 @@
         }
         #Activation{
             // background-color: rgb(58, 158, 252);
-            background-color: rgb(67,196,150);
+            background-color: #4cdb88;
             color: white;
             cursor: pointer;
         }
@@ -72,3 +94,16 @@
 
 
 
+.LAble{
+    transition: .5s all;
+    height: 300px;
+}
+.SAble{
+    transition: .5s all;
+    height: 400px;
+}
+
+.disable{
+    transition: .5s all;
+    height: 0px;
+}

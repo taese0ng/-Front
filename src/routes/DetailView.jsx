@@ -6,9 +6,6 @@ import axios from 'axios';
 import {HopeIP} from '../key'
 //192.168.0.21:3000/#/yourSchedule/detailView/
 class DetailView extends Component{
-    constructor(props){
-        super(props)
-    }
 
     componentWillMount(){
         // console.log(this.props.match.params.id)

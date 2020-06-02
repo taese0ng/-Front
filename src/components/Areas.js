@@ -1,6 +1,6 @@
 export const Areas = [
     {
-        bigArea : '강원도',
+        name : '강원도',
         code : 32,
         areas : [
             {"code":1,"name":"강릉시","rnum":1},
@@ -25,7 +25,7 @@ export const Areas = [
     },
 
     {
-        bigArea : '경기도',
+        name : '경기도',
         code : 31,
         areas : [
             {"code":1,"name":"가평군","rnum":1},
@@ -63,7 +63,7 @@ export const Areas = [
     },
 
     {
-        bigArea : '경상남도',
+        name : '경상남도',
         code : 36,
         areas : [
             {"code":1,"name":"거제시","rnum":1},
@@ -90,7 +90,7 @@ export const Areas = [
     },
 
     {
-        bigArea : '경상북도',
+        name : '경상북도',
         code : 35,
         areas : [
             {"code":1,"name":"경산시","rnum":1},
@@ -121,138 +121,138 @@ export const Areas = [
     ,
 
     {
-        bigArea : '광주',
+        name : '광주광역시',
         code : 5,
         areas : [
-            {"code":1,"name":"광산구","rnum":1},
-            {"code":2,"name":"남구","rnum":2},
-            {"code":3,"name":"동구","rnum":3},
-            {"code":4,"name":"북구","rnum":4},
-            {"code":5,"name":"서구","rnum":5}
+            // {"code":1,"name":"광산구","rnum":1},
+            // {"code":2,"name":"남구","rnum":2},
+            // {"code":3,"name":"동구","rnum":3},
+            // {"code":4,"name":"북구","rnum":4},
+            // {"code":5,"name":"서구","rnum":5}
         ]
     },
 
     {
-        bigArea : '대구',
+        name : '대구광역시',
         code : 4,
         areas : [
-            {"code":1,"name":"남구","rnum":1},
-            {"code":2,"name":"달서구","rnum":2},
-            {"code":3,"name":"달성군","rnum":3},
-            {"code":4,"name":"동구","rnum":4},
-            {"code":5,"name":"북구","rnum":5},
-            {"code":6,"name":"서구","rnum":6},
-            {"code":7,"name":"수성구","rnum":7},
-            {"code":8,"name":"중구","rnum":8}
+            // {"code":1,"name":"남구","rnum":1},
+            // {"code":2,"name":"달서구","rnum":2},
+            // {"code":3,"name":"달성군","rnum":3},
+            // {"code":4,"name":"동구","rnum":4},
+            // {"code":5,"name":"북구","rnum":5},
+            // {"code":6,"name":"서구","rnum":6},
+            // {"code":7,"name":"수성구","rnum":7},
+            // {"code":8,"name":"중구","rnum":8}
         ]
     },
 
     {
-        bigArea : '대전',
+        name : '대전광역시',
         code : 3,
         areas : [
-            {"code":1,"name":"대덕구","rnum":1},
-            {"code":2,"name":"동구","rnum":2},
-            {"code":3,"name":"서구","rnum":3},
-            {"code":4,"name":"유성구","rnum":4},
-            {"code":5,"name":"중구","rnum":5}
+            // {"code":1,"name":"대덕구","rnum":1},
+            // {"code":2,"name":"동구","rnum":2},
+            // {"code":3,"name":"서구","rnum":3},
+            // {"code":4,"name":"유성구","rnum":4},
+            // {"code":5,"name":"중구","rnum":5}
         ]
     },
 
     {
-        bigArea : '부산',
+        name : '부산광역시',
         code : 6,
         areas : [
-            {"code":1,"name":"강서구","rnum":1},
-            {"code":2,"name":"금정구","rnum":2},
-            {"code":3,"name":"기장군","rnum":3},
-            {"code":4,"name":"남구","rnum":4},
-            {"code":5,"name":"동구","rnum":5},
-            {"code":6,"name":"동래구","rnum":6},
-            {"code":7,"name":"부산진구","rnum":7},
-            {"code":8,"name":"북구","rnum":8},
-            {"code":9,"name":"사상구","rnum":9},
-            {"code":10,"name":"사하구","rnum":10},
-            {"code":11,"name":"서구","rnum":11},
-            {"code":12,"name":"수영구","rnum":12},
-            {"code":13,"name":"연제구","rnum":13},
-            {"code":14,"name":"영도구","rnum":14},
-            {"code":15,"name":"중구","rnum":15},
-            {"code":16,"name":"해운대구","rnum":16}
+            // {"code":1,"name":"강서구","rnum":1},
+            // {"code":2,"name":"금정구","rnum":2},
+            // {"code":3,"name":"기장군","rnum":3},
+            // {"code":4,"name":"남구","rnum":4},
+            // {"code":5,"name":"동구","rnum":5},
+            // {"code":6,"name":"동래구","rnum":6},
+            // {"code":7,"name":"부산진구","rnum":7},
+            // {"code":8,"name":"북구","rnum":8},
+            // {"code":9,"name":"사상구","rnum":9},
+            // {"code":10,"name":"사하구","rnum":10},
+            // {"code":11,"name":"서구","rnum":11},
+            // {"code":12,"name":"수영구","rnum":12},
+            // {"code":13,"name":"연제구","rnum":13},
+            // {"code":14,"name":"영도구","rnum":14},
+            // {"code":15,"name":"중구","rnum":15},
+            // {"code":16,"name":"해운대구","rnum":16}
         ]
     },
 
     {
-        bigArea : '서울',
+        name : '서울특별시',
         code : 1,
         areas : [
-            {"code":1,"name":"강남구","rnum":1},
-            {"code":2,"name":"강동구","rnum":2},
-            {"code":3,"name":"강북구","rnum":3},
-            {"code":4,"name":"강서구","rnum":4},
-            {"code":5,"name":"관악구","rnum":5},
-            {"code":6,"name":"광진구","rnum":6},
-            {"code":7,"name":"구로구","rnum":7},
-            {"code":8,"name":"금천구","rnum":8},
-            {"code":9,"name":"노원구","rnum":9},
-            {"code":10,"name":"도봉구","rnum":10},
-            {"code":11,"name":"동대문구","rnum":11},
-            {"code":12,"name":"동작구","rnum":12},
-            {"code":13,"name":"마포구","rnum":13},
-            {"code":14,"name":"서대문구","rnum":14},
-            {"code":15,"name":"서초구","rnum":15},
-            {"code":16,"name":"성동구","rnum":16},
-            {"code":17,"name":"성북구","rnum":17},
-            {"code":18,"name":"송파구","rnum":18},
-            {"code":19,"name":"양천구","rnum":19},
-            {"code":20,"name":"영등포구","rnum":20},
-            {"code":21,"name":"용산구","rnum":21},
-            {"code":22,"name":"은평구","rnum":22},
-            {"code":23,"name":"종로구","rnum":23},
-            {"code":24,"name":"중구","rnum":24},
-            {"code":25,"name":"중랑구","rnum":25}
+            // {"code":1,"name":"강남구","rnum":1},
+            // {"code":2,"name":"강동구","rnum":2},
+            // {"code":3,"name":"강북구","rnum":3},
+            // {"code":4,"name":"강서구","rnum":4},
+            // {"code":5,"name":"관악구","rnum":5},
+            // {"code":6,"name":"광진구","rnum":6},
+            // {"code":7,"name":"구로구","rnum":7},
+            // {"code":8,"name":"금천구","rnum":8},
+            // {"code":9,"name":"노원구","rnum":9},
+            // {"code":10,"name":"도봉구","rnum":10},
+            // {"code":11,"name":"동대문구","rnum":11},
+            // {"code":12,"name":"동작구","rnum":12},
+            // {"code":13,"name":"마포구","rnum":13},
+            // {"code":14,"name":"서대문구","rnum":14},
+            // {"code":15,"name":"서초구","rnum":15},
+            // {"code":16,"name":"성동구","rnum":16},
+            // {"code":17,"name":"성북구","rnum":17},
+            // {"code":18,"name":"송파구","rnum":18},
+            // {"code":19,"name":"양천구","rnum":19},
+            // {"code":20,"name":"영등포구","rnum":20},
+            // {"code":21,"name":"용산구","rnum":21},
+            // {"code":22,"name":"은평구","rnum":22},
+            // {"code":23,"name":"종로구","rnum":23},
+            // {"code":24,"name":"중구","rnum":24},
+            // {"code":25,"name":"중랑구","rnum":25}
         ]
     },
 
     {
-        bigArea : '세종특별자치시',
+        name : '세종시',
         code : 8,
         areas : [
-            {"code":1,"name":"세종특별자치시","rnum":1}
+            // {"code":1,"name":"세종","rnum":1}
         ]
     },
 
     {
-        bigArea : '울산',
+        name : '울산광역시',
         code : 7,
         areas : [
-            {"code":1,"name":"중구","rnum":1},
-            {"code":2,"name":"남구","rnum":2},
-            {"code":3,"name":"동구","rnum":3},
-            {"code":4,"name":"북구","rnum":4},
-            {"code":5,"name":"울주군","rnum":5}
+            // {"code":1,"name":"중구","rnum":1},
+            // {"code":2,"name":"남구","rnum":2},
+            // {"code":3,"name":"동구","rnum":3},
+            // {"code":4,"name":"북구","rnum":4},
+            // {"code":5,"name":"울주군","rnum":5}
         ]
     },
 
     {
-        bigArea : '인천',
+        name : '인천광역시',
         code : 2,
         areas : [
-            {"code":1,"name":"강화군","rnum":1},
-            {"code":2,"name":"계양구","rnum":2},
-            {"code":3,"name":"미추홀구","rnum":3},
-            {"code":4,"name":"남동구","rnum":4},
-            {"code":5,"name":"동구","rnum":5},
-            {"code":6,"name":"부평구","rnum":6},
-            {"code":7,"name":"서구","rnum":7},
-            {"code":8,"name":"연수구","rnum":8},
-            {"code":9,"name":"옹진군","rnum":9},
-            {"code":10,"name":"중구","rnum":10}
+            // {"code":1,"name":"강화군","rnum":1},
+            // {"code":2,"name":"계양구","rnum":2},
+            // {"code":3,"name":"미추홀구","rnum":3},
+            // {"code":4,"name":"남동구","rnum":4},
+            // {"code":5,"name":"동구","rnum":5},
+            // {"code":6,"name":"부평구","rnum":6},
+            // {"code":7,"name":"서구","rnum":7},
+            // {"code":8,"name":"연수구","rnum":8},
+            // {"code":9,"name":"옹진군","rnum":9},
+            // {"code":10,"name":"중구","rnum":10}
         ]
     },
 
     {
-        bigArea : '전라남도',
+        name : '전라남도',
         code : 38,
         areas : [
             {"code":1,"name":"강진군","rnum":1},
@@ -281,7 +281,7 @@ export const Areas = [
     },
 
     {
-        bigArea : '전라북도',
+        name : '전라북도',
         code : 37,
         areas : [
             {"code":1,"name":"고창군","rnum":1},
@@ -302,18 +302,18 @@ export const Areas = [
     },
 
     {
-        bigArea : '제주도',
+        name : '제주도',
         code : 39,
         areas : [
-            {"code":1,"name":"남제주군","rnum":1},
-            {"code":2,"name":"북제주군","rnum":2},
-            {"code":3,"name":"서귀포시","rnum":3},
-            {"code":4,"name":"제주시","rnum":4}
+            // {"code":1,"name":"남제주군","rnum":1},
+            // {"code":2,"name":"북제주군","rnum":2},
+            // {"code":3,"name":"서귀포시","rnum":3},
+            // {"code":4,"name":"제주시","rnum":4}
         ]
     },
 
     {
-        bigArea : '충청남도',
+        name : '충청남도',
         code : 34,
         areas : [
             {"code":1,"name":"공주시","rnum":1},
@@ -335,7 +335,7 @@ export const Areas = [
     },
 
     {
-        bigArea : '충청북도',
+        name : '충청북도',
         code : 33,
         areas :[
             {"code":1,"name":"괴산군","rnum":1},

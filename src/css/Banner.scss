@@ -1,3 +1,10 @@
+ul{
+    margin: 0;
+    padding: 0;
+    li{
+        list-style: none;
+    }
+}
 #Banner{
     width: 100%;
     height: 350px;
@@ -24,22 +31,6 @@
         }
     }
 
-    #leftArrow{
-        position: absolute;
-        top: 150px;
-        left: 0;
-        cursor: pointer;
-        z-index: 1;
-    }
-
-    #rightArrow{
-        position: absolute;
-        top: 150px;
-        right: 0;
-        cursor: pointer;
-        z-index: 1;
-    }
-
     #dotList{
         position: absolute;
         bottom: 0;
@@ -59,5 +50,49 @@
         }
     }
     
-    
+    #Arrows{
+        visibility: hidden;
+        display: flex;
+        justify-content: space-between;
+        .ArrowWrapper{
+            margin: 0 10px 0 10px;
+            display: flex;
+            position: relative;
+            border-radius: 100%;
+            top: 150px;
+            cursor: pointer;
+            z-index: 1;
+            width: 50px;
+            height: 50px;
+            background-color: #ff6633;
+            #leftArrow{
+                position: relative;
+                left: 3px;
+                width: 40%;
+                height: 40%;
+                margin: auto;
+                border-top: 6px solid white;
+                border-left: 6px solid white;
+                transform: rotate(-45deg);
+
+            }
+            #rightArrow{
+                position: relative;
+                right: 3px;
+                width: 40%;
+                height: 40%;
+                margin: auto;
+                border-top: 6px solid white;
+                border-left: 6px solid white;
+                transform: rotate(135deg);
+            }
+        }
+    }
+}
+
+
+#Banner:hover{
+    #Arrows{
+        visibility: unset;
+    }
 }

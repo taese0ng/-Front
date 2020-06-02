@@ -1,6 +1,6 @@
 #review{
-    max-width: 1200px;
-    padding: 10px;
+    max-width: 1180px;
+    padding: 20px;
     textarea{
         width: 100%;
         margin-bottom: 20px;
@@ -9,18 +9,23 @@
         font-weight: 500;
         height: 130px;
         margin: 0;
-
+        border-radius: 10px;
     }
     #reviewBtn{
         margin: 10px 0 10px 0;
         float: right;
     }
     #reviewContents{
-        border: 1px solid black;
+        border: 2px white solid;
+        border-radius: 10px;
         width: 100%;
         max-height: 450px;
         margin: 0;
         padding: 0;
+        .reviewContent{
+            margin: 10px;
+            border-bottom: 2px white solid;
+        }
         ul{
             margin: 0;
             padding: 0;
@@ -32,6 +37,7 @@
         #reviewTitle{
             font-size: 30px;
             font-weight: bold;
+            margin-bottom: 20px;
         }
         #reviewContent{
             font-size: 30px;

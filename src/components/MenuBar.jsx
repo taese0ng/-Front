@@ -1,11 +1,11 @@
 import React from 'react'
-import '../css/Menu_bar.scss'
+import '../css/MenuBar.scss'
 import { Link } from "react-router-dom";
 import hamgurger from "../assets/hamburgerMenu.png";
 
 var open = false;
 
-function Menu_bar({location}){
+function MenuBar({location}){
     window.onresize = function (event) {
       if (this.window.outerWidth > 725){
         try{
@@ -76,4 +76,4 @@ function Menu_bar({location}){
     );
 }
 
-export default Menu_bar;
+export default MenuBar;

@@ -1,18 +1,26 @@
 .picker-input__text{
-    // background-color: rgb(58, 158, 252);
-    // background-color: rgb(56,90,124);
-    background-color: rgb(67,196,150);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    margin: 10px;
-    width: 150px;
-    font-weight: bold;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-  }
+  // background-color: rgb(58, 158, 252);
+  // background-color: rgb(56,90,124);
+  background-color: #ffb197;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  width: 150px;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
 
-  .picker-input__text::placeholder{
-    color: white;
-  }
+.picker-input__text::placeholder{
+  color: white;
+}
+
+.calendar__head{
+  background-color: #ff6633;
+}
+
+.calendar__day--selected{
+  background-color: #ff6633;
+}

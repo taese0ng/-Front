@@ -63,10 +63,10 @@ function Login() {
         />
         <br />
         {/* <Link to="/yourSchedule"> */}
-        <button className="middleBtn">Sign In</button>
+        <button className="middleBtn" id='loginBtn'>여행 시작</button>
         {/* </Link> */}
         <Link to="/signup">
-          <button className="middleBtn">Sign Up</button>
+          <button className="middleBtn" id='loginBtn'>여행 준비</button>
         </Link>
       </form>
     </div>

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import arrowRight from '../assets/arrow-right.png'
-import arrowLeft from '../assets/arrow-left.png'
 import '../css/Banner.scss'
 
 var imgs;
@@ -14,7 +12,7 @@ function back(){
         imgs.style.left= (img_count-img_position-1)*100+'%';
         img_position--;
         dots[img_position].style.backgroundColor = 'white';
-        dots[img_position-1].style.backgroundColor = "rgb(43, 43, 43)";
+        dots[img_position-1].style.backgroundColor = "#4cdb88";
     }
 }
 
@@ -24,7 +22,7 @@ function next(){
         imgs.style.left= -img_position*100+'%';
         img_position++;
         dots[img_position-2].style.backgroundColor = 'white';
-        dots[img_position-1].style.backgroundColor = "rgb(43, 43, 43)";
+        dots[img_position-1].style.backgroundColor = "#4cdb88";
     }
 }
 
@@ -34,14 +32,17 @@ class Banner extends Component{
         imgs = document.getElementById('imgList');
         img_count = imgs.childElementCount;
         dots = document.getElementsByClassName('dot');
-        dots[0].style.backgroundColor = "rgb(43, 43, 43)";
+        dots[0].style.backgroundColor = "#4cdb88";
     }
     
     render(){
         return (
             <>
                 <div id="Banner">
-                    <img onClick={back} id="leftArrow" width="50px" src={arrowLeft} alt="arrow-left"/>
+                    <ul id="Arrows">
+                        <li className="ArrowWrapper" onClick={back}><div id="leftArrow"></div></li>
+                        <li className="ArrowWrapper" onClick={next}><div id="rightArrow"></div></li>
+                    </ul>
                     <ul id="imgList">
                         <li>
                             <img src="https://travelpost.kr/wp-content/uploads/2015/12/venice.jpg" alt="xx"/>
@@ -53,7 +54,6 @@ class Banner extends Component{
                             <img src="https://img.huffingtonpost.com/asset/5d81573a230000580556dcd2.jpeg?ops=scalefit_630_noupscale" alt="xx"/>
                         </li>
                     </ul>
-                    <img onClick={next} id="rightArrow" width="50px" src={arrowRight} alt="arrow-right"/>
                     <ul id="dotList">
                         <li className="dots">
                             <div className="dot"></div>

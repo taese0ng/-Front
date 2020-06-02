@@ -26,32 +26,17 @@ class HotList extends Component{
     }
 
     componentWillMount(){
-        // axios.get(`${ServerIP}/user/${id}`)
-        // .then(res=>{
-        //     res.data.itinerary.forEach(element => {
-        //     this.setState({
-        //         itineraryList: update(
-        //         this.state.itineraryList,
-        //         {
-        //             $push: [element]
-        //         }
-        //         )
-        //     })
-        //     });
-        // })
-        // .catch(err=>{
-        //     console.log(err);
-        // })
         axios.get(`${HopeIP}/api/recommend/byuser?userid=jn8121@naver.com`)
         .then(res => {
             console.log(res.data)
-            res.data.area.map(element => {
+            res.data.area.map((element) => {
                 this.setState({
                     locations : update(
                         this.state.locations, {
                             $push: [res.data.detail[element]]
                     })
                 });
+                return 0;
             })
         })
         .catch(err => console.log(err))

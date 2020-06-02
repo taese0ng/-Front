@@ -3,15 +3,11 @@ import {configureStore, createSlice} from "@reduxjs/toolkit";
 const toDos = createSlice({
   name: "toDosReducer",
   initialState: {
-    location:[],
     // list: [],
     tripDate: null,
     itineraryId : '',
   },
   reducers: {
-    addLocation:(state, action) => {
-      state.location.push({ text: action.payload, id: Date.now()});
-    },
     setTripDate:(state, action)=>{
       state.tripDate = action.payload;
     },
@@ -35,7 +31,6 @@ const toDos = createSlice({
 });
 
 export const {
-    addLocation,
     setTripDate,
     setItineraryId
     // add,

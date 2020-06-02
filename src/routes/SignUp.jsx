@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { Title } from '../components';
 import axios from 'axios';
 
@@ -79,8 +79,11 @@ function SignUp(){
         <br />
         <input className="InputInfo" placeholder="이름" onChange={InputName}/>
         <br />
-        <button className="middleBtn" id="signup_middleBtn" onClick={IsSignUp}>
-          회원가입하기
+        <Link to='/login'>
+          <button className="middleBtn" id="loginBtn">취소</button>
+        </Link>
+        <button className="middleBtn" id="loginBtn" onClick={IsSignUp}>
+          여행준비
         </button>
       </div>
     );
