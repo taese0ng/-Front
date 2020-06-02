@@ -6,6 +6,7 @@ import axios from 'axios';
 import ShowRoute from "./ShowRoute.jsx";
 import update from 'react-addons-update';
 import { Link } from "react-router-dom";
+import {ServerIP} from '../key'
 
 class TimeLine extends Component {
    constructor(props){
@@ -20,7 +21,7 @@ class TimeLine extends Component {
 
    UNSAFE_componentWillMount(){
       const {itineraryId} = this.props
-      axios.get(`http://49.50.175.145:3389/itinerary/${itineraryId}`)
+      axios.get(`${ServerIP}/itinerary/${itineraryId}`)
       .then(res => {
          console.log(res)
          res.data.itinerary.routes.forEach(element => {
@@ -100,7 +101,7 @@ class TimeLine extends Component {
    clickDelSchedule = () =>{
       const {itineraryId} = this.props
       console.log("Delete Schedule");
-      axios.get(`http://49.50.175.145:3389/itinerary/${itineraryId}/delete`,
+      axios.get(`${ServerIP}/itinerary/${itineraryId}/delete`,
          {
             headers:{
                'Authorization' : `Bearer ${sessionStorage.getItem('token')}` // 꼭 'Bearer ' 붙여줘야함
@@ -113,7 +114,7 @@ class TimeLine extends Component {
    clickUpdateBtn = () => {
       const {itineraryId} = this.props
       console.log("Update");
-      axios.post(`http://49.50.175.145:3389/itinerary/${itineraryId}/edit`,
+      axios.post(`${ServerIP}/itinerary/${itineraryId}/edit`,
       {
          title : this.state.title,
          description : this.state.description,

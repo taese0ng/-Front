@@ -25,7 +25,7 @@ class App extends Component{
           <Route exact path="/yourSchedule/sharepage" component={SharePage}></Route>
           <Route path="/yourSchedule/schedule" component={Schedule}></Route>
           <Route exact path="/yourSchedule/profile" component={Profile}></Route>
-          <Route exact path="/yourSchedule/detailView" component={DetailView}></Route>
+          <Route exact path="/yourSchedule/detailView/:id" component={DetailView}></Route>
         </Router>
       )
     }

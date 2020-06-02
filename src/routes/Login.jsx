@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Title } from "../components";
 import axios from 'axios';
+import {ServerIP} from '../key'
 
 function Login() {
   const history = useHistory();
@@ -31,7 +32,7 @@ function Login() {
       email:email,
       password: password,
     }
-    axios.post("http://49.50.175.145:3389/login", data)
+    axios.post(`${ServerIP}/login`, data)
     .then((res) =>{
       console.log(res)
       let token = res.data.token;

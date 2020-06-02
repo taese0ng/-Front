@@ -4,6 +4,7 @@ import axios from 'axios';
 import { connect } from "react-redux";
 import { setItineraryId } from "../store/store";
 import update from 'react-addons-update';
+import {ServerIP} from '../key'
 
 class MyPages extends Component {
   constructor(props){
@@ -15,7 +16,7 @@ class MyPages extends Component {
 
   UNSAFE_componentWillMount(){
     const id = JSON.parse(sessionStorage.getItem('user'))._id;
-    axios.get(`http://49.50.175.145:3389/user/${id}`)
+    axios.get(`${ServerIP}/user/${id}`)
     .then(res=>{
       res.data.itinerary.forEach(element => {
         this.setState({

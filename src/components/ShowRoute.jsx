@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import DummyLocations from "./DummyLocations";
 import '../css/ShowRoute.scss';
-
+import {kakaoMapsKey} from '../key'
 
 
 class ShowRoute extends Component {
@@ -18,7 +18,7 @@ class ShowRoute extends Component {
         const script = document.createElement('script');
         script.id = "script"
         script.async = true;
-        script.src = "https://dapi.kakao.com/v2/maps/sdk.js?appkey=60c6aa1625d0fa0ff4875eb7917e607a&autoload=false";
+        script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoMapsKey}&autoload=false`;
         document.head.appendChild(script);
 
         script.onload = () => {
