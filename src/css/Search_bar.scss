@@ -1,6 +1,8 @@
 #searchbar{
     display: inline-block;
-    background-color: #022435;
+    // background-color: #022435;
+    // background-color: rgb(252,101,69);
+    background-color: rgb(249,113,113);
     width: 100%;
     ul{
         padding: 0;
@@ -55,11 +57,15 @@
             height: 40px;
             margin: 10px;
             margin-right: 0;
-            color: rgb(133, 133, 133);
+            cursor: unset;
+            background-color: lightgray;
+            color: rgb(255, 255, 255);
         }
         #Activation{
-            background-color: rgb(58, 158, 252);
+            // background-color: rgb(58, 158, 252);
+            background-color: rgb(67,196,150);
             color: white;
+            cursor: pointer;
         }
     }
 }

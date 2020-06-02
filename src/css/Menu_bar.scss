@@ -1,6 +1,8 @@
 #menubar{
     display: inline-block;
-    background-color: #022435;
+    // background-color: #022435;
+    // background-color: rgb(252,101,69);
+    background-color: rgb(249,113,113);
     width: 100%;
     padding-top: 8px;
     padding-bottom: 8px;
@@ -41,7 +43,7 @@
 @media(max-width: 725px){
     #menubar{
         a,p{
-            color: black;
+            color: white;
         }
         #hamburger{
             display: inline;
