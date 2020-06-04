@@ -12,9 +12,11 @@ input,button{
 }
 
 #logoImg{
+    margin: auto;
+    display: block;
     width: 100%;
     max-width: 900px;
-    margin-top: 60px;
+    margin-top: 40px;
 }
 
 #signTitle{

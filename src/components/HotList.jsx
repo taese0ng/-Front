@@ -7,13 +7,11 @@ import update from 'react-addons-update';
 
 function RecommendationLocation(props){
     return (
-        <>
-            <Link className="Link" to={`/yourSchedule/detailView/${props.info.contentId}`}>
-                <li className='location'>
-                    <p>{props.info.title}</p>
-                </li>
-            </Link>
-        </>
+        <Link className="Link" to={`/yourSchedule/detailView/${props.info.contentId}`}>
+            <li className='location'>
+                <p>{props.info.title}</p>
+            </li>
+        </Link>
     )
 }
 

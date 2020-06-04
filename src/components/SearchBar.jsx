@@ -15,12 +15,15 @@ function Search_bar(){
 
     function clickPlus(){
       let LList = document.getElementById('LAreas')
+      let SList = document.getElementById('SAreas')
       LList.style.transition='0.5s all'
+      SList.style.transition='0.5s all'
       if(!LCategory){
         LList.style.height='300px'
       }
       else{
         LList.style.height='0px'
+        SList.style.height='0px'
       }
       setLCategory(LCategory => !LCategory);
       setSCategory(SCategory => false)

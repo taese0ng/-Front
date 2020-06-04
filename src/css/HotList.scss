@@ -1,10 +1,11 @@
 .location{
     display: table;
     list-style: none;
-    background: red;
+    background: #4cdb88;
+    width: 200px;
+    height: 200px;
+
     border-radius: 100%;
-    width: 100px;
-    height: 100px;
     p{
         text-align: center;
         display: table-cell;
@@ -15,9 +16,7 @@
 #rcmdedLocations{
     margin: 0 10px 0 10px;
     padding: 0;
-    display: flex;
-    justify-content: space-between;
-    overflow: auto;
+    text-align: center;
 }
 
 #hotListTitle{
@@ -29,4 +28,6 @@
 .Link{
     text-decoration: none; 
     color: black;
+    display: inline-block;
+    margin: 20px;
 }

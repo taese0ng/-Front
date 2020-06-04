@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { Title } from '../components';
 import axios from 'axios';
-
+import {HopeIP} from '../key'
 
 function SignUp(){
     const history = useHistory();
@@ -10,7 +10,15 @@ function SignUp(){
     const [passwordConfirm, setPWConfirm] = useState("");
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
-
+    
+    useEffect(() => {
+        axios.get(`${HopeIP}/api/recommend/gettendency/`)
+        .then(res=>{
+          console.log(res)
+        })
+        .catch(err => console.log(err))
+    }, [])
+    
     function only_eng_confirm(e) {
       var check_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
 
