@@ -134,80 +134,82 @@ class Profile extends Component{
     render(){
         const {edit, editPW, editBtns, userData} = this.state;
         return(
-            <div id="profile">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>e-mail</td>
-                            <td> : </td>
-                            <td>{userData.email}</td>
-                        </tr>
-                        <tr>
-                            <td>name</td>
-                            <td> : </td>
-                            { !edit ? <td>{userData.name}</td> : 
-                            <td>
-                                <input onChange={this.changeName} value={userData.name} placeholder='Name'/>
-                            </td>  }
-                        </tr>
-                        { editPW ?
-                            <>
-                                <tr>
-                                    <td>현재 비밀번호</td>
-                                    <td> : </td>
-                                    <td>
-                                        <input 
-                                            onChange={this.changePWN}
-                                            type='password' 
-                                            value={userData.passwordNow} 
-                                            placeholder='Password'/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>비밀번호</td>
-                                    <td> : </td>
-                                    <td>
-                                        <input 
-                                            onChange={this.changePW}
-                                            type='password' 
-                                            value={userData.password} 
-                                            placeholder='Password'/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>비밀번호 확인</td>
-                                    <td> : </td>
-                                    <td>
-                                        <input 
-                                            onChange={this.changePWC}
-                                            type='password' 
-                                            value={userData.passwordConfirm} 
-                                            placeholder='PasswordConfirm'/>
-                                    </td>
-                                </tr>
-                            </>
-                            :
+            <div className="footer__height" id="profile__margin">
+                <div id="profile" >
+                    <table>
+                        <tbody>
                             <tr>
-                                <td></td>
+                                <td>e-mail</td>
+                                <td> : </td>
+                                <td>{userData.email}</td>
                             </tr>
+                            <tr>
+                                <td>name</td>
+                                <td> : </td>
+                                { !edit ? <td>{userData.name}</td> : 
+                                <td>
+                                    <input onChange={this.changeName} value={userData.name} placeholder='Name'/>
+                                </td>  }
+                            </tr>
+                            { editPW ?
+                                <>
+                                    <tr>
+                                        <td>현재 비밀번호</td>
+                                        <td> : </td>
+                                        <td>
+                                            <input 
+                                                onChange={this.changePWN}
+                                                type='password' 
+                                                value={userData.passwordNow} 
+                                                placeholder='Password'/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>비밀번호</td>
+                                        <td> : </td>
+                                        <td>
+                                            <input 
+                                                onChange={this.changePW}
+                                                type='password' 
+                                                value={userData.password} 
+                                                placeholder='Password'/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>비밀번호 확인</td>
+                                        <td> : </td>
+                                        <td>
+                                            <input 
+                                                onChange={this.changePWC}
+                                                type='password' 
+                                                value={userData.passwordConfirm} 
+                                                placeholder='PasswordConfirm'/>
+                                        </td>
+                                    </tr>
+                                </>
+                                :
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div>
+                        { !editBtns ?
+                            <>
+                                <button className="middleBtn" onClick={this.clickEditBtn}>
+                                    <span role="img" aria-label="edit">✏️ </span> Edit
+                                </button>
+                                <button className="middleBtn" onClick={this.clickEditPW}>
+                                    <span role="img" aria-label="editPW">🔐</span> EditPW
+                                </button>
+                            </> :
+                            <>
+                                <button className="middleBtn" onClick={this.clickOKBtn} >OK</button>
+                                <button className="middleBtn" onClick={this.clickCancelBtn}>Cancel</button>
+                            </>
                         }
-                    </tbody>
-                </table>
-                <div>
-                    { !editBtns ?
-                        <>
-                            <button className="middleBtn" onClick={this.clickEditBtn}>
-                                <span role="img" aria-label="edit">✏️ </span> Edit
-                            </button>
-                            <button className="middleBtn" onClick={this.clickEditPW}>
-                                <span role="img" aria-label="editPW">🔐</span> EditPW
-                            </button>
-                        </> :
-                        <>
-                            <button className="middleBtn" onClick={this.clickOKBtn} >OK</button>
-                            <button className="middleBtn" onClick={this.clickCancelBtn}>Cancel</button>
-                        </>
-                    }
+                    </div>
                 </div>
             </div>
         )

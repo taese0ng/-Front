@@ -1,5 +1,13 @@
+@font-face {
+    /* font-family: NanumSquareRound;
+    src: url('../assets/fonts/NanumSquareRoundR.ttf'); */
+}
 body{
+    /* font-family: NanumSquareRound; */
     background-color: rgb(255, 238, 219);
+}
+.footer__height{
+    min-height: calc(100vh - 201px);
 }
 input,button{
     outline: none;

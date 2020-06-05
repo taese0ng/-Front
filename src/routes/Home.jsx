@@ -4,11 +4,11 @@ import '../css/Home.scss';
 
 function Home(){
     return (
-        <>
+        <div className="footer__height">
             <Banner></Banner>
             <SearchBar></SearchBar>
             <HotList></HotList>
-        </>
+        </div>
     )
 }
 

@@ -21,7 +21,7 @@ class DetailView extends Component{
 
     render(){
         return(
-            <div id="DetailView">
+            <div id="DetailView" className="footer__height">
                 <AboutContent info={{name:"여수"}}/>
                 <Review/>
             </div>

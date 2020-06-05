@@ -1,0 +1,20 @@
+#footer{
+    margin: auto;
+    border-top: 2px solid #ffb197;;
+    width: 80%;
+    text-align: center;
+    #footer__nav{
+        padding: 50px 50px 0 50px;
+        display: flex;
+        justify-content: space-between;
+        li{
+            color: #ffb197;
+            font-weight: bold;
+            font-size: 17px;
+        }
+    }
+    #footer__copyright{
+        color: lightgray;
+        padding: 40px 0 20px 0;
+    }
+}

@@ -39,7 +39,7 @@ class MyPages extends Component {
     const {itineraryList} = this.state;
     // console.log(itineraryList)
     return (
-      <div className="mypages">
+      <div className="mypages footer__height">
         {itineraryList.map((element) => (
           <MyPage 
           Location={element.title} Period={element.routes[0].Date} 

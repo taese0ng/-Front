@@ -42,7 +42,7 @@ class SharePage extends Component{
   render(){
     const {cards} = this.state;
     return (
-      <div id="CardView">
+      <div id="CardView" className="footer__height">
         <ul>
           {cards.map((card, index) => (
             <Card
