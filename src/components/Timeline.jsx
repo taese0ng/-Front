@@ -7,6 +7,7 @@ import ShowRoute from "./ShowRoute.jsx";
 import update from 'react-addons-update';
 import { Link } from "react-router-dom";
 import {ServerIP} from '../key'
+import {setSchedule, initSchedule} from "../store/store";
 
 class TimeLine extends Component {
    constructor(props){
@@ -20,11 +21,14 @@ class TimeLine extends Component {
     }
 
    UNSAFE_componentWillMount(){
-      const {itineraryId} = this.props
+      const {itineraryId,setSchedule,initSchedule} = this.props
+      initSchedule();
+
       axios.get(`${ServerIP}/itinerary/${itineraryId}`)
       .then(res => {
          console.log(res)
          res.data.itinerary.routes.forEach(element => {
+            setSchedule(element.name);
             this.setState({
                routes: update(
                  this.state.routes,
@@ -150,7 +154,7 @@ class TimeLine extends Component {
                            </div> : 
                            <></>
                         }
-                        <Place info={route}/>
+                        <Place info={route} index={index}/>
                      </li>
                   ))
                }
@@ -175,8 +179,15 @@ class TimeLine extends Component {
 
 function mapStateToProps(state) {
    return { 
-      itineraryId : state.itineraryId,
+      itineraryId : state.itineraryId
     };
  }
 
-export default connect(mapStateToProps) (TimeLine);
+ function mapDispatchToProps(dispatch) {
+   return { 
+      setSchedule: (text) => dispatch(setSchedule(text)),
+      initSchedule: () => dispatch(initSchedule())
+   };
+ }
+
+export default connect(mapStateToProps,mapDispatchToProps) (TimeLine);
