@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import "./css/Custom.css";
 import { HashRouter as Router, Route, Redirect} from "react-router-dom";
-import { Login, SignUp, Tendency, Home, MySchedule, SharePage, Schedule, Profile, DetailView} from "./routes";
+import { Login, SignUp, Home, MySchedule, SharePage, Schedule, Profile, DetailView} from "./routes";
 import { MenuBar } from './components'
 
 class App extends Component{
@@ -18,7 +18,6 @@ class App extends Component{
         <Router>
           <Redirect path="*" to="/yourSchedule" />
           {/* <Redirect path="*" to="/yourSchedule/detailView" /> */}
-          <Route exact path="/tendency" component={Tendency}></Route>
           <Route path="/yourSchedule" component={MenuBar}></Route>
           <Route exact path="/yourSchedule" component={Home}></Route>
           <Route exact path="/yourSchedule/myschedule" component={MySchedule}></Route>
@@ -32,7 +31,8 @@ class App extends Component{
     else{
       return (
         <Router>
-          <Redirect path="*" to="/login" />
+          {/* <Redirect path="*" to="/login" /> */}
+          <Redirect path="*" to="/signup" />
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/signup" component={SignUp}></Route>
         </Router>

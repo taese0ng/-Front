@@ -11,8 +11,7 @@ function HowTo(props) {
         <ul className="transport_icon">
              <li>
                 <a href={"https://map.kakao.com/?sName="+start+"&eName="+end} target = "_blank" rel="noopener noreferrer">
-                <img src={how} alt='HowToGo'/>
-
+                    <img src={how} alt='HowToGo'/>
                 </a>
             </li>
         </ul>

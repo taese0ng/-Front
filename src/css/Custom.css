@@ -16,7 +16,7 @@ input,button{
     display: block;
     width: 100%;
     max-width: 900px;
-    margin-top: 40px;
+    padding-top: 40px;
 }
 
 #signTitle{
