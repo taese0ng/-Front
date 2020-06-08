@@ -3,10 +3,11 @@ import MenuBar from './MenuBar.jsx';
 import SearchBar from './SearchBar.jsx';
 import Title from './Title.jsx';
 import Timeline from './Timeline.jsx';
+import Timeline_R from './Timeline_R.jsx';
 import HotList from './HotList.jsx'
 import MyCalendar from './MyCalendar.jsx'
 import Card from './Card.jsx'
 import Tendency from './Tendency.jsx'
 import Footer from './Footer.jsx'
 
-export {Banner, MenuBar, SearchBar, Title, Timeline, HotList, MyCalendar, Card, Tendency, Footer};
+export {Banner, MenuBar, SearchBar, Title, Timeline,Timeline_R, HotList, MyCalendar, Card, Tendency, Footer};

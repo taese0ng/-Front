@@ -7,7 +7,7 @@ import ShowRoute from "./ShowRoute.jsx";
 import update from 'react-addons-update';
 import { Link } from "react-router-dom";
 import {ServerIP, HopeIP} from '../key'
-import {setSchedule, initSchedule} from "../store/store";
+import {setSchedule, initSchedule,setLatlng,initLatlng} from "../store/store";
 
 class Timeline_R extends Component {
    constructor(props){
@@ -22,37 +22,58 @@ class Timeline_R extends Component {
     }
 
    UNSAFE_componentWillMount(){
-      const {itineraryId,setSchedule,initSchedule} = this.props
+      const {setLatlng,initLatlng,setSchedule,initSchedule} = this.props
       initSchedule();
+      initLatlng();
       axios.get(`${HopeIP}/api/recommend/user?userId=jn8121@naver.com&areaCode=32&sigunguCode=1`)
       .then(res => {
-         console.log("츠천",res)
-      })
-      .catch(err => {
-         console.log("츠천에러",err);
-      })
-      axios.get(`${ServerIP}/itinerary/${itineraryId}`)
-      .then(res => {
-         console.log(res)
-         res.data.itinerary.routes.forEach(element => {
-            setSchedule(element.name);
+         console.log("추추추");
+         console.log("츠천",res);
+         console.log("경로정보", res.data[0].detail);
+         res.data[0].area.forEach( element => {
+            //console.log("경로 데이터", res.data[0].detail[element]);
+            let data = res.data[0].detail[element];
+            setSchedule(data.title);
+            setLatlng({lat:data.mapY,lng: data.mapX});
             this.setState({
                routes: update(
                  this.state.routes,
                  {
-                   $push: [element]
+                   $push: [{name : data.title}]
                  }
                )
              })
+             this.setState({
+               title: data.title,
+               description : data.overview
+            })
          });
-         this.setState({
-            title: res.data.itinerary.title,
-            description : res.data.itinerary.description,
-         })
       })
       .catch(err => {
-         console.log(err);
+         console.log("츠천에러",err);
       })
+      // axios.get(`${ServerIP}/itinerary/${itineraryId}`)
+      // .then(res => {
+      //    console.log(res)
+      //    res.data.itinerary.routes.forEach(element => {
+      //       setSchedule(element.name);
+      //       this.setState({
+      //          routes: update(
+      //            this.state.routes,
+      //            {
+      //              $push: [element]
+      //            }
+      //          )
+      //        })
+      //    });
+      //    this.setState({
+      //       title: res.data.itinerary.title,
+      //       description : res.data.itinerary.description,
+      //    })
+      // })
+      // .catch(err => {
+      //    console.log(err);
+      // })
    }
 
    clickRevise = () => {
@@ -200,7 +221,9 @@ function mapStateToProps(state) {
  function mapDispatchToProps(dispatch) {
    return { 
       setSchedule: (text) => dispatch(setSchedule(text)),
-      initSchedule: () => dispatch(initSchedule())
+      initSchedule: () => dispatch(initSchedule()),
+      setLatlng: (text) => dispatch(setLatlng(text)),
+      initLatlng: () => dispatch(initLatlng())
    };
  }
 

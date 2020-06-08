@@ -5,6 +5,7 @@ const toDos = createSlice({
   initialState: {
     // list: [],
     schedule:[],
+    latlng:[],
     tripDate: null,
     itineraryId : '',
   },
@@ -19,11 +20,20 @@ const toDos = createSlice({
     setSchedule:(state, action)=>{
       state.schedule=[...state.schedule,action.payload]
       //push({text : action.payload});
-      //console.log("스토어",action.payload)
-      //console.log("스토어2",state.schedule)
+      // console.log("스토어",action.payload)
+       console.log("스토어2",state.schedule)
     },
     initSchedule:(state)=>{
       state.schedule=[]
+    },
+    setLatlng:(state, action)=>{
+      state.latlng=[...state.latlng,action.payload]
+      //push({text : action.payload});
+      // console.log("스토어",action.payload)
+      console.log("스토어2",state.latlng)
+    },
+    initLatlng:(state)=>{
+      state.latlng=[]
     }
     // add: (state, action) => {
     //   state.list.push({ text: action.payload, id: Date.now() });
@@ -44,7 +54,9 @@ export const {
     setTripDate,
     setItineraryId,
     setSchedule,
-    initSchedule
+    initSchedule,
+    setLatlng,
+    initLatlng
     // add,
     // remove
 } = toDos.actions;
