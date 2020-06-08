@@ -31,8 +31,8 @@ class App extends Component{
     else{
       return (
         <Router>
-          {/* <Redirect path="*" to="/login" /> */}
-          <Redirect path="*" to="/signup" />
+          <Redirect path="*" to="/login" />
+          {/* <Redirect path="*" to="/signup" /> */}
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/signup" component={SignUp}></Route>
         </Router>

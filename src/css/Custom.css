@@ -89,3 +89,10 @@ input,button{
     background-color: #66cc99;
     color: white;
 }
+
+#disableBtn{
+    margin-top: 50px;
+    background: lightgray;
+    color: rgb(117, 117, 117);
+    cursor: unset;
+}

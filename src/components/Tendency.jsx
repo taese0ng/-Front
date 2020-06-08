@@ -1,34 +1,38 @@
-import React, {useState, useEffect} from 'react'
-import {HopeIP} from '../key'
-import axios from 'axios'
+import React, {useState} from "react";
 import '../css/Tendency.scss'
 
-function Tendency(){
-    const [tendency, setTendency] = useState([]);
+function Tendency(props){
+  const [tendency] = useState(props.tendency);
+  
+  function checking(e){
+      const check = document.getElementById(e.target.value)
+      if(e.target.checked){
+        check.style.boxShadow = "0 0 0 15px rgb(255, 216, 131)"
+      }
+      else{
+        check.style.boxShadow = "unset"
+      }
+  }
 
-    useEffect(() => {
-        axios.get(`${HopeIP}/api/recommend/gettendency/`)
-        .then(res=>{
-            // eslint-disable-next-line
-            res.data.area.map((element) => {
-                setTendency(tendency => [...tendency,res.data.detail[element]])
-            })
-            
-        })
-        .catch(err => console.log(err))
-    }, [])
-
-    return(
-        <div>
-            <ul className="tendency">
-            {tendency.map((element) => (
-                <li key={element.contentId}>
-                    <label><input type="checkbox" value={element.title}/>{element.title}</label>
-                </li>
-            ))}
-            </ul>
-        </div>
-    )
+  return (
+      <div>
+          <ul className='tendency'>
+          {tendency.map(element => (
+            <li key={element.contentId}>
+                <label id={element.contentId} style={{backgroundImage: `url(${element.firstImage})`, 
+                backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
+                    <input type="checkbox" value={element.contentId} 
+                    onChange={props.method} onClick={checking}/>
+                    
+                </label>
+                <p>
+                    {element.title}
+                </p>
+            </li>
+          ))}
+          </ul>
+      </div>
+  );
 }
 
 export default Tendency;
