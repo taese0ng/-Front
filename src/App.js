@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import "./css/Custom.css";
 import { HashRouter as Router, Route, Redirect} from "react-router-dom";
 import { Login, SignUp, Home, MySchedule, SharePage, Schedule, Profile, DetailView} from "./routes";
-import { MenuBar } from './components'
+import { MenuBar,Footer } from './components'
 
 class App extends Component{
   // let re = /(signup|tendency)/;
@@ -25,6 +25,7 @@ class App extends Component{
           <Route path="/yourSchedule/schedule" component={Schedule}></Route>
           <Route exact path="/yourSchedule/profile" component={Profile}></Route>
           <Route exact path="/yourSchedule/detailView/:id" component={DetailView}></Route>
+          <Route path="/yourSchedule" component={Footer}></Route>
         </Router>
       )
     }
