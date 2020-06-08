@@ -8,8 +8,9 @@ import update from 'react-addons-update';
 function RecommendationLocation(props){
     return (
         <Link className="Link" to={`/yourSchedule/detailView/${props.info.contentId}`}>
-            <li className='location'>
-                <p>{props.info.title}</p>
+            <li className='location' style={{backgroundImage: `url(${props.info.firstImage})`, 
+                backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
+                <p className="locationTitle">{props.info.title}</p>
             </li>
         </Link>
     )
@@ -24,7 +25,7 @@ class HotList extends Component{
     }
 
     componentWillMount(){
-        axios.get(`${HopeIP}/api/recommend/byuser?userid=jn8121@naver.com`)
+        axios.get(`${HopeIP}/api/recommend/user?userId=jn8121@naver.com`)
         .then(res => {
             console.log(res.data)
             res.data.area.map((element) => {

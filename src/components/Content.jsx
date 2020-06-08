@@ -5,13 +5,14 @@ import "../css/Content.scss"
 
 // 말풍선 안 내용 (장소이름, 장소설명 + About(글로 설명된 부분))
 function Content(props) {
+
     return (
         <ul className="contents">
             <li className="content__way">
                 <div className="content__title">
                     <p>{props.info.name}</p>
                 </div>
-                <HowTo />
+                <HowTo index={props.index}/>
             </li>
             <li className="content__place">
                 <About info={props.info}/>

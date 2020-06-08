@@ -24,7 +24,7 @@ input,button{
     display: block;
     width: 100%;
     max-width: 900px;
-    margin-top: 40px;
+    padding-top: 40px;
 }
 
 #signTitle{
@@ -96,4 +96,11 @@ input,button{
     margin-top: 50px;
     background-color: #66cc99;
     color: white;
+}
+
+#disableBtn{
+    margin-top: 50px;
+    background: lightgray;
+    color: rgb(117, 117, 117);
+    cursor: unset;
 }

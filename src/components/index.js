@@ -6,6 +6,6 @@ import Timeline from './Timeline.jsx';
 import HotList from './HotList.jsx'
 import MyCalendar from './MyCalendar.jsx'
 import Card from './Card.jsx'
-import Footer from './Footer.jsx'
+import Tendency from './Tendency.jsx'
 
-export {Banner, MenuBar, SearchBar, Title, Timeline, HotList, MyCalendar, Card, Footer};
+export {Banner, MenuBar, SearchBar, Title, Timeline, HotList, MyCalendar, Card, Tendency};
