@@ -6,5 +6,6 @@ import SignUp from './SignUp.jsx';
 import Schedule from './Schedule.jsx';
 import Profile from './Profile.jsx';
 import DetailView from './DetailView.jsx'
+import Recommend from './Recommend.jsx'
 
-export {Home, Login, MySchedule, SharePage, SignUp, Schedule, Profile, DetailView};
+export {Home, Login, MySchedule, SharePage, SignUp, Schedule, Profile, DetailView, Recommend};

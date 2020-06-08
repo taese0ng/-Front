@@ -6,10 +6,10 @@ import axios from 'axios';
 import ShowRoute from "./ShowRoute.jsx";
 import update from 'react-addons-update';
 import { Link } from "react-router-dom";
-import {ServerIP} from '../key'
+import {ServerIP, HopeIP} from '../key'
 import {setSchedule, initSchedule} from "../store/store";
 
-class TimeLine extends Component {
+class Timeline_R extends Component {
    constructor(props){
       super(props);
       this.state = {
@@ -17,13 +17,20 @@ class TimeLine extends Component {
          description : '',
          routes : [],
          reviseBtn : false,
+         recommend : []
       }
     }
 
    UNSAFE_componentWillMount(){
       const {itineraryId,setSchedule,initSchedule} = this.props
       initSchedule();
-      
+      axios.get(`${HopeIP}/api/recommend/user?userId=jn8121@naver.com&areaCode=32&sigunguCode=1`)
+      .then(res => {
+         console.log("츠천",res)
+      })
+      .catch(err => {
+         console.log("츠천에러",err);
+      })
       axios.get(`${ServerIP}/itinerary/${itineraryId}`)
       .then(res => {
          console.log(res)
@@ -197,4 +204,4 @@ function mapStateToProps(state) {
    };
  }
 
-export default connect(mapStateToProps,mapDispatchToProps) (TimeLine);
+export default connect(mapStateToProps,mapDispatchToProps) (Timeline_R);

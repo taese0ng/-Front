@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import '../css/SearchBar.scss'
 import MyCalendar from './MyCalendar.jsx'
 import { Areas } from '../components/Areas.js'
+import { Link } from "react-router-dom";
 
 function Search_bar(){
     const [LCategory, setLCategory] = useState(false);
@@ -147,9 +148,15 @@ function Search_bar(){
         <section id="section2">
           <button className="searchBtn" id="Activation" onClick={resetBtn}>초기화</button>
           {locations.length > 0 ? (
+            <Link
+            to="/yourSchedule/recommend"
+            >
             <button className="searchBtn" id="Activation">
               추천시작
             </button>
+          </Link> 
+
+             
           ) : (
             <button className="searchBtn">추천시작</button>
           )}
