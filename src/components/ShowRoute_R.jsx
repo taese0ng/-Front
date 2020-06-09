@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 let map;
 let script;
 var bounds;
+var polyline =[];
 class ShowRoute_R extends Component {
 
 
@@ -20,8 +21,12 @@ class ShowRoute_R extends Component {
         const { latlng } = this.props
 
         console.log(latlng,"여기다");
-
-                latlng.map((elem, index) => {
+        polyline.forEach(elem =>{
+            elem.setMap(null);
+        })
+    
+                latlng.map((elem, index) => 
+                {
                     if (latlng.length > index+1) {
                         var to = new kakao.maps.LatLng(latlng[index+ 1].lat, latlng[index+ 1].lng);
                         var from = new kakao.maps.LatLng(latlng[index].lat, latlng[index].lng);
@@ -31,7 +36,7 @@ class ShowRoute_R extends Component {
                             title: index + 1 // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
                         });
 
-                        var polyline = new kakao.maps.Polyline({
+                        let polylineTemp = new kakao.maps.Polyline({
                             path: [from, to], // 선을 구성하는 좌표배열 입니다
                             strokeWeight: 5, // 선의 두께 입니다
                             strokeColor: 'red', // 선의 색깔입니다
@@ -39,6 +44,9 @@ class ShowRoute_R extends Component {
                             strokeStyle: 'dashed' // 선의 스타일입니다
 
                         });
+
+                        polyline.push(polylineTemp)
+
 
                         if (index  === latlng.length-2) {
 
@@ -54,7 +62,7 @@ class ShowRoute_R extends Component {
 
                         //오류 해결
                         try {
-                            polyline.setMap(map);
+                            polylineTemp.setMap(map);
                         } catch (err) {
                             console.log(`error 발생 ~! \n${err}`);
                             window.location.reload();
@@ -85,15 +93,10 @@ class ShowRoute_R extends Component {
         script.onload = () => {
 
             kakao.maps.load(() => {
-
-
                 map = new kakao.maps.Map(el, {
                     center: new kakao.maps.LatLng(34.7516329613, 127.7140048886),
                 });
                 bounds = new kakao.maps.LatLngBounds();
-
-
-
             });
 
         };

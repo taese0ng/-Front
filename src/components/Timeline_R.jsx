@@ -22,13 +22,14 @@ class Timeline_R extends Component {
     }
 
    UNSAFE_componentWillMount(){
-      const {setLatlng,initLatlng,setSchedule,initSchedule} = this.props
+      const {itineraryId,setLatlng,initLatlng,setSchedule,initSchedule} = this.props
       
       axios.get(`${HopeIP}/api/recommend/user?userId=jn8121@naver.com&areaCode=32&sigunguCode=1`)
       .then(res => {
          initSchedule();
          initLatlng();
          res.data[0].area.forEach( element => {
+            console.log(element);
             let data = res.data[0].detail[element];
             setSchedule(data.title);
             setLatlng({lat:data.mapY,lng:data.mapX});
@@ -37,6 +38,14 @@ class Timeline_R extends Component {
                  this.state.routes,
                  {
                    $push: [{name : data.title}]
+                 }
+               )
+             })
+             this.setState({
+               recommend: update(
+                 this.state.recommend,
+                 {
+                   $push:[{lat:data.mapY,lng:data.mapX}]
                  }
                )
              })
@@ -58,29 +67,51 @@ class Timeline_R extends Component {
    }
 
    clickUpBtn = (idx) =>{
+      const {setLatlng,initLatlng} = this.props
+
       console.log("Up", idx)
       if(idx > 0){
          let down = this.state.routes[idx];
          let up = this.state.routes[idx-1];
-         
+         let downXY = this.state.recommend[idx];
+         let upXY = this.state.recommend[idx-1];
          this.setState({
             routes : update(
                this.state.routes,
                {
-                  
                   [idx] : {$set : up},
                   [idx-1]: {$set: down}
                }
             )
          })
+         this.setState({
+            recommend : update(
+               this.state.recommend,
+               {  
+                  [idx] : {$set : upXY},
+                  [idx-1]: {$set: downXY}
+               }
+            )
+         })
+         
       }
+      
+      initLatlng();
+      this.state.recommend.forEach(element => {
+         console.log(element,"경도위도");
+         setLatlng(element);
+      })
    }
 
    clickDownBtn = (idx) =>{
+      const {setLatlng,initLatlng} = this.props
+
       console.log("Down", idx)
       if(idx < this.state.routes.length-1){
          let up = this.state.routes[idx];
          let down = this.state.routes[idx+1];
+         let upXY = this.state.recommend[idx];
+         let downXY = this.state.recommend[idx+1];
          this.setState({
             routes : update(
                this.state.routes,
@@ -88,9 +119,22 @@ class Timeline_R extends Component {
                   [idx] : {$set : down},
                   [idx+1]: {$set: up}
                }
+            ),
+            recommend : update(
+               this.state.recommend,
+               {
+                  [idx] : {$set : downXY},
+                  [idx+1]: {$set: upXY}
+               }
             )
          })
       }
+      
+      initLatlng();
+      this.state.recommend.forEach(element => {
+         console.log(element,"경도위도");
+         setLatlng(element);
+      })
    }
 
    clickDelBtn = (idx) => {
@@ -101,8 +145,15 @@ class Timeline_R extends Component {
             {
                $splice: [[idx,1]]
             }
+         ),
+         recommend : update(
+            this.state.recommend,
+            {
+               $splice: [[idx,1]]
+            }
          )
       })
+      
    }
 
    clickDelSchedule = () =>{
@@ -119,26 +170,13 @@ class Timeline_R extends Component {
    }
 
    clickUpdateBtn = () => {
-      const {itineraryId,schedule,setSchedule,initSchedule} = this.props
-      console.log("Update");
-      axios.post(`${ServerIP}/itinerary/${itineraryId}/edit`,
-      {
-         title : this.state.title,
-         description : this.state.description,
-         routes:this.state.routes
-      },
-      {
-         headers:{
-            'Authorization' : `Bearer ${sessionStorage.getItem('token')}` // 꼭 'Bearer ' 붙여줘야함
-         }
-     }).then(res => {
-         console.log(res,"이거야")
+      const {setSchedule,initSchedule} = this.props
+     
          // 일정 수정 시 업데이트
          initSchedule();
          this.state.routes.forEach(element => {
             setSchedule(element.name);
          })
-      }).catch(err => console.log(err))
 
       this.setState({
          reviseBtn : !this.state.reviseBtn
