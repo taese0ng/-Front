@@ -11,11 +11,19 @@ function DetailView(){
     const { id } = useParams();
     const [contentId, setContentId] = useState(null);
     const [comments, setComments] = useState([]);
+    const [name, setName] = useState();
+    const [overview, setOverview] = useState();
+    const [image, setImage] = useState();
+
     useEffect(() => {
         // console.log(this.props.match.params.id)
-        axios.get(`${HopeIP}/api/recommend/areadata/${id}`)
+        axios.get(`${HopeIP}/api/search/area/${id}/`)
         .then(res => {
             console.log(res)
+            const data = res.data;
+            setName(data.title)
+            setOverview(data.overview)
+            setImage(data.firstImage)
         })
         .catch(err => {
             console.log(err);
@@ -23,6 +31,7 @@ function DetailView(){
 
         axios.get(`${ServerIP}/content/${id}`)
         .then(res =>{
+            console.log(res);
             setContentId(res.data.content._id)
             let ans = []
             res.data.comments.forEach((element) => {
@@ -31,6 +40,7 @@ function DetailView(){
             setComments(ans)
         })
         .catch(err => console.log(err))
+        // eslint-disable-next-line
     },[])
 
     function submitComment(comment){
@@ -72,7 +82,7 @@ function DetailView(){
 
     return(
         <div id="DetailView" className="footer__height">
-            <AboutContent info={{name:"여수"}}/>
+            <AboutContent info={{name:name, overview:overview, image:image}}/>
             <Review submitMethod={submitComment} 
             commentsInfo={comments} delComment={delComment}/>
         </div>

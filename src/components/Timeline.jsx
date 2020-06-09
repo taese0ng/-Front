@@ -17,6 +17,7 @@ class TimeLine extends Component {
          description : '',
          routes : [],
          reviseBtn : false,
+         publish: false,
       }
     }
 
@@ -41,6 +42,7 @@ class TimeLine extends Component {
          this.setState({
             title: res.data.itinerary.title,
             description : res.data.itinerary.description,
+            publish: res.data.itinerary.publish
          })
       })
       .catch(err => {
@@ -137,6 +139,31 @@ class TimeLine extends Component {
       });
    }
 
+   setPublic=()=>{
+      const {itineraryId} = this.props
+      axios.get(`${ServerIP}/itinerary/${itineraryId}/public`, {
+         headers:{'Authorization' : `Bearer ${sessionStorage.getItem('token')}`}
+      })
+      .then(res => {
+         console.log(res)
+         this.setState({publish: true})
+      })
+      .catch(err => console.log(err))
+   }
+
+   setPrivate=()=>{
+      const {itineraryId} = this.props
+      axios.get(`${ServerIP}/itinerary/${itineraryId}/private`, {
+         headers:{'Authorization' : `Bearer ${sessionStorage.getItem('token')}`}
+      })
+      .then(res => {
+         console.log(res)
+         this.setState({publish: false})
+      })
+      .catch(err => console.log(err))
+   }
+   
+
    render(){
       return (
          <div className="container">
@@ -170,6 +197,12 @@ class TimeLine extends Component {
                   <Link to="/yourSchedule">
                      <button className="middleBtn" onClick = {this.clickDelSchedule}>일정 삭제</button>
                   </Link>
+               </span>
+               <span>
+                  {this.state.publish ?
+                     <button className="middleBtn" onClick={this.setPrivate}>공유해제</button> :
+                     <button className="middleBtn" onClick={this.setPublic}>공유하기</button>
+                  }
                </span>
             </div>
          </div>

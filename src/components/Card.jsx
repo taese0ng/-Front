@@ -2,7 +2,7 @@ import React from 'react'
 import '../css/Card.scss'
 
 function Card(props){
-    const {eMail,schedule, view, date, cardImg} = props
+    const {name, schedule, view, date, cardImg} = props
     return(
         <li className="card">
             <div id='cardImg'>
@@ -14,7 +14,7 @@ function Card(props){
                         {schedule}
                     </li>
                     <li>
-                        {eMail}
+                        {name}
                     </li>
                     <li>
                         View : {view}
