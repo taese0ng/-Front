@@ -3,7 +3,7 @@ import Place from "./Place.jsx"
 import '../css/Timeline.scss'
 import { connect } from "react-redux";
 import axios from 'axios';
-import ShowRoute from "./ShowRoute.jsx";
+import ShowRoute_R from "./ShowRoute_R.jsx";
 import update from 'react-addons-update';
 import { Link } from "react-router-dom";
 import {ServerIP, HopeIP} from '../key'
@@ -23,18 +23,15 @@ class Timeline_R extends Component {
 
    UNSAFE_componentWillMount(){
       const {setLatlng,initLatlng,setSchedule,initSchedule} = this.props
-      initSchedule();
-      initLatlng();
+      
       axios.get(`${HopeIP}/api/recommend/user?userId=jn8121@naver.com&areaCode=32&sigunguCode=1`)
       .then(res => {
-         console.log("추추추");
-         console.log("츠천",res);
-         console.log("경로정보", res.data[0].detail);
+         initSchedule();
+         initLatlng();
          res.data[0].area.forEach( element => {
-            //console.log("경로 데이터", res.data[0].detail[element]);
             let data = res.data[0].detail[element];
             setSchedule(data.title);
-            setLatlng({lat:data.mapY,lng: data.mapX});
+            setLatlng({lat:data.mapY,lng:data.mapX});
             this.setState({
                routes: update(
                  this.state.routes,
@@ -52,28 +49,6 @@ class Timeline_R extends Component {
       .catch(err => {
          console.log("츠천에러",err);
       })
-      // axios.get(`${ServerIP}/itinerary/${itineraryId}`)
-      // .then(res => {
-      //    console.log(res)
-      //    res.data.itinerary.routes.forEach(element => {
-      //       setSchedule(element.name);
-      //       this.setState({
-      //          routes: update(
-      //            this.state.routes,
-      //            {
-      //              $push: [element]
-      //            }
-      //          )
-      //        })
-      //    });
-      //    this.setState({
-      //       title: res.data.itinerary.title,
-      //       description : res.data.itinerary.description,
-      //    })
-      // })
-      // .catch(err => {
-      //    console.log(err);
-      // })
    }
 
    clickRevise = () => {
@@ -163,7 +138,6 @@ class Timeline_R extends Component {
          this.state.routes.forEach(element => {
             setSchedule(element.name);
          })
-         console.log("음",schedule);
       }).catch(err => console.log(err))
 
       this.setState({
@@ -174,7 +148,7 @@ class Timeline_R extends Component {
    render(){
       return (
          <div className="container">
-            <ShowRoute/>
+            <ShowRoute_R/>
             <ul className="timeline">
                {
                   this.state.routes.map((route,index) => (
@@ -214,7 +188,8 @@ class Timeline_R extends Component {
 function mapStateToProps(state) {
    return { 
       itineraryId : state.itineraryId,
-      schedule:state.schedule
+      schedule:state.schedule,
+      latlng:state.latlng
     };
  }
 
@@ -222,7 +197,7 @@ function mapStateToProps(state) {
    return { 
       setSchedule: (text) => dispatch(setSchedule(text)),
       initSchedule: () => dispatch(initSchedule()),
-      setLatlng: (text) => dispatch(setLatlng(text)),
+      setLatlng: ({lat,lng}) => dispatch(setLatlng({lat,lng})),
       initLatlng: () => dispatch(initLatlng())
    };
  }

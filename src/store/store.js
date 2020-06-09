@@ -21,19 +21,21 @@ const toDos = createSlice({
       state.schedule=[...state.schedule,action.payload]
       //push({text : action.payload});
       // console.log("스토어",action.payload)
-       console.log("스토어2",state.schedule)
+      // console.log("스토어2",state.schedule)
     },
     initSchedule:(state)=>{
-      state.schedule=[]
+      state.schedule=[];
     },
     setLatlng:(state, action)=>{
       state.latlng=[...state.latlng,action.payload]
       //push({text : action.payload});
       // console.log("스토어",action.payload)
-      console.log("스토어2",state.latlng)
+      console.log("저;장",state.latlng)
     },
     initLatlng:(state)=>{
-      state.latlng=[]
+      state.latlng=[];
+      console.log("초기화",state.latlng);
+
     }
     // add: (state, action) => {
     //   state.list.push({ text: action.payload, id: Date.now() });

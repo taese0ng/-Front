@@ -76,8 +76,6 @@ class ShowRoute extends Component {
                     return null;
                 });
 
-
-
                 map.setBounds(bounds);
             });
 
