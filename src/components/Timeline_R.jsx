@@ -7,7 +7,7 @@ import ShowRoute_R from "./ShowRoute_R.jsx";
 import update from 'react-addons-update';
 import { Link } from "react-router-dom";
 import {ServerIP, HopeIP} from '../key'
-import {setSchedule, initSchedule,setLatlng,initLatlng} from "../store/store";
+import {setSchedule, initSchedule} from "../store/store";
 
 class Timeline_R extends Component {
    constructor(props){
@@ -22,17 +22,16 @@ class Timeline_R extends Component {
     }
 
    UNSAFE_componentWillMount(){
-      const {itineraryId,setLatlng,initLatlng,setSchedule,initSchedule} = this.props
-      
+      const {setSchedule,initSchedule} = this.props
+      console.log(this.props);
       axios.get(`${HopeIP}/api/recommend/user?userId=jn8121@naver.com&areaCode=32&sigunguCode=1`)
       .then(res => {
          initSchedule();
-         initLatlng();
          res.data[0].area.forEach( element => {
             console.log(element);
             let data = res.data[0].detail[element];
             setSchedule(data.title);
-            setLatlng({lat:data.mapY,lng:data.mapX});
+            
             this.setState({
                routes: update(
                  this.state.routes,
@@ -67,7 +66,6 @@ class Timeline_R extends Component {
    }
 
    clickUpBtn = (idx) =>{
-      const {setLatlng,initLatlng} = this.props
 
       console.log("Up", idx)
       if(idx > 0){
@@ -93,18 +91,10 @@ class Timeline_R extends Component {
                }
             )
          })
-         
       }
-      
-      initLatlng();
-      this.state.recommend.forEach(element => {
-         console.log(element,"경도위도");
-         setLatlng(element);
-      })
    }
 
    clickDownBtn = (idx) =>{
-      const {setLatlng,initLatlng} = this.props
 
       console.log("Down", idx)
       if(idx < this.state.routes.length-1){
@@ -130,11 +120,7 @@ class Timeline_R extends Component {
          })
       }
       
-      initLatlng();
-      this.state.recommend.forEach(element => {
-         console.log(element,"경도위도");
-         setLatlng(element);
-      })
+
    }
 
    clickDelBtn = (idx) => {
@@ -153,7 +139,6 @@ class Timeline_R extends Component {
             }
          )
       })
-      
    }
 
    clickDelSchedule = () =>{
@@ -170,7 +155,7 @@ class Timeline_R extends Component {
    }
 
    clickUpdateBtn = () => {
-      const {setSchedule,initSchedule} = this.props
+      const {setSchedule,initSchedule} = this.props;
      
          // 일정 수정 시 업데이트
          initSchedule();
@@ -181,12 +166,17 @@ class Timeline_R extends Component {
       this.setState({
          reviseBtn : !this.state.reviseBtn
       });
+      
    }
-
    render(){
+      const {latlng} = this.props;
+
+      
+      console.log(this.state.recommend);
+      console.log(latlng,"경도위도");
       return (
          <div className="container">
-            <ShowRoute_R/>
+            <ShowRoute_R recommend={this.state.recommend}/>
             <ul className="timeline">
                {
                   this.state.routes.map((route,index) => (
@@ -226,17 +216,14 @@ class Timeline_R extends Component {
 function mapStateToProps(state) {
    return { 
       itineraryId : state.itineraryId,
-      schedule:state.schedule,
-      latlng:state.latlng
+      schedule:state.schedule
     };
  }
 
  function mapDispatchToProps(dispatch) {
    return { 
       setSchedule: (text) => dispatch(setSchedule(text)),
-      initSchedule: () => dispatch(initSchedule()),
-      setLatlng: ({lat,lng}) => dispatch(setLatlng({lat,lng})),
-      initLatlng: () => dispatch(initLatlng())
+      initSchedule: () => dispatch(initSchedule())
    };
  }
 

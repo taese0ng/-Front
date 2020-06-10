@@ -25,7 +25,7 @@ class App extends Component{
           <Route path="/yourSchedule/schedule" component={Schedule}></Route>
           <Route exact path="/yourSchedule/profile" component={Profile}></Route>
           <Route exact path="/yourSchedule/detailView/:id" component={DetailView}></Route>
-          <Route exact path="/yourSchedule/recommend" component={Recommend}></Route>
+          <Route exact path="/yourSchedule/recommend/:area" component={Recommend}></Route>
           <Route path="/yourSchedule" component={Footer}></Route>
 
         </Router>

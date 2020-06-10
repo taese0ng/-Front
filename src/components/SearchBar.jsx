@@ -149,14 +149,12 @@ function Search_bar(){
           <button className="searchBtn" id="Activation" onClick={resetBtn}>초기화</button>
           {locations.length > 0 ? (
             <Link
-            to="/yourSchedule/recommend"
+            to={`/yourSchedule/recommend/${LArea.code}`}
             >
             <button className="searchBtn" id="Activation">
               추천시작
             </button>
           </Link> 
-
-             
           ) : (
             <button className="searchBtn">추천시작</button>
           )}
