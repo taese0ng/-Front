@@ -6,7 +6,7 @@ import axios from 'axios';
 import ShowRoute from "./ShowRoute.jsx";
 import update from 'react-addons-update';
 import { Link } from "react-router-dom";
-import {ServerIP} from '../key'
+import {ServerIP, HopeIP} from '../key'
 import {setSchedule, initSchedule} from "../store/store";
 
 class TimeLine extends Component {
@@ -27,17 +27,32 @@ class TimeLine extends Component {
 
       axios.get(`${ServerIP}/itinerary/${itineraryId}`)
       .then(res => {
-         console.log(res)
+         // console.log(res)
          res.data.itinerary.routes.forEach(element => {
-            setSchedule(element.name);
-            this.setState({
-               routes: update(
-                 this.state.routes,
-                 {
-                   $push: [element]
-                 }
-               )
-             })
+            setSchedule(element.name); //todo 지울지말지 결정.
+            axios.get(`${HopeIP}/api/search/area/${element}/`)
+            .then(res => {
+               console.log(res)
+               this.setState({
+                  routes: update(
+                    this.state.routes,
+                    {
+                      $push: [
+                         {
+                            name: res.data.title,
+                            overview : res.data.overview,
+                            mapX : res.data.mapX,
+                            mapY: res.data.mapY,
+                            image : res.data.firstImage,
+                            homepage : res.data.homepage,
+                            title : res.data.title,
+                         }
+                     ]
+                    }
+                  )
+                })
+            })
+            .catch(err => console.log("ㅅㅂㅅㅂㅅㅂ",err))
          });
          this.setState({
             title: res.data.itinerary.title,

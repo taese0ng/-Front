@@ -18,6 +18,7 @@ class MyPages extends Component {
     const id = JSON.parse(sessionStorage.getItem('user'))._id;
     axios.get(`${ServerIP}/user/${id}`)
     .then(res=>{
+      console.log(res)
       res.data.itinerary.forEach(element => {
         this.setState({
           itineraryList: update(
@@ -42,7 +43,7 @@ class MyPages extends Component {
       <div className="mypages footer__height">
         {itineraryList.map((element) => (
           <MyPage 
-          Location={element.title} Period={element.routes[0].Date} 
+          Location={element.title} Period={element.date} 
           Id={element._id} key={element._id} 
           method={
             () => {

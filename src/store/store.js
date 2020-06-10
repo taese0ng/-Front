@@ -13,14 +13,12 @@ const toDos = createSlice({
       state.tripDate = action.payload;
     },
     setItineraryId:(state, action)=>{
-      console.log(action.payload)
+      // console.log(action.payload)
       state.itineraryId = action.payload;
     },
     setSchedule:(state, action)=>{
       state.schedule=[...state.schedule,action.payload]
       //push({text : action.payload});
-      console.log("스토어",action.payload)
-      console.log("스토어2",state.schedule)
     },
     initSchedule:(state)=>{
       state.schedule=[]
