@@ -59,7 +59,8 @@ function SignUp(){
         name: name,
         email: email,
         verifyPassword: passwordConfirm,
-        password: password
+        password: password,
+        selections: choice
       };
       axios.post("http://49.50.175.145:3389/join", data)
       .then((res) => {
@@ -81,12 +82,11 @@ function SignUp(){
     function checkTendncy(e){
       // console.log(e.target.value);
       if(e.target.checked){
-        setChoice([...choice, e.target.value]) 
+        setChoice([...choice, parseInt(e.target.value)])
       }
       else{
         setChoice(choice.filter(element => element !== e.target.value))
       }
-      console.log(choice)
     }
 
     return (

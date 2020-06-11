@@ -6,7 +6,7 @@ import axios from 'axios';
 import ShowRoute from "./ShowRoute.jsx";
 import update from 'react-addons-update';
 import { Link } from "react-router-dom";
-import {ServerIP} from '../key'
+import {ServerIP, HopeIP} from '../key'
 import {setSchedule, initSchedule} from "../store/store";
 
 class TimeLine extends Component {
@@ -17,6 +17,7 @@ class TimeLine extends Component {
          description : '',
          routes : [],
          reviseBtn : false,
+         publish: false,
       }
     }
 
@@ -26,21 +27,37 @@ class TimeLine extends Component {
       
       axios.get(`${ServerIP}/itinerary/${itineraryId}`)
       .then(res => {
-         console.log(res)
+         // console.log(res)
          res.data.itinerary.routes.forEach(element => {
-            setSchedule(element.name);
-            this.setState({
-               routes: update(
-                 this.state.routes,
-                 {
-                   $push: [element]
-                 }
-               )
-             })
+            setSchedule(element.name); //todo 지울지말지 결정.
+            axios.get(`${HopeIP}/api/search/area/${element}/`)
+            .then(res => {
+               console.log(res)
+               this.setState({
+                  routes: update(
+                    this.state.routes,
+                    {
+                      $push: [
+                         {
+                            name: res.data.title,
+                            overview : res.data.overview,
+                            mapX : res.data.mapX,
+                            mapY: res.data.mapY,
+                            image : res.data.firstImage,
+                            homepage : res.data.homepage,
+                            title : res.data.title,
+                         }
+                     ]
+                    }
+                  )
+                })
+            })
+            .catch(err => console.log("ㅅㅂㅅㅂㅅㅂ",err))
          });
          this.setState({
             title: res.data.itinerary.title,
             description : res.data.itinerary.description,
+            publish: res.data.itinerary.publish
          })
       })
       .catch(err => {
@@ -143,6 +160,31 @@ class TimeLine extends Component {
       });
    }
 
+   setPublic=()=>{
+      const {itineraryId} = this.props
+      axios.get(`${ServerIP}/itinerary/${itineraryId}/public`, {
+         headers:{'Authorization' : `Bearer ${sessionStorage.getItem('token')}`}
+      })
+      .then(res => {
+         console.log(res)
+         this.setState({publish: true})
+      })
+      .catch(err => console.log(err))
+   }
+
+   setPrivate=()=>{
+      const {itineraryId} = this.props
+      axios.get(`${ServerIP}/itinerary/${itineraryId}/private`, {
+         headers:{'Authorization' : `Bearer ${sessionStorage.getItem('token')}`}
+      })
+      .then(res => {
+         console.log(res)
+         this.setState({publish: false})
+      })
+      .catch(err => console.log(err))
+   }
+   
+
    render(){
       return (
          <div className="container">
@@ -176,6 +218,12 @@ class TimeLine extends Component {
                   <Link to="/yourSchedule">
                      <button className="middleBtn" onClick = {this.clickDelSchedule}>일정 삭제</button>
                   </Link>
+               </span>
+               <span>
+                  {this.state.publish ?
+                     <button className="middleBtn" onClick={this.setPrivate}>공유해제</button> :
+                     <button className="middleBtn" onClick={this.setPublic}>공유하기</button>
+                  }
                </span>
             </div>
          </div>

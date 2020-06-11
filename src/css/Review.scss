@@ -22,6 +22,7 @@
         max-height: 450px;
         margin: 0;
         padding: 0;
+        overflow: auto;
         .reviewContent{
             margin: 10px;
             border-bottom: 2px white solid;
@@ -29,12 +30,14 @@
         ul{
             margin: 0;
             padding: 0;
+            width: 100%;
         }
         li{
             list-style: none;
             text-align: left;
         }
         #reviewTitle{
+            width: 100%;
             font-size: 30px;
             font-weight: bold;
             margin-bottom: 20px;

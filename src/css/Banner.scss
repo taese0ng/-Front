@@ -7,7 +7,8 @@ ul{
 }
 #Banner{
     width: 100%;
-    height: 350px;
+    min-height: 250px;
+    height: 22.6vw;
     overflow: hidden;
     position: relative;
     margin: 0 auto;
@@ -25,8 +26,11 @@ ul{
             width: 100vw;
             height: 100%;
             img{
-                height: 100%;
                 width: 100%;
+                min-height: 250px;
+                background-position: 'center';
+                background-size: 'cover';
+                background-repeat: 'no-repeat';
             }
         }
     }
@@ -59,7 +63,7 @@ ul{
             display: flex;
             position: relative;
             border-radius: 100%;
-            top: 150px;
+            top: calc(22.6vw / 2 - 25px);
             cursor: pointer;
             z-index: 1;
             width: 50px;

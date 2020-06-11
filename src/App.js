@@ -17,7 +17,7 @@ class App extends Component{
       return (
         <Router>
           <Redirect path="*" to="/yourSchedule" />
-          {/* <Redirect path="*" to="/yourSchedule/detailView" /> */}
+          {/* <Redirect path="*" to="/yourSchedule/" /> */}
           <Route path="/yourSchedule" component={MenuBar}></Route>
           <Route exact path="/yourSchedule" component={Home}></Route>
           <Route exact path="/yourSchedule/myschedule" component={MySchedule}></Route>

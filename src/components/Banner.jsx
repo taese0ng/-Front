@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import '../css/Banner.scss'
+import banner1 from '../assets/images/banner1.png'
+import banner2 from '../assets/images/banner2.png'
 
 var imgs;
 var img_count;
@@ -9,7 +11,7 @@ var dots;
 function back(){
     if(1<img_position){
         console.log("back");
-        imgs.style.left= (img_count-img_position-1)*100+'%';
+        imgs.style.left= (img_count-img_position)*100+'%';
         img_position--;
         dots[img_position].style.backgroundColor = 'white';
         dots[img_position-1].style.backgroundColor = "#4cdb88";
@@ -45,19 +47,13 @@ class Banner extends Component{
                     </ul>
                     <ul id="imgList">
                         <li>
-                            <img src="https://travelpost.kr/wp-content/uploads/2015/12/venice.jpg" alt="xx"/>
+                            <img src={banner1} alt="xx"/>
                         </li>
                         <li>
-                            <img src="https://t1.daumcdn.net/cfile/tistory/997861485CE3D49F25" alt="xx"/>
-                        </li>
-                        <li>
-                            <img src="https://img.huffingtonpost.com/asset/5d81573a230000580556dcd2.jpeg?ops=scalefit_630_noupscale" alt="xx"/>
+                            <img src={banner2} alt="xx"/>
                         </li>
                     </ul>
                     <ul id="dotList">
-                        <li className="dots">
-                            <div className="dot"></div>
-                        </li>
                         <li className="dots">
                             <div className="dot"></div>
                         </li>
