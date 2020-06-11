@@ -22,41 +22,49 @@ class Timeline_R extends Component {
     }
 
    UNSAFE_componentWillMount(){
-      const {setSchedule,initSchedule} = this.props
-      console.log(this.props);
-      axios.get(`${HopeIP}/api/recommend/user?userId=jn8121@naver.com&areaCode=32&sigunguCode=1`)
-      .then(res => {
-         initSchedule();
-         res.data[0].area.forEach( element => {
-            console.log(element);
-            let data = res.data[0].detail[element];
-            setSchedule(data.title);
-            
-            this.setState({
-               routes: update(
-                 this.state.routes,
-                 {
-                   $push: [{name : data.title}]
-                 }
-               )
-             })
-             this.setState({
-               recommend: update(
-                 this.state.recommend,
-                 {
-                   $push:[{lat:data.mapY,lng:data.mapX}]
-                 }
-               )
-             })
-             this.setState({
-               title: data.title,
-               description : data.overview
-            })
-         });
-      })
-      .catch(err => {
-         console.log("츠천에러",err);
-      })
+      const {setSchedule,initSchedule, AreaCodes} = this.props
+      const userID = JSON.parse(sessionStorage.getItem("user"))._id
+      initSchedule();
+      AreaCodes.map((AreaCode) => (
+         axios.get(`${HopeIP}/api/recommend/user?userId=${userID}&areaCode=${AreaCode.areaCode}&sigunguCode=${AreaCode.sigunguCode}`)
+         .then(res => {
+            res.data[0].area.forEach( element => {
+               console.log(res.data[0].detail);
+               let data = res.data[0].detail[element];
+               setSchedule(data.title);
+               
+               this.setState({
+                  routes: update(
+                  this.state.routes,
+                  {
+                     $push: [{
+                        name: data.title,
+                        overview : data.overview,
+                        image : data.firstImage,
+                        homepage : data.homepage,
+                        title : data.title,
+                     }]
+                  }
+                  )
+               })
+               this.setState({
+                  recommend: update(
+                  this.state.recommend,
+                  {
+                     $push:[{lat:data.mapY,lng:data.mapX}]
+                  }
+                  )
+               })
+               this.setState({
+                  title: data.title,
+                  description : data.overview
+               })
+            });
+         })
+         .catch(err => {
+            console.log("츠천에러",err);
+         })
+      ))
    }
 
    clickRevise = () => {
@@ -66,8 +74,6 @@ class Timeline_R extends Component {
    }
 
    clickUpBtn = (idx) =>{
-
-      console.log("Up", idx)
       if(idx > 0){
          let down = this.state.routes[idx];
          let up = this.state.routes[idx-1];
@@ -95,8 +101,6 @@ class Timeline_R extends Component {
    }
 
    clickDownBtn = (idx) =>{
-
-      console.log("Down", idx)
       if(idx < this.state.routes.length-1){
          let up = this.state.routes[idx];
          let down = this.state.routes[idx+1];
@@ -119,12 +123,9 @@ class Timeline_R extends Component {
             )
          })
       }
-      
-
    }
 
    clickDelBtn = (idx) => {
-      console.log("Del", idx);
       this.setState({
          routes : update(
             this.state.routes,
@@ -143,7 +144,6 @@ class Timeline_R extends Component {
 
    clickDelSchedule = () =>{
       const {itineraryId} = this.props
-      console.log("Delete Schedule");
       axios.get(`${ServerIP}/itinerary/${itineraryId}/delete`,
          {
             headers:{
@@ -169,11 +169,6 @@ class Timeline_R extends Component {
       
    }
    render(){
-      const {latlng} = this.props;
-
-      
-      console.log(this.state.recommend);
-      console.log(latlng,"경도위도");
       return (
          <div className="container">
             <ShowRoute_R recommend={this.state.recommend}/>
@@ -216,14 +211,15 @@ class Timeline_R extends Component {
 function mapStateToProps(state) {
    return { 
       itineraryId : state.itineraryId,
-      schedule:state.schedule
+      schedule:state.schedule,
+      AreaCodes: state.AreaCodes,
     };
  }
 
  function mapDispatchToProps(dispatch) {
    return { 
       setSchedule: (text) => dispatch(setSchedule(text)),
-      initSchedule: () => dispatch(initSchedule())
+      initSchedule: () => dispatch(initSchedule()),
    };
  }
 

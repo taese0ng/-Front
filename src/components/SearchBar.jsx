@@ -3,13 +3,17 @@ import '../css/SearchBar.scss'
 import MyCalendar from './MyCalendar.jsx'
 import { Areas } from '../components/Areas.js'
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import {setAreaCodes} from "../store/store";
 
-function Search_bar(){
+function Search_bar({setAreaCodes}){
     const [LCategory, setLCategory] = useState(false);
     const [SCategory, setSCategory] = useState(false);
     const [LArea, setLArea] = useState(null);
     const [locations, setLocations] = useState([]);
-    
+    const [AreaCode, setAreaCode] = useState();
+    const [place, setPlace] = useState([]);
+
     function addLocations(location){
       setLocations([...locations, location])
     }
@@ -34,21 +38,22 @@ function Search_bar(){
     function clickLCategory(LAreaCode, Area){
       let LList = document.getElementById('LAreas')
       let SList = document.getElementById('SAreas')
+      setAreaCode(LAreaCode);
+
       if(Area.areas.length===0){
         for(let i =0; i<locations.length; i++){
           if(locations[i] === Area){
-            console.log("dd")
             return;
           }
         }
         setLCategory(LCategory => !LCategory);
         setSCategory(SCategory => false);
-        addLocations(Area);
+        addLocations({areaCode:LAreaCode, sigunguCode: 0});
+        setPlace([...place, Area])
         LList.style.height='0px'
         SList.style.height='0px'
         LList.style.transition='0s'
         SList.style.transition='0s'
-        console.log(Area.code, 0);
       }
       else{
         SList.style.transition='0.5s all'
@@ -61,12 +66,12 @@ function Search_bar(){
           setSCategory(SCategory => true);
           SList.style.height='400px'
         }
-        setLArea(LArea => Area)
       }
+      setLArea(LArea => Area)
     }
 
     function choiceArea(SAreaCode, Area){
-      console.log(LArea.code, SAreaCode);
+      // console.log(LArea.code, SAreaCode);
       for(let i =0; i<locations.length; i++){
         if(locations[i] === Area){
           return;
@@ -80,7 +85,8 @@ function Search_bar(){
       SList.style.transition='0s'
       setLCategory(LCategory => !LCategory);
       setSCategory(SCategory => !SCategory);
-      addLocations(Area);
+      setPlace([...place, Area])
+      addLocations({areaCode:AreaCode, sigunguCode:SAreaCode});
     }
 
     function resetBtn(){
@@ -93,20 +99,25 @@ function Search_bar(){
         SList.style.transition='0s'
       }
       setLocations([])
+      setPlace([])
       setLCategory(LCategory => false);
       setSCategory(SCategory => false)
+    }
+
+    function setStoreAreaCodes(){
+      setAreaCodes(locations)
     }
 
     return (
       <div id="searchbar">
         <section id="section1">
           <MyCalendar/>
-          {locations.map((location) => (
+          {place.map((location) => (
             <button {...location} key={location.code} className="middleBtn">
               {location.name}
             </button>
           ))}
-          {locations.length <= 1 && (
+          {place.length <= 1 && (
             <ul>
                 <li>
                     <button onClick={clickPlus} className="middleBtn">
@@ -148,10 +159,8 @@ function Search_bar(){
         <section id="section2">
           <button className="searchBtn" id="Activation" onClick={resetBtn}>초기화</button>
           {locations.length > 0 ? (
-            <Link
-            to={`/yourSchedule/recommend/${LArea.code}`}
-            >
-            <button className="searchBtn" id="Activation">
+            <Link to={`/yourSchedule/recommend/`}>
+            <button className="searchBtn" id="Activation" onClick={setStoreAreaCodes}>
               추천시작
             </button>
           </Link> 
@@ -163,4 +172,15 @@ function Search_bar(){
     );
 }
 
-export default Search_bar;
+function mapStateToProps(state) {
+  return { 
+   };
+}
+
+function mapDispatchToProps(dispatch) {
+  return { 
+    setAreaCodes: (AreaCodes) => dispatch(setAreaCodes(AreaCodes))
+  };
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (Search_bar);

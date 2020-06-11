@@ -7,8 +7,6 @@ import { kakaoMapsKey } from '../key'
 let map;
 let script;
 var bounds;
-var polyline = [];
-var markers = [];
 
 class ShowRoute_R extends Component {
     constructor(props){
@@ -28,10 +26,10 @@ class ShowRoute_R extends Component {
         const {recommend} = this.props
 
         console.log(recommend, "여기다");
-        polyline.forEach(elem => {
+        this.state.polyline.forEach(elem => {
             elem.setMap(null);
         })
-        markers.forEach(elem =>{
+        this.state.markers.forEach(elem =>{
             elem.setMap(null);
         })
 
@@ -54,8 +52,8 @@ class ShowRoute_R extends Component {
 
                 });
 
-                polyline.push(polylineTemp);
-                markers.push(markerTemp);
+                this.state.polyline.push(polylineTemp);
+                this.state.markers.push(markerTemp);
 
                 if (index === recommend.length - 2) {
 
@@ -65,7 +63,7 @@ class ShowRoute_R extends Component {
                         title: index + 2 // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
                     });
                     
-                    markers.push(markerTemp);   
+                    this.state.markers.push(markerTemp);   
                 }
 
                 bounds.extend(to);

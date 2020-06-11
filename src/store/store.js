@@ -8,6 +8,7 @@ const toDos = createSlice({
     latlng:[],
     tripDate: null,
     itineraryId : '',
+    AreaCodes: []
   },
   reducers: {
     setTripDate:(state, action)=>{
@@ -25,8 +26,11 @@ const toDos = createSlice({
     },
     initSchedule:(state)=>{
       state.schedule=[];
-    }
-    }
+    },
+    setAreaCodes:(state, codes)=>{
+      state.AreaCodes = codes.payload;
+    },
+  }
     // add: (state, action) => {
     //   state.list.push({ text: action.payload, id: Date.now() });
     // },
@@ -47,6 +51,7 @@ export const {
     setItineraryId,
     setSchedule,
     initSchedule,
+    setAreaCodes,
     // add,
     // remove
 } = toDos.actions;

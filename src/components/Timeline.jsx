@@ -3,7 +3,7 @@ import Place from "./Place.jsx"
 import '../css/Timeline.scss'
 import { connect } from "react-redux";
 import axios from 'axios';
-import ShowRoute from "./ShowRoute.jsx";
+import ShowRoute_R from "./ShowRoute_R.jsx";
 import update from 'react-addons-update';
 import { Link } from "react-router-dom";
 import {ServerIP, HopeIP} from '../key'
@@ -18,6 +18,7 @@ class TimeLine extends Component {
          routes : [],
          reviseBtn : false,
          publish: false,
+         recommend : []
       }
     }
 
@@ -41,13 +42,19 @@ class TimeLine extends Component {
                          {
                             name: res.data.title,
                             overview : res.data.overview,
-                            mapX : res.data.mapX,
-                            mapY: res.data.mapY,
                             image : res.data.firstImage,
                             homepage : res.data.homepage,
                             title : res.data.title,
                          }
                      ]
+                    }
+                  )
+                })
+                this.setState({
+                  recommend: update(
+                    this.state.recommend,
+                    {
+                      $push:[{lat:res.data.mapY,lng:res.data.mapX}]
                     }
                   )
                 })
@@ -72,18 +79,26 @@ class TimeLine extends Component {
    }
 
    clickUpBtn = (idx) =>{
-      console.log("Up", idx)
       if(idx > 0){
          let down = this.state.routes[idx];
          let up = this.state.routes[idx-1];
-         
+         let downXY = this.state.recommend[idx];
+         let upXY = this.state.recommend[idx-1];
          this.setState({
             routes : update(
                this.state.routes,
                {
-                  
                   [idx] : {$set : up},
                   [idx-1]: {$set: down}
+               }
+            )
+         })
+         this.setState({
+            recommend : update(
+               this.state.recommend,
+               {  
+                  [idx] : {$set : upXY},
+                  [idx-1]: {$set: downXY}
                }
             )
          })
@@ -91,10 +106,11 @@ class TimeLine extends Component {
    }
 
    clickDownBtn = (idx) =>{
-      console.log("Down", idx)
       if(idx < this.state.routes.length-1){
          let up = this.state.routes[idx];
          let down = this.state.routes[idx+1];
+         let upXY = this.state.recommend[idx];
+         let downXY = this.state.recommend[idx+1];
          this.setState({
             routes : update(
                this.state.routes,
@@ -102,16 +118,29 @@ class TimeLine extends Component {
                   [idx] : {$set : down},
                   [idx+1]: {$set: up}
                }
+            ),
+            recommend : update(
+               this.state.recommend,
+               {
+                  [idx] : {$set : downXY},
+                  [idx+1]: {$set: upXY}
+               }
             )
          })
       }
    }
 
+
    clickDelBtn = (idx) => {
-      console.log("Del", idx);
       this.setState({
          routes : update(
             this.state.routes,
+            {
+               $splice: [[idx,1]]
+            }
+         ),
+         recommend : update(
+            this.state.recommend,
             {
                $splice: [[idx,1]]
             }
@@ -188,7 +217,7 @@ class TimeLine extends Component {
    render(){
       return (
          <div className="container">
-            <ShowRoute/>
+            <ShowRoute_R recommend={this.state.recommend}/>
             <ul className="timeline">
                {
                   this.state.routes.map((route,index) => (

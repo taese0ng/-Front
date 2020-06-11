@@ -5,7 +5,7 @@ function AboutContent(props){
     return(
         <ul className="about__data">
             <li className="about__Img_box">
-                <img className="about__Img" src={props.info.image} alt={props.info.title}/>
+                <img className="about__Img" src={props.info.image} alt={props.info.name}/>
             </li>
 
             <li className="about__description__box">
