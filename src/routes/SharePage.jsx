@@ -10,7 +10,7 @@ function SharePage(){
   useEffect(() => {
     axios.get(`${ServerIP}/itinerary`)
     .then((res)=>{
-      console.log(res)
+      // console.log(res)
       let items=[]
       res.data.items.forEach(el=>{
         items.push(el)
@@ -27,7 +27,7 @@ function SharePage(){
           <Card
             key={index}
             name={card.creator.name}
-            // cardImg={card.cardImg}
+            // cardImg={cards[0].img}
             cardImg="https://www.mcst.go.kr/attachFiles/cultureInfoCourt/localFestival/notifyFestival/1523839838562.jpg"
             schedule={card.title}
             view={card.view}

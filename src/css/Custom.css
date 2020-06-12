@@ -6,6 +6,11 @@ body{
     /* font-family: NanumSquareRound; */
     background-color: rgb(255, 238, 219);
 }
+
+ul{
+    display: inline-block;
+    vertical-align: middle;
+}
 .footer__height{
     min-height: calc(100vh - 201px);
 }

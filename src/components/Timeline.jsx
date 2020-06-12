@@ -28,38 +28,35 @@ class TimeLine extends Component {
       
       axios.get(`${ServerIP}/itinerary/${itineraryId}`)
       .then(res => {
-         // console.log(res)
-         res.data.itinerary.routes.forEach(element => {
-            setSchedule(element.name); //todo 지울지말지 결정.
-            axios.get(`${HopeIP}/api/search/area/${element}/`)
-            .then(res => {
-               console.log(res)
-               this.setState({
-                  routes: update(
-                    this.state.routes,
-                    {
-                      $push: [
-                         {
-                            name: res.data.title,
-                            overview : res.data.overview,
-                            image : res.data.firstImage,
-                            homepage : res.data.homepage,
-                            title : res.data.title,
-                         }
+         // console.log("ㅇㅇㅇ",res)
+         res.data.routes.forEach(element => {
+            setSchedule(element.title); //todo 지울지말지 결정.
+            this.setState({
+               routes: update(
+                  this.state.routes,
+                  {
+                     $push: [
+                        {
+                           name: element.title,
+                           overview : element.overview,
+                           image : element.firstImage,
+                           homepage : element.homepage,
+                           title : element.title,
+                           zipCode : element.zipCode,
+                           tel : element.tel,
+                        }
                      ]
-                    }
-                  )
-                })
-                this.setState({
-                  recommend: update(
-                    this.state.recommend,
-                    {
-                      $push:[{lat:res.data.mapY,lng:res.data.mapX}]
-                    }
-                  )
-                })
-            })
-            .catch(err => console.log("ㅅㅂㅅㅂㅅㅂ",err))
+                  }
+               )
+               })
+               this.setState({
+               recommend: update(
+                  this.state.recommend,
+                  {
+                     $push:[{lat:element.mapY,lng:element.mapX}]
+                  }
+               )
+               })
          });
          this.setState({
             title: res.data.itinerary.title,

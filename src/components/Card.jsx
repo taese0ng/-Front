@@ -2,9 +2,9 @@ import React from 'react'
 import '../css/Card.scss'
 
 function Card(props){
-    const {name, schedule, view, date, cardImg} = props
+    const {name, schedule, view, date, cardImg, method} = props
     return(
-        <li className="card">
+        <li className="card" onClick={method}>
             <div id='cardImg'>
                 <img alt="dd" src={cardImg}/>
             </div>
@@ -16,9 +16,11 @@ function Card(props){
                     <li>
                         {name}
                     </li>
-                    <li>
-                        View : {view}
-                    </li>
+                    {view && 
+                        <li>
+                            View : {view}
+                        </li>
+                    }
                     <li>
                         Date : {date}
                     </li>

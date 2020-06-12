@@ -18,10 +18,13 @@ function SignUp(){
       axios.get(`${HopeIP}/api/recommend/testset/`)
       .then(res=>{
           // console.log(res.data)
+          let list=[]
           // eslint-disable-next-line
-          res.data.area.map((element) => {
-              setTendency(tendency => [...tendency,res.data.detail[element]])
+          res.data.map((element) => {
+              list.push(element);
           })
+
+          setTendency(tendency => list)
           
       })
       .catch(err => console.log(err))

@@ -28,9 +28,9 @@ class Timeline_R extends Component {
       AreaCodes.map((AreaCode) => (
          axios.get(`${HopeIP}/api/recommend/user?userId=${userID}&areaCode=${AreaCode.areaCode}&sigunguCode=${AreaCode.sigunguCode}`)
          .then(res => {
-            res.data[0].area.forEach( element => {
-               console.log(res.data[0].detail);
-               let data = res.data[0].detail[element];
+            console.log(res);
+            res.data[0].forEach( element => {
+               let data = element;
                setSchedule(data.title);
                
                this.setState({

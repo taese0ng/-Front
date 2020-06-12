@@ -10,7 +10,7 @@ var dots;
 
 function back(){
     if(1<img_position){
-        console.log("back");
+        // console.log("back");
         imgs.style.left= (img_count-img_position)*100+'%';
         img_position--;
         dots[img_position].style.backgroundColor = 'white';
@@ -20,7 +20,7 @@ function back(){
 
 function next(){
     if(img_count>img_position){
-        console.log("next")
+        // console.log("next")
         imgs.style.left= -img_position*100+'%';
         img_position++;
         dots[img_position-2].style.backgroundColor = 'white';
@@ -50,7 +50,9 @@ class Banner extends Component{
                             <img src={banner1} alt="xx"/>
                         </li>
                         <li>
-                            <img src={banner2} alt="xx"/>
+                            <a href="https://www.coronacatch.com" target="_blank">
+                                <img src={banner2} alt="xx"/>
+                            </a>
                         </li>
                     </ul>
                     <ul id="dotList">

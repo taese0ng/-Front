@@ -27,16 +27,12 @@ class HotList extends Component{
     componentWillMount(){
         axios.get(`${HopeIP}/api/recommend/user?userId=jn8121@naver.com`)
         .then(res => {
-            console.log(res.data)
-            res.data.area.map((element) => {
-                this.setState({
-                    locations : update(
-                        this.state.locations, {
-                            $push: [res.data.detail[element]]
-                    })
-                });
-                return 0;
+            // console.log(res.data)
+            let list = []
+            res.data.map((element) => {
+                list.push(element);
             })
+            this.setState({locations : list});
         })
         .catch(err => console.log(err))
     }
@@ -47,7 +43,9 @@ class HotList extends Component{
                 <p id='hotListTitle'>여긴 어때요? (모두에게 하테하테)</p>
                 <ul id="rcmdedLocations">
                     {this.state.locations.map((location, index) => (
-                        <RecommendationLocation info = {location} key={index}/>
+                        <span key={location.contentId}>
+                            { index < 15 && <RecommendationLocation info = {location} key={location.contentId}/>}
+                        </span>
                     ))}
                 </ul>
             </>

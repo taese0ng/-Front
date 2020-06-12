@@ -25,7 +25,7 @@ class ShowRoute_R extends Component {
 
         const {recommend} = this.props
 
-        console.log(recommend, "여기다");
+        // console.log(recommend, "여기다");
         this.state.polyline.forEach(elem => {
             elem.setMap(null);
         })

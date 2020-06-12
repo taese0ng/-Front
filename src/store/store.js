@@ -15,7 +15,7 @@ const toDos = createSlice({
       state.tripDate = action.payload;
     },
     setItineraryId:(state, action)=>{
-      console.log(action.payload)
+      // console.log(action.payload)
       state.itineraryId = action.payload;
     },
     setSchedule:(state, action)=>{

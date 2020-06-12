@@ -7,7 +7,7 @@ function About(props) {
     return (
         <>
             <AboutContent info={props.info}/>
-            <AboutAddress/>
+            <AboutAddress info={props.info}/>
         </>
     )
 }

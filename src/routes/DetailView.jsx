@@ -19,7 +19,7 @@ function DetailView(){
         // console.log(this.props.match.params.id)
         axios.get(`${HopeIP}/api/search/area/${id}/`)
         .then(res => {
-            console.log(res)
+            // console.log(res)
             const data = res.data;
             setName(data.title)
             setOverview(data.overview)
@@ -31,7 +31,7 @@ function DetailView(){
 
         axios.get(`${ServerIP}/content/${id}`)
         .then(res =>{
-            console.log(res);
+            // console.log(res);
             setContentId(res.data.content._id)
             let ans = []
             res.data.comments.forEach((element) => {
