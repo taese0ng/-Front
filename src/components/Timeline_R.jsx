@@ -3,7 +3,7 @@ import Place from "./Place.jsx"
 import '../css/Timeline.scss'
 import { connect } from "react-redux";
 import axios from 'axios';
-import ShowRoute_R from "./ShowRoute_R.jsx";
+import ShowRouteR from "./ShowRoute_R.jsx";
 import update from 'react-addons-update';
 import { Link } from "react-router-dom";
 import {ServerIP, HopeIP} from '../key'
@@ -171,7 +171,7 @@ class Timeline_R extends Component {
    render(){
       return (
          <div className="container">
-            <ShowRoute_R recommend={this.state.recommend}/>
+            <ShowRouteR recommend={this.state.recommend}/>
             <ul className="timeline">
                {
                   this.state.routes.map((route,index) => (

@@ -50,7 +50,7 @@ class Banner extends Component{
                             <img src={banner1} alt="xx"/>
                         </li>
                         <li>
-                            <a href="https://www.coronacatch.com" target="_blank">
+                            <a href="https://www.coronacatch.com" target="_blank" rel="noopener noreferrer">
                                 <img src={banner2} alt="xx"/>
                             </a>
                         </li>

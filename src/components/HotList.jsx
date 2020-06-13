@@ -3,7 +3,6 @@ import '../css/HotList.scss'
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import {HopeIP} from '../key'
-import update from 'react-addons-update';
 
 function RecommendationLocation(props){
     return (
@@ -30,7 +29,7 @@ class HotList extends Component{
             // console.log(res.data)
             let list = []
             res.data.map((element) => {
-                list.push(element);
+                return list.push(element);
             })
             this.setState({locations : list});
         })

@@ -80,7 +80,7 @@ class ShowRoute_R extends Component {
                 return null;
             }
 
-            map.setBounds(bounds);
+            return map.setBounds(bounds);
         });
     }
 
