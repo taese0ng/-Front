@@ -72,8 +72,8 @@ function Search_bar({setAreaCodes}){
 
     function choiceArea(SAreaCode, Area){
       // console.log(LArea.code, SAreaCode);
-      for(let i =0; i<locations.length; i++){
-        if(locations[i] === Area){
+      for(let i =0; i<place.length; i++){
+        if(place[i] === Area){
           return;
         }
       }

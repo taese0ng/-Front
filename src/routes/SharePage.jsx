@@ -1,16 +1,20 @@
 import React, {useState, useEffect} from "react";
 import {Card} from '../components'
+import { useHistory } from "react-router-dom";
 import axios from 'axios'
 import '../css/Card.scss'
 import {ServerIP} from '../key'
+import { connect } from "react-redux";
+import { setItineraryId, setPage } from "../store/store";
 
-function SharePage(){
+function SharePage({setItineraryId, setPage}){
+  const history = useHistory();
   const [cards, setCards] = useState([])
 
   useEffect(() => {
     axios.get(`${ServerIP}/itinerary`)
     .then((res)=>{
-      // console.log(res)
+      console.log(res)
       let items=[]
       res.data.items.forEach(el=>{
         items.push(el)
@@ -31,7 +35,13 @@ function SharePage(){
             cardImg="https://www.mcst.go.kr/attachFiles/cultureInfoCourt/localFestival/notifyFestival/1523839838562.jpg"
             schedule={card.title}
             view={card.view}
-            date={card.routes[0].Date}
+            date={card.date}
+            method={
+              () => {
+                setItineraryId(card._id);
+                setPage('sharePage');
+                history.push(`/yourSchedule/schedule/${card._id}`);
+              }}
           />
         ))}
         
@@ -41,5 +51,17 @@ function SharePage(){
 
 }
 
+function mapStateToProps(state) {
+  return { 
+    
+   };
+}
 
-export default SharePage;
+function mapDispatchToProps(dispatch) {
+  return { 
+    setItineraryId: (text) => dispatch(setItineraryId(text)),
+    setPage: (pageName) => dispatch(setPage(pageName)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (SharePage);

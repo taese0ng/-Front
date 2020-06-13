@@ -24,7 +24,8 @@ class HotList extends Component{
     }
 
     componentWillMount(){
-        axios.get(`${HopeIP}/api/recommend/user?userId=jn8121@naver.com`)
+        const userId = JSON.parse(sessionStorage.getItem("user"))._id;
+        axios.get(`${HopeIP}/api/recommend/user?userId=${userId}`)
         .then(res => {
             // console.log(res.data)
             let list = []

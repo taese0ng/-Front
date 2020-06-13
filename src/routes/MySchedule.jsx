@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import { connect } from "react-redux";
-import { setItineraryId } from "../store/store";
+import { setItineraryId, setPage } from "../store/store";
 import update from 'react-addons-update';
-import {ServerIP} from '../key'
-import {Card} from '../components'
+import { ServerIP } from '../key'
+import { Card } from '../components'
 
 class MyPages extends Component {
   constructor(props){
@@ -38,9 +38,8 @@ class MyPages extends Component {
   }
 
   render(){
-    const {setItineraryId} = this.props;
+    const {setItineraryId, setPage} = this.props;
     const {itineraryList, userName} = this.state;
-    // console.log(itineraryList)
     return (
       <div id="CardView" className="footer__height">
         <ul>
@@ -54,10 +53,11 @@ class MyPages extends Component {
             date={element.date}
             method={
               () => {
-                setItineraryId(element._id)
+                setItineraryId(element._id);
+                setPage("mySchedule");
                 this.props.history.push(`/yourSchedule/schedule/${element._id}`);
-              }
-            }/>
+              }}
+              />
           ))}
         </ul>
       </div>
@@ -74,6 +74,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return { 
     setItineraryId: (text) => dispatch(setItineraryId(text)),
+    setPage: (pageName) => dispatch(setPage(pageName)),
   };
 }
 

@@ -6,7 +6,7 @@ function AboutAddress(props){
         <ul className="about__notice">
             <li className="about__adress">
                 <p className="about__title">주소 : </p>
-                <p className="about__content">{props.info.zipCode}</p>
+                <p className="about__content">{props.info.zipCode === "Empty" ? "주소가 없습니다." : props.info.zipCode}</p>
             </li>
             {/* <li className="about__hours">
                 <p className="about__title">이용시간 : </p>

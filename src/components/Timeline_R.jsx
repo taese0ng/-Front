@@ -43,6 +43,8 @@ class Timeline_R extends Component {
                         image : data.firstImage,
                         homepage : data.homepage,
                         title : data.title,
+                        zipCode : data.zipCode,
+                        tel : data.tel,
                      }]
                   }
                   )
@@ -177,13 +179,12 @@ class Timeline_R extends Component {
                   this.state.routes.map((route,index) => (
                      <li key={index} className="route">
                         {
-                           this.state.reviseBtn ? 
+                           this.state.reviseBtn &&
                            <div>
                               <button className="smallBtn" onClick={() => this.clickUpBtn(index)}>Up</button>
                               <button className="smallBtn" onClick={() => this.clickDownBtn(index)}>Down</button>
                               <button className="smallBtn" onClick={() => this.clickDelBtn(index)}>Delete</button>
-                           </div> : 
-                           <></>
+                           </div>
                         }
                         <Place info={route} index={index}/>
                      </li>
