@@ -11,7 +11,9 @@ function Content(props) {
                 <div className="content__title">
                     <p>{props.info.name}</p>
                 </div>
-                <HowTo info={props.info} index={props.index}/>
+                {props.mapState && 
+                    <HowTo info={props.info} index={props.index}/>
+                }
             </li>
             <li className="content__place">
                 <About info={props.info}/>

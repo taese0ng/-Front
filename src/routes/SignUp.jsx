@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { Title, Tendency } from '../components';
-import {HopeIP} from '../key'
+import {HopeIP, ServerIP} from '../key'
 import axios from 'axios'
 
 function SignUp(){
@@ -65,7 +65,7 @@ function SignUp(){
         password: password,
         selections: choice
       };
-      axios.post("http://49.50.175.145:3389/join", data)
+      axios.post(`${ServerIP}/join`, data)
       .then((res) => {
         // console.log(res)
         alert("회원가입이 완료 되었습니다.");

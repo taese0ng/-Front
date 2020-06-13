@@ -10,15 +10,14 @@ function HowTo(props) {
     let start = props.schedule[(props.index-1)];
     let end = props.schedule[props.index];
     //console.log("하우투",props.index,start,end);
-
     if(start==null){
         return (
             <ul className="transport_icon">
-                 <li>
-                        <a href={"https://map.kakao.com/?q="+end} target = "_blank" rel="noopener noreferrer">
-                        <img src={how} alt='HowToGo'/>
-                        
-                        </a>
+                <li>
+                    <a href={"https://map.kakao.com/?q="+end} target = "_blank" rel="noopener noreferrer">
+                    <img src={how} alt='HowToGo'/>
+                    
+                    </a>
                 </li>
             </ul>
         ) 
@@ -27,11 +26,11 @@ function HowTo(props) {
     else{
         return (
             <ul className="transport_icon">
-                 <li>
-                        <a href={"https://map.kakao.com/?sName="+start+"&eName="+end} target = "_blank" rel="noopener noreferrer">
-                        <img src={how} alt='HowToGo'/>
-                        
-                        </a>
+                <li>
+                    <a href={"https://map.kakao.com/?sName="+start+"&eName="+end} target = "_blank" rel="noopener noreferrer">
+                    <img src={how} alt='HowToGo'/>
+                    
+                    </a>
                 </li>
             </ul>
         ) 

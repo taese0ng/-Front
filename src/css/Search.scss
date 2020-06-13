@@ -1,0 +1,94 @@
+#Search{
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    background:rgba(0, 0, 0, 0.623);
+    width: 100vw;
+    height: 100vh;
+    #SearchForm{
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+
+        form{
+            input{
+                font-weight: 500;
+                font-size: 2.5rem;
+                border-radius: 5px;
+                outline: none;
+                vertical-align: middle;
+                margin-right: 10px;
+            }
+            #searchBtn{
+                font-size: 2.0rem;
+                vertical-align: middle;
+                padding: 8px;
+                font-weight: 500;
+                border-radius: 5px;
+                outline: none;
+                cursor: pointer;
+                border: none;
+                color: rgb(88, 77, 77);
+                background-color: rgb(255, 196, 0);
+            }
+        }
+        #searchList{
+            border-radius: 10px;
+            background: lightgoldenrodyellow;
+            border: 10px solid lightgoldenrodyellow;
+            margin-top: 40px;
+            overflow: auto;
+            padding: 0;
+            min-width: 450px;
+            width: 60%;
+            max-width: 900px;
+            max-height: 600px;
+        }
+    }
+}
+
+
+#searchItem{
+    border-bottom: 2px solid rgb(245, 227, 68);
+    cursor: pointer;
+    padding: 0;
+    height: 200px;
+    background: lightgoldenrodyellow;
+    display: flex;
+    justify-content: space-between;
+    img{
+        height: 95%;
+        width: 50%;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    p{
+        font-size: 2.5rem;
+        font-weight: 500;
+        padding: 0;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin: auto;
+    }
+}
+
+.notVisible{
+    display: none;
+}
+
+@media(max-width:850px){
+    #Search{
+        #SearchForm{
+            form{
+                input{
+                    font-size: 2.0rem;
+                    width: 350px;
+                }
+                #searchBtn{
+                    font-size: 1.5rem;
+                }
+            }
+        }
+    }
+}

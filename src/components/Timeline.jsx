@@ -8,6 +8,7 @@ import update from 'react-addons-update';
 import { Link } from "react-router-dom";
 import {ServerIP} from '../key'
 import {setSchedule, initSchedule} from "../store/store";
+import Search from './Search.jsx'
 
 class TimeLine extends Component {
    constructor(props){
@@ -18,7 +19,9 @@ class TimeLine extends Component {
          routes : [],
          reviseBtn : false,
          publish: false,
-         recommend : []
+         recommend : [],
+         openSearch:false,
+         addIdx : 0,
       }
     }
 
@@ -28,7 +31,7 @@ class TimeLine extends Component {
       
       axios.get(`${ServerIP}/itinerary/${itineraryId}`)
       .then(res => {
-         // console.log("ㅇㅇㅇ",res)
+         console.log("ㅇㅇㅇ",res)
          res.data.routes.forEach(element => {
             setSchedule(element.title); //todo 지울지말지 결정.
             this.setState({
@@ -210,6 +213,25 @@ class TimeLine extends Component {
       .catch(err => console.log(err))
    }
    
+   clickAddBtn = (idx) => {
+      this.setState({addIdx : idx})
+      const timeline = document.querySelector("body")
+      const Search = document.querySelector("#Search")
+      if(!this.state.openSearch){
+         timeline.style.overflow="hidden";
+         Search.style.top = document.documentElement.scrollTop+"px";
+      }
+      else{
+         timeline.style.overflow="unset";
+      }
+      this.setState({
+         openSearch : !this.state.openSearch
+      })
+   }
+
+   addSchedule = (info) =>{
+      console.log(info)
+   }
 
    render(){
       const {isPage} = this.props;
@@ -217,6 +239,7 @@ class TimeLine extends Component {
       return (
          <div className="container">
             <ShowRouteR recommend={this.state.recommend}/>
+            <Search clickAddBtn={this.clickAddBtn} addSchedule={this.addSchedule} className={!this.state.openSearch ? "notVisible" : ""}/>
             <ul className="timeline">
                {
                   this.state.routes.map((route,index) => (
@@ -227,35 +250,36 @@ class TimeLine extends Component {
                               <button className="smallBtn" onClick={() => this.clickUpBtn(index)}>Up</button>
                               <button className="smallBtn" onClick={() => this.clickDownBtn(index)}>Down</button>
                               <button className="smallBtn" onClick={() => this.clickDelBtn(index)}>Delete</button>
+                              <button className="smallBtn" onClick={() => this.clickAddBtn(index)}>Add</button>
                            </div> : 
                            <></>
                         }
-                        <Place info={route} index={index}/>
+                        <Place info={route} index={index} mapState={!this.state.reviseBtn}/>
                      </li>
                   ))
                }
             </ul>
             { isPage==="sharePage" ? 
                <div>
-                  <button className="middleBtn addBtn">내 일정에 추가하기</button>
+                  <button className="middleBtn addBtn scheduleBtn">내 일정에 추가하기</button>
                </div>
                :
                <div>
                   <span id="ReviseSchedule">
                      {!this.state.reviseBtn ?
-                     <button className="middleBtn borderBtn" onClick={this.clickRevise}>일정 수정</button> :
-                     <button className="middleBtn borderBtn" onClick={this.clickUpdateBtn}>수정 완료</button>
+                     <button className="middleBtn borderBtn scheduleBtn" onClick={this.clickRevise}>일정 수정</button> :
+                     <button className="middleBtn borderBtn scheduleBtn" onClick={this.clickUpdateBtn}>수정 완료</button>
                      }
                   </span>
                   <span>
                      <Link to="/yourSchedule">
-                        <button className="middleBtn borderBtn" onClick = {this.clickDelSchedule}>일정 삭제</button>
+                        <button className="middleBtn borderBtn scheduleBtn" onClick = {this.clickDelSchedule}>일정 삭제</button>
                      </Link>
                   </span>
                   <span>
                      {this.state.publish ?
-                        <button className="middleBtn borderBtn" onClick={this.setPrivate}>공유해제</button> :
-                        <button className="middleBtn borderBtn" onClick={this.setPublic}>공유하기</button>
+                        <button className="middleBtn borderBtn notShare" onClick={this.setPrivate}>공유해제</button> :
+                        <button className="middleBtn borderBtn scheduleBtn" onClick={this.setPublic}>공유하기</button>
                      }
                   </span>
                </div>

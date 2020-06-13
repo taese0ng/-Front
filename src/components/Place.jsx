@@ -7,7 +7,7 @@ function Place(props) {
     return (
         <>
             <div className="place__circle"></div>
-            <Content info={props.info} index={props.index}/>
+            <Content info={props.info} index={props.index} mapState={props.mapState}/>
         </>
     );
 }
