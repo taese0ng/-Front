@@ -147,7 +147,7 @@ class TimeLine extends Component {
 
    clickDelSchedule = () =>{
       const {itineraryId} = this.props
-      console.log("Delete Schedule");
+      // console.log("Delete Schedule");
       axios.get(`${ServerIP}/itinerary/${itineraryId}/delete`,
          {
             headers:{
@@ -159,8 +159,8 @@ class TimeLine extends Component {
    }
 
    clickUpdateBtn = () => {
-      const {itineraryId,schedule,setSchedule,initSchedule} = this.props
-      console.log("Update");
+      const {itineraryId,setSchedule,initSchedule} = this.props
+      // console.log("Update");
       axios.post(`${ServerIP}/itinerary/${itineraryId}/edit`,
       {
          title : this.state.title,
@@ -172,13 +172,13 @@ class TimeLine extends Component {
             'Authorization' : `Bearer ${sessionStorage.getItem('token')}` // 꼭 'Bearer ' 붙여줘야함
          }
      }).then(res => {
-         console.log(res,"이거야")
+         // console.log(res,"이거야")
          // 일정 수정 시 업데이트
          initSchedule();
          this.state.routes.forEach(element => {
             setSchedule(element.name);
          })
-         console.log("음",schedule);
+         // console.log("음",schedule);
       }).catch(err => console.log(err))
 
       this.setState({
@@ -192,7 +192,7 @@ class TimeLine extends Component {
          headers:{'Authorization' : `Bearer ${sessionStorage.getItem('token')}`}
       })
       .then(res => {
-         console.log(res)
+         // console.log(res)
          this.setState({publish: true})
       })
       .catch(err => console.log(err))
@@ -204,7 +204,7 @@ class TimeLine extends Component {
          headers:{'Authorization' : `Bearer ${sessionStorage.getItem('token')}`}
       })
       .then(res => {
-         console.log(res)
+         // console.log(res)
          this.setState({publish: false})
       })
       .catch(err => console.log(err))
@@ -212,6 +212,8 @@ class TimeLine extends Component {
    
 
    render(){
+      const {isPage} = this.props;
+
       return (
          <div className="container">
             <ShowRouteR recommend={this.state.recommend}/>
@@ -233,25 +235,31 @@ class TimeLine extends Component {
                   ))
                }
             </ul>
-            <div>
-               <span id="ReviseSchedule">
-                  {!this.state.reviseBtn ?
-                  <button className="middleBtn" onClick={this.clickRevise}>일정 수정</button> :
-                  <button className="middleBtn" onClick={this.clickUpdateBtn}>수정 완료</button>
-                  }
-               </span>
-               <span>
-                  <Link to="/yourSchedule">
-                     <button className="middleBtn" onClick = {this.clickDelSchedule}>일정 삭제</button>
-                  </Link>
-               </span>
-               <span>
-                  {this.state.publish ?
-                     <button className="middleBtn" onClick={this.setPrivate}>공유해제</button> :
-                     <button className="middleBtn" onClick={this.setPublic}>공유하기</button>
-                  }
-               </span>
-            </div>
+            { isPage==="sharePage" ? 
+               <div>
+                  <button className="middleBtn addBtn">내 일정에 추가하기</button>
+               </div>
+               :
+               <div>
+                  <span id="ReviseSchedule">
+                     {!this.state.reviseBtn ?
+                     <button className="middleBtn borderBtn" onClick={this.clickRevise}>일정 수정</button> :
+                     <button className="middleBtn borderBtn" onClick={this.clickUpdateBtn}>수정 완료</button>
+                     }
+                  </span>
+                  <span>
+                     <Link to="/yourSchedule">
+                        <button className="middleBtn borderBtn" onClick = {this.clickDelSchedule}>일정 삭제</button>
+                     </Link>
+                  </span>
+                  <span>
+                     {this.state.publish ?
+                        <button className="middleBtn borderBtn" onClick={this.setPrivate}>공유해제</button> :
+                        <button className="middleBtn borderBtn" onClick={this.setPublic}>공유하기</button>
+                     }
+                  </span>
+               </div>
+            }
          </div>
       );
    }
@@ -260,7 +268,8 @@ class TimeLine extends Component {
 function mapStateToProps(state) {
    return { 
       itineraryId : state.itineraryId,
-      schedule:state.schedule
+      schedule : state.schedule,
+      isPage : state.isPage,
     };
  }
 

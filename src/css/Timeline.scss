@@ -3,6 +3,7 @@
 	list-style: none;
 	position: relative;
 	margin-bottom: 0;
+	
 	&:before {
 		content: '';
 		position: absolute;
@@ -23,4 +24,12 @@
 			left: 40px;
 		}
 	}
-} 
+}
+
+.addBtn{
+	width: unset;
+	border: 2px solid #ff6633;
+}
+.borderBtn{
+	border: 2px solid #ff6633;
+}
