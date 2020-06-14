@@ -1,4 +1,9 @@
 
+
+#tendencyText{
+    font-size: 2.5rem;
+    font-weight: 500;
+}
 .tendency{
     li{
         display: inline-block;
@@ -15,9 +20,12 @@
             color: white;
             font-weight: bold;
             font-size: 20px;
-            width: 400px;
-            height: 400px;
+            width: 40vw;
+            height: 40vw;
+            max-width: 400px;
+            max-height: 400px;
             border-radius: 100%;
+            margin: auto;
             justify-content: center;
             input{
                 zoom: none;
@@ -30,6 +38,28 @@
         p{
             background-color: rgb(206, 238, 188);
             color: #ff434d;
+            font-size: 2rem;
+        }
+    }
+}
+
+
+@media(max-width: 600px){
+
+    #tendencyText{
+        font-size: 1.3rem;
+    }
+    .tendency{
+        li{
+            width: 40%;
+            margin: 0 10px 0 10px;
+            label{
+                width: 100px;
+                height: 100px;
+            }
+            p{
+                font-size: 1.3rem;
+            }
         }
     }
 }

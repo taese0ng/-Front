@@ -16,6 +16,7 @@ function Tendency(props){
 
   return (
       <div>
+          <p id="tendencyText">마음에 드는 장소를 최소 10개 선택해 주세요.</p>
           <ul className='tendency'>
           {tendency.map(element => (
             <li key={element.contentId}>

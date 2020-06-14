@@ -19,8 +19,10 @@ class MyPages extends Component {
     const id = JSON.parse(sessionStorage.getItem('user'))._id;
     axios.get(`${ServerIP}/user/${id}`)
     .then(res=>{
-      // console.log("dd",res)
-      this.setState({userName: res.data.user.name});
+      console.log("dd",res)
+      this.setState({
+        userName: res.data.user.name
+      });
       res.data.itinerary.forEach(element => {
         this.setState({
           itineraryList: update(
@@ -47,8 +49,7 @@ class MyPages extends Component {
             <Card
             key={element._id}
             name={userName}
-            // cardImg={itineraryList[0].img}
-            cardImg="https://www.mcst.go.kr/attachFiles/cultureInfoCourt/localFestival/notifyFestival/1523839838562.jpg"
+            cardImg={element.img}
             schedule={element.title}
             date={element.date}
             method={

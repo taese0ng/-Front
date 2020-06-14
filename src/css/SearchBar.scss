@@ -107,3 +107,27 @@
     transition: .5s all;
     height: 0px;
 }
+
+@media(max-width: 600px){
+    #searchbar{
+        #section1{
+            width: 100%;
+            text-align: center;
+            .picker{
+                display: block;
+            }
+            #LAreas{
+                position: absolute;
+            }
+        }
+        #section2{
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            .searchBtn{
+                width: 150px;
+                margin: 10px;
+            }
+        }
+    }
+}

@@ -9,10 +9,14 @@
     margin-bottom: 20px;
     padding: 0;
     border-radius: 12px;
+    width: 90%;
+    max-width: 900px;
     #cardImg{
         border-radius: 12px 12px 0 0;
+        background-color: rgb(255, 235, 179);
         img{
             height: 100%;
+            width: 100%;
             border-radius: 12px 12px 0 0;
         }
     }

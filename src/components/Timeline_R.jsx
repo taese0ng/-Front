@@ -170,7 +170,7 @@ class Timeline_R extends Component {
    }
 
    mySchedule = () =>{
-      const {AreaCodes} = this.props
+      const {AreaCodes, selectDate} = this.props
       let scheduleName = ""
       for(let i=0; i<AreaCodes.length; i++){
          for(let j=0; j<Areas.length; j++){
@@ -194,9 +194,9 @@ class Timeline_R extends Component {
       this.state.routes.forEach(el=>{
          contentIds.push(el.contentId)
       })
-
       axios.post(`${ServerIP}/itinerary/upload`,{
-         //date:도 있어야합니다.~~~~~~제발~~~~~~
+         areaCodes: AreaCodes,
+         date: selectDate,
          title: scheduleName,
          description: this.state.routes.description,
          routes: contentIds
@@ -205,7 +205,6 @@ class Timeline_R extends Component {
             'Authorization' : `Bearer ${sessionStorage.getItem('token')}`
          }
       }).then(res=>{
-         console.log(res)
       }).catch(err => console.log(err))
    }
 
@@ -303,6 +302,7 @@ function mapStateToProps(state) {
       itineraryId : state.itineraryId,
       schedule:state.schedule,
       AreaCodes: state.AreaCodes,
+      selectDate: state.selectDate,
     };
  }
 

@@ -100,3 +100,14 @@ ul{
         visibility: unset;
     }
 }
+
+@media(max-width: 850px){
+    #Banner{
+        #Arrows{
+            .ArrowWrapper{
+                top: 100px;
+            }
+        }
+    }
+    
+}

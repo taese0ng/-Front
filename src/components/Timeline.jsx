@@ -7,7 +7,7 @@ import ShowRouteR from "./ShowRoute_R.jsx";
 import update from 'react-addons-update';
 import { Link } from "react-router-dom";
 import {ServerIP} from '../key'
-import {setSchedule, initSchedule} from "../store/store";
+import {setSchedule, initSchedule, setAreaCodes} from "../store/store";
 import Search from './Search.jsx'
 
 class TimeLine extends Component {
@@ -19,19 +19,21 @@ class TimeLine extends Component {
          routes : [],
          reviseBtn : false,
          publish: false,
-         recommend : [],
          openSearch:false,
          addIdx : 0,
+         areaCodes: [],
+         date: "",
+         temp: []
       }
     }
 
    UNSAFE_componentWillMount(){
-      const {itineraryId,setSchedule,initSchedule} = this.props
+      const {itineraryId,setSchedule,initSchedule,setAreaCodes} = this.props
       initSchedule();
       
       axios.get(`${ServerIP}/itinerary/${itineraryId}`)
       .then(res => {
-         console.log("ㅇㅇㅇ",res)
+         // console.log("ㅇㅇㅇ",res)
          res.data.routes.forEach(element => {
             setSchedule(element.title); //todo 지울지말지 결정.
             this.setState({
@@ -47,25 +49,23 @@ class TimeLine extends Component {
                            title : element.title,
                            zipCode : element.zipCode,
                            tel : element.tel,
+                           lat:element.mapY,
+                           lng:element.mapX,
+                           contentId:element.contentId
                         }
                      ]
                   }
                )
                })
-               this.setState({
-               recommend: update(
-                  this.state.recommend,
-                  {
-                     $push:[{lat:element.mapY,lng:element.mapX}]
-                  }
-               )
-               })
          });
          this.setState({
+            date: res.data.itinerary.date,
+            areaCodes: res.data.itinerary.areaCodes,
             title: res.data.itinerary.title,
             description : res.data.itinerary.description,
             publish: res.data.itinerary.publish
          })
+         setAreaCodes(res.data.itinerary.areaCodes)
       })
       .catch(err => {
          console.log(err);
@@ -74,6 +74,7 @@ class TimeLine extends Component {
 
    clickRevise = () => {
       this.setState({
+         temp : this.state.routes,
          reviseBtn : !this.state.reviseBtn
       });
    }
@@ -82,23 +83,12 @@ class TimeLine extends Component {
       if(idx > 0){
          let down = this.state.routes[idx];
          let up = this.state.routes[idx-1];
-         let downXY = this.state.recommend[idx];
-         let upXY = this.state.recommend[idx-1];
          this.setState({
             routes : update(
                this.state.routes,
                {
                   [idx] : {$set : up},
                   [idx-1]: {$set: down}
-               }
-            )
-         })
-         this.setState({
-            recommend : update(
-               this.state.recommend,
-               {  
-                  [idx] : {$set : upXY},
-                  [idx-1]: {$set: downXY}
                }
             )
          })
@@ -109,8 +99,6 @@ class TimeLine extends Component {
       if(idx < this.state.routes.length-1){
          let up = this.state.routes[idx];
          let down = this.state.routes[idx+1];
-         let upXY = this.state.recommend[idx];
-         let downXY = this.state.recommend[idx+1];
          this.setState({
             routes : update(
                this.state.routes,
@@ -119,13 +107,6 @@ class TimeLine extends Component {
                   [idx+1]: {$set: up}
                }
             ),
-            recommend : update(
-               this.state.recommend,
-               {
-                  [idx] : {$set : downXY},
-                  [idx+1]: {$set: upXY}
-               }
-            )
          })
       }
    }
@@ -135,12 +116,6 @@ class TimeLine extends Component {
       this.setState({
          routes : update(
             this.state.routes,
-            {
-               $splice: [[idx,1]]
-            }
-         ),
-         recommend : update(
-            this.state.recommend,
             {
                $splice: [[idx,1]]
             }
@@ -157,33 +132,33 @@ class TimeLine extends Component {
                'Authorization' : `Bearer ${sessionStorage.getItem('token')}` // 꼭 'Bearer ' 붙여줘야함
             }
       }).then(res => {
-         console.log(res,"삭제")
+         // console.log(res,"삭제")
       }).catch(err => console.log(err))
    }
 
    clickUpdateBtn = () => {
       const {itineraryId,setSchedule,initSchedule} = this.props
       // console.log("Update");
+      let contentIds = []
+      this.state.routes.forEach(el=>{
+         contentIds.push(el.contentId)
+      })
       axios.post(`${ServerIP}/itinerary/${itineraryId}/edit`,
       {
+         date: this.state.date,
          title : this.state.title,
          description : this.state.description,
-         routes:this.state.routes
+         routes: contentIds
       },
       {
          headers:{
             'Authorization' : `Bearer ${sessionStorage.getItem('token')}` // 꼭 'Bearer ' 붙여줘야함
          }
-     }).then(res => {
-         // console.log(res,"이거야")
-         // 일정 수정 시 업데이트
-         initSchedule();
-         this.state.routes.forEach(element => {
-            setSchedule(element.name);
-         })
-         // console.log("음",schedule);
-      }).catch(err => console.log(err))
-
+     }).then(res => {}).catch(err => console.log(err))
+      initSchedule();
+      this.state.routes.forEach(element => {
+         setSchedule(element.name);
+      })
       this.setState({
          reviseBtn : !this.state.reviseBtn
       });
@@ -230,15 +205,57 @@ class TimeLine extends Component {
    }
 
    addSchedule = (info) =>{
-      console.log(info)
+      const obj = {
+         contentId : info.contentId,
+         name: info.title,
+         overview : info.overview,
+         image : info.firstImage,
+         homepage : info.homepage,
+         title : info.title,
+         zipCode : info.zipCode,
+         tel : info.tel,
+         lat:info.mapY,
+         lng:info.mapX,
+         description : info.overview
+      }
+      
+      this.setState({
+         routes: this.state.routes.slice(0,this.state.addIdx).concat(obj).concat(this.state.routes.slice(this.state.addIdx,this.state.routes.length))
+      })
    }
+
+   modifiCancel = () =>{
+      this.setState({
+         routes : this.state.temp,
+         reviseBtn : !this.state.reviseBtn
+      })
+   }
+
+   getOtherSchedule = () =>{
+      let contentIds = []
+      this.state.routes.forEach(el=>{
+         contentIds.push(el.contentId)
+      })
+      axios.post(`${ServerIP}/itinerary/upload`,{
+         areaCodes: this.state.areaCodes,
+         date: this.state.date,
+         title: this.state.title,
+         description: this.state.routes.description,
+         routes: contentIds
+       },{
+         headers:{
+            'Authorization' : `Bearer ${sessionStorage.getItem('token')}`
+         }
+      }).then(res=>{}).catch(err => console.log(err))
+   }
+
 
    render(){
       const {isPage} = this.props;
 
       return (
          <div className="container">
-            <ShowRouteR recommend={this.state.recommend}/>
+            <ShowRouteR recommend={this.state.routes}/>
             <Search clickAddBtn={this.clickAddBtn} addSchedule={this.addSchedule} className={!this.state.openSearch ? "notVisible" : ""}/>
             <ul className="timeline">
                {
@@ -261,14 +278,17 @@ class TimeLine extends Component {
             </ul>
             { isPage==="sharePage" ? 
                <div>
-                  <button className="middleBtn addBtn scheduleBtn">내 일정에 추가하기</button>
+                  <button className="middleBtn addBtn scheduleBtn" onClick={this.getOtherSchedule}>내 일정에 추가하기</button>
                </div>
                :
                <div>
                   <span id="ReviseSchedule">
                      {!this.state.reviseBtn ?
                      <button className="middleBtn borderBtn scheduleBtn" onClick={this.clickRevise}>일정 수정</button> :
-                     <button className="middleBtn borderBtn scheduleBtn" onClick={this.clickUpdateBtn}>수정 완료</button>
+                     <>
+                        <button className="middleBtn borderBtn scheduleBtn" onClick={this.clickUpdateBtn}>수정 완료</button>
+                        <button className="middleBtn borderBtn scheduleBtn" onClick={this.modifiCancel}>수정 취소</button>
+                     </>
                      }
                   </span>
                   <span>
@@ -294,13 +314,15 @@ function mapStateToProps(state) {
       itineraryId : state.itineraryId,
       schedule : state.schedule,
       isPage : state.isPage,
+      selectDate : state.selectDate,
     };
  }
 
  function mapDispatchToProps(dispatch) {
    return { 
       setSchedule: (text) => dispatch(setSchedule(text)),
-      initSchedule: () => dispatch(initSchedule())
+      initSchedule: () => dispatch(initSchedule()),
+      setAreaCodes: (AreaCodes) => dispatch(setAreaCodes(AreaCodes))
    };
  }
 

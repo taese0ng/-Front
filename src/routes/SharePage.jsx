@@ -31,8 +31,8 @@ function SharePage({setItineraryId, setPage}){
           <Card
             key={index}
             name={card.creator.name}
-            // cardImg={cards[0].img}
-            cardImg="https://www.mcst.go.kr/attachFiles/cultureInfoCourt/localFestival/notifyFestival/1523839838562.jpg"
+            cardImg={card.img}
+            // cardImg="https://www.mcst.go.kr/attachFiles/cultureInfoCourt/localFestival/notifyFestival/1523839838562.jpg"
             schedule={card.title}
             view={card.view}
             date={card.date}

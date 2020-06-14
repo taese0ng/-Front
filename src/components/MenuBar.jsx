@@ -21,9 +21,13 @@ function MenuBar({location}){
       isOpen()
     }
     function isOpen(){
-      open
-        ? (document.getElementById("section1").style.left = "0")
-        : (document.getElementById("section1").style.left = "-60vw");
+      if(open){
+        document.getElementById("section1").style.left = "0";
+        document.querySelector("body").style.overflow = "hidden";
+      }else{
+        document.getElementById("section1").style.left = "-100vw";
+        document.querySelector("body").style.overflow = "unset";
+      }
     }
     
     function LogOut(){
@@ -37,6 +41,7 @@ function MenuBar({location}){
         <section id="hamburger" onClick={clickMenu}>
           <img src={hamgurger} alt="hamburgerMenu" />
         </section>
+        
         <section id="section1">
           <Link to="/yourSchedule" className="Link" onClick={clickMenu}>
             {location.pathname === "/yourSchedule" ? (

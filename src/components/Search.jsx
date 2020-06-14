@@ -7,7 +7,9 @@ import { connect } from "react-redux";
 
 function SearchResult(props) {
   return (
-      <li id="searchItem" onClick={() => props.addSchedule(props.info)}>
+      <li id="searchItem" onClick={() => {
+        props.addSchedule(props.info) 
+        props.clickAddBtn()}}>
           <img src={props.info.firstImage} alt={props.info.name}/>
           <p>{props.info.title}</p>
       </li>
@@ -27,7 +29,7 @@ function Search(props) {
     e.preventDefault();
     setResult([])
     props.AreaCodes.forEach(el => {
-      console.log(el)
+      // console.log(el)
       axios.get(`${HopeIP}/api/search/area?areaCode=${el.areaCode}&sigunguCode=${el.sigunguCode}&search=${item}`)
         .then((res) => {
           console.log(res)
@@ -58,7 +60,7 @@ function Search(props) {
         </form>
         <ul id="searchList">
           {result.map(element => (
-              <SearchResult addSchedule={props.addSchedule} info={element} key={element.contentId} />
+              <SearchResult addSchedule={props.addSchedule} clickAddBtn={props.clickAddBtn} info={element} key={element.contentId} />
           ))}
         </ul>
       </div>
