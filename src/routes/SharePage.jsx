@@ -14,7 +14,7 @@ function SharePage({setItineraryId, setPage}){
   useEffect(() => {
     axios.get(`${ServerIP}/itinerary`)
     .then((res)=>{
-      console.log(res)
+      // console.log(res)
       let items=[]
       res.data.items.forEach(el=>{
         items.push(el)

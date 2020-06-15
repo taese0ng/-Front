@@ -19,7 +19,7 @@ class MyPages extends Component {
     const id = JSON.parse(sessionStorage.getItem('user'))._id;
     axios.get(`${ServerIP}/user/${id}`)
     .then(res=>{
-      console.log("dd",res)
+      // console.log("dd",res)
       this.setState({
         userName: res.data.user.name
       });

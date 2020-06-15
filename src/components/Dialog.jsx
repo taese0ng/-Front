@@ -9,8 +9,9 @@ function Dialog(props) {
             <p>진짜 삭제하시겠습니까?</p>
             <Link to="/yourSchedule">
                 <button onClick={() => {
-                    props.clickDelSchedule()}}>
-                    예</button></Link>
+                    props.clickDelSchedule()
+                }}>예</button>
+            </Link>
             <button>아니오</button>
         </div>
     );

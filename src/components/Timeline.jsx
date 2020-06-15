@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import axios from 'axios';
 import ShowRouteR from "./ShowRoute_R.jsx";
 import update from 'react-addons-update';
-import { Link } from "react-router-dom";
 import {ServerIP} from '../key'
 import {setSchedule, initSchedule, setAreaCodes} from "../store/store";
 import Search from './Search.jsx'
@@ -126,21 +125,7 @@ class TimeLine extends Component {
    }
 
    clickDelSchedule = () =>{
-      const {itineraryId} = this.props
-      // console.log("Delete Schedule");
-
-      // const timeline = document.querySelector("body")
-      // const Dialog = document.querySelector("#Dialog")
-      // if(!this.state.sureDelete){
-      //    timeline.style.overflow="hidden";
-      //    Dialog.style.top = document.documentElement.scrollTop+"px";
-      // }
-      // else{
-      //    timeline.style.overflow="unset";
-      // }
-      // this.setState({
-      //    sureDelete : !this.state.sureDelete
-      // })
+      const {itineraryId} = this.props;
       axios.get(`${ServerIP}/itinerary/${itineraryId}/delete`,
          {
             headers:{

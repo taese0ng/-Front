@@ -9,7 +9,7 @@ function MenuBar({location}){
     window.onresize = function (event) {
       if (this.window.outerWidth > 725){
         try{
-        document.getElementById("section1").style.left="-60vw";
+          document.getElementById("section1").style.left="-100vw";
         }catch(error){
 
         }
