@@ -10,6 +10,7 @@ import {setSchedule, initSchedule} from "../store/store";
 import { Areas } from '../components/Areas.js'
 import Search from './Search.jsx'
 import { Link } from "react-router-dom";
+import Dialog from "./Dialog.jsx";
 
 class Timeline_R extends Component {
    constructor(props){
@@ -255,6 +256,8 @@ class Timeline_R extends Component {
          <div className="container">
             <ShowRouteR recommend={this.state.routes}/>
             <Search clickAddBtn={this.clickAddBtn} addSchedule={this.addSchedule} className={!this.state.openSearch ? "notVisible" : ""}/>
+             {/* 일정체택 버튼 */}
+             <Dialog onClickOk = {this.mySchedule} comment = "내 일정으로 채택하시겠습니까?"/> 
             <ul className="timeline">
                {
                   this.state.routes.map((route,index) => (
@@ -287,7 +290,8 @@ class Timeline_R extends Component {
                </span>
                <span>
                   {!this.state.reviseBtn ?
-                     <Link to='/yourSchedule'><button className="middleBtn borderBtn scheduleBtn" onClick={this.mySchedule}>일정 채택</button></Link>:
+                     // <Link to='/yourSchedule'><button className="middleBtn borderBtn scheduleBtn" onClick={this.mySchedule}>일정 채택</button></Link>:
+                     <button className="middleBtn borderBtn scheduleBtn">일정 채택</button>:
                      <button className="middleBtn borderBtn scheduleBtn" onClick={this.modifiCancel}>수정 취소</button>
                   }
                </span>
