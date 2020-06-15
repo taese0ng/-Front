@@ -21,7 +21,7 @@ function MenuBar({location}){
       isOpen()
     }
     function isOpen(){
-      if(open){
+      if(open&& window.innerWidth<725){
         document.getElementById("section1").style.left = "0";
         document.querySelector("body").style.overflow = "hidden";
       }else{

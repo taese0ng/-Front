@@ -40,6 +40,7 @@ class MyPages extends Component {
   }
 
   render(){
+
     const {setItineraryId, setPage} = this.props;
     const {itineraryList, userName} = this.state;
     return (

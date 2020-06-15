@@ -9,6 +9,7 @@ import {ServerIP, HopeIP} from '../key'
 import {setSchedule, initSchedule} from "../store/store";
 import { Areas } from '../components/Areas.js'
 import Search from './Search.jsx'
+import { Link } from "react-router-dom";
 
 class Timeline_R extends Component {
    constructor(props){
@@ -175,6 +176,9 @@ class Timeline_R extends Component {
       for(let i=0; i<AreaCodes.length; i++){
          for(let j=0; j<Areas.length; j++){
             if(AreaCodes[i].areaCode === Areas[j].code){
+               if(AreaCodes[i].sigunguCode=== 0){
+                  scheduleName += Areas[j].name
+               }
                for(let k=0; k<Areas[j].areas.length; k++){
                   if(Areas[j].areas[k].code === AreaCodes[i].sigunguCode){
                      scheduleName += Areas[j].areas[k].name
@@ -282,7 +286,7 @@ class Timeline_R extends Component {
                </span>
                <span>
                   {!this.state.reviseBtn ?
-                     <button className="middleBtn borderBtn scheduleBtn" onClick={this.mySchedule}>일정 채택</button>:
+                     <Link to='/yourSchedule'><button className="middleBtn borderBtn scheduleBtn" onClick={this.mySchedule}>일정 채택</button></Link>:
                      <button className="middleBtn borderBtn scheduleBtn" onClick={this.modifiCancel}>수정 취소</button>
                   }
                </span>
