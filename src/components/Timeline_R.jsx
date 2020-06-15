@@ -178,6 +178,7 @@ class Timeline_R extends Component {
             if(AreaCodes[i].areaCode === Areas[j].code){
                if(AreaCodes[i].sigunguCode=== 0){
                   scheduleName += Areas[j].name
+                  break
                }
                for(let k=0; k<Areas[j].areas.length; k++){
                   if(Areas[j].areas[k].code === AreaCodes[i].sigunguCode){

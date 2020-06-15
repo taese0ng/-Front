@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import {ServerIP} from '../key'
 import {setSchedule, initSchedule, setAreaCodes} from "../store/store";
 import Search from './Search.jsx'
+import Dialog from "./Dialog.jsx";
 
 class TimeLine extends Component {
    constructor(props){
@@ -20,6 +21,7 @@ class TimeLine extends Component {
          reviseBtn : false,
          publish: false,
          openSearch:false,
+         sureDelete:false,
          addIdx : 0,
          areaCodes: [],
          date: "",
@@ -126,6 +128,19 @@ class TimeLine extends Component {
    clickDelSchedule = () =>{
       const {itineraryId} = this.props
       // console.log("Delete Schedule");
+
+      // const timeline = document.querySelector("body")
+      // const Dialog = document.querySelector("#Dialog")
+      // if(!this.state.sureDelete){
+      //    timeline.style.overflow="hidden";
+      //    Dialog.style.top = document.documentElement.scrollTop+"px";
+      // }
+      // else{
+      //    timeline.style.overflow="unset";
+      // }
+      // this.setState({
+      //    sureDelete : !this.state.sureDelete
+      // })
       axios.get(`${ServerIP}/itinerary/${itineraryId}/delete`,
          {
             headers:{
@@ -257,6 +272,7 @@ class TimeLine extends Component {
          <div className="container">
             <ShowRouteR recommend={this.state.routes}/>
             <Search clickAddBtn={this.clickAddBtn} addSchedule={this.addSchedule} className={!this.state.openSearch ? "notVisible" : ""}/>
+            <Dialog clickDelSchedule = {this.clickDelSchedule}/>
             <ul className="timeline">
                {
                   this.state.routes.map((route,index) => (
@@ -292,9 +308,9 @@ class TimeLine extends Component {
                      }
                   </span>
                   <span>
-                     <Link to="/yourSchedule">
-                        <button className="middleBtn borderBtn scheduleBtn" onClick = {this.clickDelSchedule}>일정 삭제</button>
-                     </Link>
+                     {/* <button className="middleBtn borderBtn scheduleBtn" onClick = {this.clickDelSchedule}>일정 삭제</button> */}
+                     <button className="middleBtn borderBtn scheduleBtn">일정 삭제</button>
+
                   </span>
                   <span>
                      {this.state.publish ?
