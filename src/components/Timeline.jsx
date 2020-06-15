@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import axios from 'axios';
 import ShowRouteR from "./ShowRoute_R.jsx";
 import update from 'react-addons-update';
-import { Link } from "react-router-dom";
 import {ServerIP} from '../key'
 import {setSchedule, initSchedule, setAreaCodes} from "../store/store";
 import Search from './Search.jsx'
@@ -272,7 +271,14 @@ class TimeLine extends Component {
          <div className="container">
             <ShowRouteR recommend={this.state.routes}/>
             <Search clickAddBtn={this.clickAddBtn} addSchedule={this.addSchedule} className={!this.state.openSearch ? "notVisible" : ""}/>
-            <Dialog clickDelSchedule = {this.clickDelSchedule}/>
+            {/* 일정 삭제 버튼 */}
+            <Dialog onClickOk = {this.clickDelSchedule} comment = "정말 삭제하시겠습니까?"/> 
+            {/* 내 일정에 추가하기 버튼 */}
+            <Dialog onClickOk = {this.getOtherSchedule} comment = "현재 보고계신 일정을 내 일정으로 추가하시곘습니까?"/> 
+            {/* 공유해젳 버튼 */}
+            <Dialog onClickOk = {this.setPrivate} comment = "내 일정에서 사라지게 됩니다. 정말 이 일정의 공유를 해제하시겠습니까?"/> 
+            {/* 공유하기 버튼 */}
+            <Dialog onClickOk = {this.setPublic} comment = "내 일정에 현재 일정이 추가됩니다. 공유하시겠습니까?"/> 
             <ul className="timeline">
                {
                   this.state.routes.map((route,index) => (
@@ -294,7 +300,9 @@ class TimeLine extends Component {
             </ul>
             { isPage==="sharePage" ? 
                <div>
-                  <button className="middleBtn addBtn scheduleBtn" onClick={this.getOtherSchedule}>내 일정에 추가하기</button>
+                  {/* <button className="middleBtn addBtn scheduleBtn" onClick={this.getOtherSchedule}>내 일정에 추가하기</button> */}
+                  <button className="middleBtn addBtn scheduleBtn">내 일정에 추가하기</button>
+
                </div>
                :
                <div>
@@ -314,8 +322,10 @@ class TimeLine extends Component {
                   </span>
                   <span>
                      {this.state.publish ?
-                        <button className="middleBtn borderBtn notShare" onClick={this.setPrivate}>공유해제</button> :
-                        <button className="middleBtn borderBtn scheduleBtn" onClick={this.setPublic}>공유하기</button>
+                        // <button className="middleBtn borderBtn notShare" onClick={this.setPrivate}>공유해제</button> :
+                        // <button className="middleBtn borderBtn scheduleBtn" onClick={this.setPublic}>공유하기</button>
+                        <button className="middleBtn borderBtn notShare">공유해제</button> :
+                        <button className="middleBtn borderBtn scheduleBtn">공유하기</button>
                      }
                   </span>
                </div>

@@ -35,14 +35,13 @@ class ShowRoute_R extends Component {
         })
 
         recommend.map((elem, index) => {
-            var markerImage = new kakao.maps.MarkerImage(
-                `${icon}`, new kakao.maps.Size(52, 72),new kakao.maps.Point(26, 36));
+            let size = new kakao.maps.Size(52, 72);
+            let markerImage = new kakao.maps.MarkerImage(
+                `${icon}`, size,new kakao.maps.Point(26, 36));
+            
             if (recommend.length > index + 1) {
                 var to = new kakao.maps.LatLng(recommend[index + 1].lat, recommend[index + 1].lng);
                 var from = new kakao.maps.LatLng(recommend[index].lat, recommend[index].lng);
-
-
-                
 
                 let markerTemp = new kakao.maps.Marker({
                     map: map, // 마커를 표시할 지도
