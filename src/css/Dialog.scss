@@ -39,10 +39,18 @@
     display: none;
 }
 
-@media(max-width:850px){
+@media(max-width:600px){
     #Dialog{
         #DialogForm{
-            
+            width: 80%;
+            #DialogComment{
+                font-size: 1rem;
+            }
+            button{
+                width: 30%;
+                font-size: 1rem;
+                padding: 5px;
+            }
         }
     }
 }

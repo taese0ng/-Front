@@ -9,6 +9,7 @@ function Dialog(props) {
                 <p id="DialogComment">{props.comment}</p>
                 <Link to="/yourSchedule">
                     <button onClick={() => {
+                        props.onCancel()
                         props.onClickOk()
                     }}>예</button>
                 </Link>

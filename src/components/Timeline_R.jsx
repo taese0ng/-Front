@@ -274,8 +274,7 @@ class Timeline_R extends Component {
          <div className="container">
             <ShowRouteR recommend={this.state.routes}/>
             <Search clickAddBtn={this.clickAddBtn} addSchedule={this.addSchedule} className={!this.state.openSearch ? "notVisible" : ""}/>
-             {/* 일정체택 버튼 */}
-             <Dialog onClickOk = {this.mySchedule} onCancel={this.clickAdopt} className={!this.state.openAdopt ? "notVisible" : ""} comment = "내 일정으로 채택하시겠습니까?"/> 
+            <Dialog onClickOk = {this.mySchedule} onCancel={this.clickAdopt} className={!this.state.openAdopt ? "notVisible" : ""} comment = "내 일정으로 채택하시겠습니까?"/> 
             <ul className="timeline">
                {
                   this.state.routes.map((route,index) => (

@@ -283,13 +283,6 @@ class TimeLine extends Component {
          <div className="container">
             <ShowRouteR recommend={this.state.routes}/>
             <Search clickAddBtn={this.clickAddBtn} addSchedule={this.addSchedule} className={!this.state.openSearch ? "notVisible" : ""}/>
-            {/* 일정 삭제 버튼 */}
-            {/* <Dialog onClickOk = {this.clickDelSchedule} comment = "정말 삭제하시겠습니까?"/>  */}
-            {/* 내 일정에 추가하기 버튼 */}
-            {/* <Dialog onClickOk = {this.getOtherSchedule} comment = "현재 보고계신 일정을 내 일정으로 추가하시곘습니까?"/>  */}
-            {/* 공유해제 버튼 */}
-            {/* <Dialog onClickOk = {this.setPrivate} comment = "내 일정에서 사라지게 됩니다. 정말 이 일정의 공유를 해제하시겠습니까?"/>  */}
-            {/* 공유하기 버튼 */}
             <Dialog onClickOk = {this.state.dialogMethod} onCancel={this.setDialog} className={!this.state.openDialog ? "notVisible" : ""} comment = {this.state.dialogComment}/> 
             <ul className="timeline">
                {
