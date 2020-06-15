@@ -23,7 +23,7 @@ class HotList extends Component{
         }
     }
 
-    componentWillMount(){
+    UNSAFE_componentWillMount(){
         const userId = JSON.parse(sessionStorage.getItem("user"))._id;
         axios.get(`${HopeIP}/api/recommend/user?userId=${userId}`)
         .then(res => {
@@ -40,7 +40,7 @@ class HotList extends Component{
     render(){
         return(
             <>
-                <p id='hotListTitle'>여긴 어때요? (모두에게 하테하테)</p>
+                <p id='hotListTitle'>여긴 어때요? (모두에게 하테하테) <span aria-label="imoji" role="img">🚗🚙🚕</span></p>
                 <ul id="rcmdedLocations">
                     {this.state.locations.map((location, index) => (
                         <span key={location.contentId}>

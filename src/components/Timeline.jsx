@@ -24,7 +24,10 @@ class TimeLine extends Component {
          addIdx : 0,
          areaCodes: [],
          date: "",
-         temp: []
+         temp: [],
+         openDialog : false,
+         dialogComment: "",
+         dialogMethod: null,
       }
     }
 
@@ -250,6 +253,29 @@ class TimeLine extends Component {
    }
 
 
+   setDialog = () =>{
+      const timeline = document.querySelector("body")
+      const dialog = document.querySelector("#Dialog")
+      if(!this.state.openDialog){
+         timeline.style.overflow="hidden";
+         dialog.style.top = document.documentElement.scrollTop+"px";
+      }
+      else{
+         timeline.style.overflow="unset";
+      }
+      this.setState({
+         openDialog : !this.state.openDialog
+      })
+   }
+
+   setDialogProps =(onMethod, onComment)=>{
+      this.setState({
+         dialogMethod : onMethod,
+         dialogComment : onComment
+      })
+      this.setDialog();
+   }
+
    render(){
       const {isPage} = this.props;
 
@@ -258,13 +284,13 @@ class TimeLine extends Component {
             <ShowRouteR recommend={this.state.routes}/>
             <Search clickAddBtn={this.clickAddBtn} addSchedule={this.addSchedule} className={!this.state.openSearch ? "notVisible" : ""}/>
             {/* 일정 삭제 버튼 */}
-            <Dialog onClickOk = {this.clickDelSchedule} comment = "정말 삭제하시겠습니까?"/> 
+            {/* <Dialog onClickOk = {this.clickDelSchedule} comment = "정말 삭제하시겠습니까?"/>  */}
             {/* 내 일정에 추가하기 버튼 */}
-            <Dialog onClickOk = {this.getOtherSchedule} comment = "현재 보고계신 일정을 내 일정으로 추가하시곘습니까?"/> 
-            {/* 공유해젳 버튼 */}
-            <Dialog onClickOk = {this.setPrivate} comment = "내 일정에서 사라지게 됩니다. 정말 이 일정의 공유를 해제하시겠습니까?"/> 
+            {/* <Dialog onClickOk = {this.getOtherSchedule} comment = "현재 보고계신 일정을 내 일정으로 추가하시곘습니까?"/>  */}
+            {/* 공유해제 버튼 */}
+            {/* <Dialog onClickOk = {this.setPrivate} comment = "내 일정에서 사라지게 됩니다. 정말 이 일정의 공유를 해제하시겠습니까?"/>  */}
             {/* 공유하기 버튼 */}
-            <Dialog onClickOk = {this.setPublic} comment = "내 일정에 현재 일정이 추가됩니다. 공유하시겠습니까?"/> 
+            <Dialog onClickOk = {this.state.dialogMethod} onCancel={this.setDialog} className={!this.state.openDialog ? "notVisible" : ""} comment = {this.state.dialogComment}/> 
             <ul className="timeline">
                {
                   this.state.routes.map((route,index) => (
@@ -286,8 +312,7 @@ class TimeLine extends Component {
             </ul>
             { isPage==="sharePage" ? 
                <div>
-                  {/* <button className="middleBtn addBtn scheduleBtn" onClick={this.getOtherSchedule}>내 일정에 추가하기</button> */}
-                  <button className="middleBtn addBtn scheduleBtn">내 일정에 추가하기</button>
+                  <button className="middleBtn addBtn scheduleBtn" onClick={() => this.setDialogProps(this.getOtherSchedule, "현재 보고계신 일정을 내 일정으로 추가하시겠습니까?")}>내 일정에 추가하기</button>
 
                </div>
                :
@@ -302,16 +327,13 @@ class TimeLine extends Component {
                      }
                   </span>
                   <span>
-                     {/* <button className="middleBtn borderBtn scheduleBtn" onClick = {this.clickDelSchedule}>일정 삭제</button> */}
-                     <button className="middleBtn borderBtn scheduleBtn">일정 삭제</button>
+                     <button className="middleBtn borderBtn scheduleBtn" onClick={() => this.setDialogProps(this.clickDelSchedule, "정말 삭제하시겠습니까?")}>일정 삭제</button>
 
                   </span>
                   <span>
                      {this.state.publish ?
-                        // <button className="middleBtn borderBtn notShare" onClick={this.setPrivate}>공유해제</button> :
-                        // <button className="middleBtn borderBtn scheduleBtn" onClick={this.setPublic}>공유하기</button>
-                        <button className="middleBtn borderBtn notShare">공유해제</button> :
-                        <button className="middleBtn borderBtn scheduleBtn">공유하기</button>
+                        <button className="middleBtn borderBtn notShare" onClick={() => this.setDialogProps(this.setPrivate, "정말 이 일정의 공유를 해제하시겠습니까?")}>공유해제</button> :
+                        <button className="middleBtn borderBtn scheduleBtn" onClick={() => this.setDialogProps(this.setPublic, "정말 이 일정을 공유 하시겠습니까?")}>공유하기</button>
                      }
                   </span>
                </div>

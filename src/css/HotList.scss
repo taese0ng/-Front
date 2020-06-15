@@ -25,9 +25,13 @@
 }
 
 #hotListTitle{
-    font-size: 20px;
+    font-size: 2rem;
     font-weight: bold;
-    margin-left: 20px;
+    text-align: center;
+    color: rgb(250, 145, 25);
+    width: 50%;
+    margin: 20px auto 20px auto;
+    border-bottom: 3px solid rgb(255, 166, 0);
 }
 
 .Link{
@@ -35,4 +39,19 @@
     color: black;
     display: inline-block;
     margin: 20px;
+}
+
+
+@media(max-width: 600px){
+    #hotListTitle{
+        font-size: 1.0rem;
+        width: 90%;
+    }
+    .location{
+        width: 130px;
+        height: 130px;
+        p{
+            font-size: 1.2rem;
+        }
+    }
 }

@@ -9,7 +9,6 @@ import {ServerIP, HopeIP} from '../key'
 import {setSchedule, initSchedule} from "../store/store";
 import { Areas } from '../components/Areas.js'
 import Search from './Search.jsx'
-import { Link } from "react-router-dom";
 import Dialog from "./Dialog.jsx";
 
 class Timeline_R extends Component {
@@ -25,6 +24,7 @@ class Timeline_R extends Component {
          temp : [],
          openSearch:false,
          addIdx : 0,
+         openAdopt : false
       }
     }
 
@@ -211,8 +211,10 @@ class Timeline_R extends Component {
             'Authorization' : `Bearer ${sessionStorage.getItem('token')}`
          }
       }).then(res=>{
+         
       }).catch(err => console.log(err))
    }
+
 
    clickAddBtn = (idx) => {
       this.setState({addIdx : idx})
@@ -251,13 +253,29 @@ class Timeline_R extends Component {
       })
    }
 
+   clickAdopt = () =>{
+      const timeline = document.querySelector("body")
+      const dialog = document.querySelector("#Dialog")
+      if(!this.state.openAdopt){
+         timeline.style.overflow="hidden";
+         dialog.style.top = document.documentElement.scrollTop+"px";
+      }
+      else{
+         timeline.style.overflow="unset";
+      }
+      this.setState({
+         openAdopt : !this.state.openAdopt
+      })
+   }
+
+
    render(){
       return (
          <div className="container">
             <ShowRouteR recommend={this.state.routes}/>
             <Search clickAddBtn={this.clickAddBtn} addSchedule={this.addSchedule} className={!this.state.openSearch ? "notVisible" : ""}/>
              {/* 일정체택 버튼 */}
-             <Dialog onClickOk = {this.mySchedule} comment = "내 일정으로 채택하시겠습니까?"/> 
+             <Dialog onClickOk = {this.mySchedule} onCancel={this.clickAdopt} className={!this.state.openAdopt ? "notVisible" : ""} comment = "내 일정으로 채택하시겠습니까?"/> 
             <ul className="timeline">
                {
                   this.state.routes.map((route,index) => (
@@ -291,7 +309,7 @@ class Timeline_R extends Component {
                <span>
                   {!this.state.reviseBtn ?
                      // <Link to='/yourSchedule'><button className="middleBtn borderBtn scheduleBtn" onClick={this.mySchedule}>일정 채택</button></Link>:
-                     <button className="middleBtn borderBtn scheduleBtn">일정 채택</button>:
+                     <button className="middleBtn borderBtn scheduleBtn" onClick={this.clickAdopt}>일정 채택</button>:
                      <button className="middleBtn borderBtn scheduleBtn" onClick={this.modifiCancel}>수정 취소</button>
                   }
                </span>

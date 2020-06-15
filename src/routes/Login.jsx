@@ -34,7 +34,7 @@ function Login() {
     }
     axios.post(`${ServerIP}/login`, data)
     .then((res) =>{
-      console.log(res)
+      // console.log(res)
       let token = res.data.token;
       let user = res.data.user;
       sessionStorage.setItem('token', token);

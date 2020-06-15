@@ -14,14 +14,9 @@ class ShowRoute_R extends Component {
         super(props);
         this.state = {
             polyline: [],
-            markers: []
+            markers: [],
         }
     }
-
-    onUnload(event) {
-        alert('page Refreshed')
-    }
-
     componentDidUpdate() {
 
         const { recommend } = this.props
@@ -35,22 +30,22 @@ class ShowRoute_R extends Component {
         })
 
         recommend.map((elem, index) => {
-            let size = new kakao.maps.Size(52, 72);
-            let markerImage = new kakao.maps.MarkerImage(
-                `${icon}`, size,new kakao.maps.Point(26, 36));
+            let size = new window.kakao.maps.Size(52, 72);
+            let markerImage = new window.kakao.maps.MarkerImage(
+                `${icon}`, size,new window.kakao.maps.Point(26, 36));
             
             if (recommend.length > index + 1) {
-                var to = new kakao.maps.LatLng(recommend[index + 1].lat, recommend[index + 1].lng);
-                var from = new kakao.maps.LatLng(recommend[index].lat, recommend[index].lng);
+                var to = new window.kakao.maps.LatLng(recommend[index + 1].lat, recommend[index + 1].lng);
+                var from = new window.kakao.maps.LatLng(recommend[index].lat, recommend[index].lng);
 
-                let markerTemp = new kakao.maps.Marker({
+                let markerTemp = new window.kakao.maps.Marker({
                     map: map, // 마커를 표시할 지도
                     image: markerImage,
                     position: from, // 마커를 표시할 위치
                     title: index + 1 // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
                 });
 
-                let polylineTemp = new kakao.maps.Polyline({
+                let polylineTemp = new window.kakao.maps.Polyline({
                     path: [from, to], // 선을 구성하는 좌표배열 입니다
                     strokeWeight: 7, // 선의 두께 입니다
                     strokeColor: '#031EA8', // 선의 색깔입니다
@@ -64,7 +59,7 @@ class ShowRoute_R extends Component {
 
                 if (index === recommend.length - 2) {
 
-                    markerTemp = new kakao.maps.Marker({
+                    markerTemp = new window.kakao.maps.Marker({
                         map: map, // 마커를 표시할 지도
                         image: markerImage,
                         position: to, // 마커를 표시할 위치
@@ -96,23 +91,32 @@ class ShowRoute_R extends Component {
 
     componentDidMount() {
         let el = document.getElementById('map');
-        script = document.createElement('script');
-        script.id = "script"
-        script.async = true;
-        script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoMapsKey}&autoload=false`;
-        document.head.appendChild(script);
 
         script.onload = () => {
 
             kakao.maps.load(() => {
-                map = new kakao.maps.Map(el, {
-                    center: new kakao.maps.LatLng(34.7516329613, 127.7140048886),
+                map = new window.kakao.maps.Map(el, {
+                    center: new window.kakao.maps.LatLng(34.7516329613, 127.7140048886),
                 });
-                bounds = new kakao.maps.LatLngBounds();
+                bounds = new window.kakao.maps.LatLngBounds();
             });
 
         };
     }
+
+    UNSAFE_componentWillMount(){
+        const trash = document.getElementById("script");
+        if(trash !== null){
+            document.head.removeChild(trash);
+        }
+        script = document.createElement('script');
+        script.id = "script"
+        script.async = true;
+        script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoMapsKey}&autoload=false&libraries=services,clusterer,drawing`;
+        document.head.appendChild(script);
+        // console.log(document.head)
+    }
+
     render() {
 
         return (
