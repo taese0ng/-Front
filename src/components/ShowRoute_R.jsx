@@ -7,7 +7,6 @@ import icon from '../assets/icon_howto.png';
 
 let map;
 let script;
-var bounds;
 
 class ShowRoute_R extends Component {
     constructor(props) {
@@ -21,6 +20,7 @@ class ShowRoute_R extends Component {
 
         const { recommend } = this.props
 
+
         // console.log(recommend, "여기다");
         this.state.polyline.forEach(elem => {
             elem.setMap(null);
@@ -29,11 +29,14 @@ class ShowRoute_R extends Component {
             elem.setMap(null);
         })
 
+
+        var bounds = new window.kakao.maps.LatLngBounds();
+
         recommend.map((elem, index) => {
             let size = new window.kakao.maps.Size(52, 72);
             let markerImage = new window.kakao.maps.MarkerImage(
-                `${icon}`, size,new window.kakao.maps.Point(26, 36));
-            
+                `${icon}`, size, new window.kakao.maps.Point(26, 36));
+
             if (recommend.length > index + 1) {
                 var to = new window.kakao.maps.LatLng(recommend[index + 1].lat, recommend[index + 1].lng);
                 var from = new window.kakao.maps.LatLng(recommend[index].lat, recommend[index].lng);
@@ -85,8 +88,8 @@ class ShowRoute_R extends Component {
                 return null;
             }
             return null;
-
         });
+
     }
 
     componentDidMount() {
@@ -98,15 +101,14 @@ class ShowRoute_R extends Component {
                 map = new window.kakao.maps.Map(el, {
                     center: new window.kakao.maps.LatLng(34.7516329613, 127.7140048886),
                 });
-                bounds = new window.kakao.maps.LatLngBounds();
             });
 
         };
     }
 
-    UNSAFE_componentWillMount(){
+    UNSAFE_componentWillMount() {
         const trash = document.getElementById("script");
-        if(trash !== null){
+        if (trash !== null) {
             document.head.removeChild(trash);
         }
         script = document.createElement('script');
