@@ -33,10 +33,12 @@ class Timeline_R extends Component {
       const userID = JSON.parse(sessionStorage.getItem("user"))._id
       initSchedule();
       AreaCodes.map((AreaCode) => (
+         // console.log(this.state.bigData)
          axios.get(`${HopeIP}/api/recommend/user?userId=${userID}&areaCode=${AreaCode.areaCode}&sigunguCode=${AreaCode.sigunguCode}`)
             .then(res => {
-                console.log("추천결과",res);
+               //  console.log("추천결과",res);
                res.data.forEach(schedule => {
+                  // console.log(schedule)
                   let routeList = []
                   schedule.forEach(element => {
                      let data = element;
@@ -75,7 +77,7 @@ class Timeline_R extends Component {
             .catch(err => {
                console.log("츠천에러", err);
             })
-      ))
+         ))
    }
 
    clickRevise = () => {
@@ -270,7 +272,7 @@ class Timeline_R extends Component {
 
 
    render() {
-      console.log(this.state.routes)
+      // console.log(this.state.routes)
       return (
          <div className="container">
             <ShowRouteR recommend={this.state.routes} />

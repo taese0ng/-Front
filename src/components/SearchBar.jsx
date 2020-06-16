@@ -90,7 +90,7 @@ function Search_bar({setAreaCodes}){
     }
 
     function resetBtn(){
-      if(locations.length < 2){
+      if(locations.length < 1){
         let LList = document.getElementById('LAreas')
         let SList = document.getElementById('SAreas')
         LList.style.height='0px'
@@ -117,7 +117,7 @@ function Search_bar({setAreaCodes}){
               {location.name}
             </button>
           ))}
-          {place.length <= 1 && (
+          {place.length < 1 && (
             <ul>
                 <li>
                     <button onClick={clickPlus} className="middleBtn">
