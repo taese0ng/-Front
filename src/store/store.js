@@ -5,16 +5,12 @@ const toDos = createSlice({
   initialState: {
     schedule:[],
     latlng:[],
-    tripDate: null,
     itineraryId : '',
     AreaCodes: [],
     isPage: "",
     selectDate: "",
   },
   reducers: {
-    setTripDate:(state, action)=>{
-      state.tripDate = action.payload;
-    },
     setItineraryId:(state, action)=>{
       state.itineraryId = action.payload;
     },
@@ -37,7 +33,6 @@ const toDos = createSlice({
 });
 
 export const {
-    setTripDate,
     setItineraryId,
     setSchedule,
     initSchedule,
